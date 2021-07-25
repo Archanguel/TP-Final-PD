@@ -29,7 +29,8 @@ namespace Trabajo_Final___Grupo_4
             services.AddControllersWithViews();
 
             services.AddDbContext<UsuarioContext>(options =>
-            options.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11))));
+            //options.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11))));
+            options.UseMySql(Credenciales.GetConnectionString()));
             //options.UseSqlServer(Configuration.GetConnectionString("UsuarioContext")));
         }
 

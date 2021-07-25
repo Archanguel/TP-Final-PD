@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Models;
 using Trabajo_Final___Grupo_4.Helpers;
+using Microsoft.Extensions.Logging;
 
 namespace Trabajo_Final___Grupo_4.Data
 {
@@ -21,10 +22,20 @@ namespace Trabajo_Final___Grupo_4.Data
 
         public DbSet<Trabajo_Final___Grupo_4.Models.Alojamiento> Alojamiento { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11)));
-        }
+            optionsBuilder.UseMySql(Credenciales.GetConnectionString());
+        }*/
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .UseMySql("server=localhost;user=root;database=inicio-proyecto;port=3306;password=")
+                .UseLoggerFactory(LoggerFactory.Create(b => b
+                    .AddConsole()
+                    .AddFilter(level => level >= LogLevel.Information)))
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors();
+        }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(usuario =>
