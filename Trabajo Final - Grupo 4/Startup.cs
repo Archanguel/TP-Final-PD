@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -8,6 +8,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Trabajo_Final___Grupo_4.Data;
+using Trabajo_Final___Grupo_4.Helpers;
 
 namespace Trabajo_Final___Grupo_4
 {
@@ -24,6 +27,10 @@ namespace Trabajo_Final___Grupo_4
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<UsuarioContext>(options =>
+            options.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11))));
+            //options.UseSqlServer(Configuration.GetConnectionString("UsuarioContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
