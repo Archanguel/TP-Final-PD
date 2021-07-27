@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
+using Trabajo_Final___Grupo_4.Helpers;
 
 namespace Trabajo_Final___Grupo_4.Models
 {
@@ -57,6 +58,7 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             if (ModelState.IsValid)
             {
+                usuario.Password = Utils.Encriptar(usuario.Password);
                 _context.Add(usuario);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
