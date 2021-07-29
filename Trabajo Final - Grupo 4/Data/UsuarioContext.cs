@@ -11,6 +11,10 @@ namespace Trabajo_Final___Grupo_4.Data
 {
     public class UsuarioContext : DbContext
     {
+        public UsuarioContext()
+        {
+        }
+
         public UsuarioContext (DbContextOptions<UsuarioContext> options)
             : base(options)
         {

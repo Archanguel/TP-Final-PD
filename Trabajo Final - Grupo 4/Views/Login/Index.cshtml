@@ -20,7 +20,8 @@
     <div class="box">
         <img src="~/imgs/avatar-user.png" class="avatar">
         <h1>Login</h1>
-        <form action="Home" method="post" class="from-horizontal">
+        <form method="post" class="from-horizontal">
+            <!--action="Home"-->
             <div class="form-group">
 
                 <input type="user" class="form-control" id="user" name="user" placeholder="Usuario">
@@ -29,6 +30,7 @@
                 <button type="submit" class="btn btn-primary btn-xs" name="login">Entrar</button>
             </div>
         </form>
+        <button type="button" class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Create", "Usuarios")'">Registrarse</button>
     </div>
 </body>
 
