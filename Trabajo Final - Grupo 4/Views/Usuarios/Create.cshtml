@@ -1,65 +1,86 @@
 ﻿@model Trabajo_Final___Grupo_4.Models.Usuario
 
 @{
+    Layout = null;
     ViewData["Title"] = "Registrarse";
 }
+<!DOCTYPE html>
 
-<h1>Registrarse</h1>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<body>
+    <div class="box2">
+        <h1>Registrarse</h1>
+        <form asp-action="Create" class="from-horizontal">
             <div class="form-group">
-                <label asp-for="Dni" class="control-label"></label>
-                <input asp-for="Dni" class="form-control" />
-                <span asp-validation-for="Dni" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" type="password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <!--<label asp-for="Dni" class="control-label"></label>-->
+                    <input asp-for="Dni" type="dni" class="form-control" placeholder="Dni" />
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Nombre" class="control-label"></label>-->
+                    <input asp-for="Nombre" type="nombre" class="form-control" placeholder="Nombre" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Email" class="control-label"></label>-->
+                    <input asp-for="Email" type="email" class="form-control" placeholder="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Password" class="control-label"></label>-->
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Repeat Password" />
+                </div>
 
-            <div class="form-group form-check d-none">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
-                </label>
-            </div>
-            <div class="form-group form-check d-none">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
-                </label>
-            </div>
-            <div class="form-group d-none">
-                <label asp-for="Intentos" class="control-label"></label>
-                <input asp-for="Intentos" class="form-control" value="0"/>
-                <span asp-validation-for="Intentos" class="text-danger"></span>
-            </div>
+                <div class="form-group form-check d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                    </label>
+                </div>
+                <div class="form-group form-check d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                    </label>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="Intentos" class="control-label"></label>
+                    <input asp-for="Intentos" class="form-control" value="0" />
+                    <span asp-validation-for="Intentos" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="REGISTRARSE" class="btn btn-primary" />
+                <div class="form-group">
+                    <input type="submit" value="REGISTRARSE" class="btn btn-primary" />
+                </div>
             </div>
         </form>
+        <button type="button" class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("", "Login")'">Login</button>
     </div>
-</div>
+</body>
 
-<!--
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
--->
+    </html>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+
+
+    <!--
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+    -->
+
+                        @section Scripts {
+                            @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+                        }
