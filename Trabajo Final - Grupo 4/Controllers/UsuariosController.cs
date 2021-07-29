@@ -44,6 +44,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Usuarios/Create
+        [HttpGet("Registrarse")]
         public IActionResult Create()
         {
             return View();
@@ -52,16 +53,24 @@ namespace Trabajo_Final___Grupo_4.Models
         // POST: Usuarios/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost("Registrarse")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Dni,Nombre,Email,Password,IsAdmin,Bloqueado,Intentos")] Usuario usuario)
         {
             if (ModelState.IsValid)
             {
-                usuario.Password = Utils.Encriptar(usuario.Password);
-                _context.Add(usuario);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (_context.Usuario.Any(x => String.Equals(x.Email, usuario.Email, StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    ModelState.AddModelError("Email", "Email ya registrado");
+                    
+                }
+                else
+                {
+                    usuario.Password = Utils.Encriptar(usuario.Password);
+                    _context.Add(usuario);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(usuario);
         }

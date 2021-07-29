@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Trabajo_Final___Grupo_4.Models;
 using Trabajo_Final___Grupo_4.Data;
+using Trabajo_Final___Grupo_4.Helpers;
 
 namespace Trabajo_Final___Grupo_4.Controllers
 {
@@ -16,20 +17,26 @@ namespace Trabajo_Final___Grupo_4.Controllers
         private int dniIngresado;
         ILogger<LoginController> logger;
 
-        private AgenciaManager agencia;
+        private readonly AgenciaManager agencia;
 
+        public LoginController(AgenciaManager agencia)
+        {
+            this.agencia = agencia;
+        }
+
+        [HttpGet("Login")]
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("Login")]
         public ActionResult Login(int dni, String password)
         {
             //int dni = int.Parse("1234");
             //String password = "1234";
 
-            if (this.agencia.FindUserForDNI(dni) == null)
+            if (this.agencia.FindUserForDNI(dni) == null) //!_context.Usuario.Any(x => x.Dni == dni)
             {
                 //MessageBox.Show("No existe ese usuario");
                 //return;
@@ -37,10 +44,10 @@ namespace Trabajo_Final___Grupo_4.Controllers
                 return View();
             }
 
-
             this.agencia.BloquearUsuario(dni);
             // Al bloquear al usuario salgo del metodo con el return
             //if (this.bloquearUsuarioPorIntentos(dni)) return;
+
 
             if (this.agencia.autenticarUsuario(dni, password))
             {

@@ -3,9 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
-using Trabajo_Final___Grupo_4.Data;
+using Trabajo_Final___Grupo_4.Models;
 
-namespace Trabajo_Final___Grupo_4.Models
+namespace Trabajo_Final___Grupo_4.Data
 {
     public class Agencia
     {
@@ -14,130 +14,121 @@ namespace Trabajo_Final___Grupo_4.Models
         public const int MAXIMA_CANTIDAD_DE_ESTRELLAS = 5;
 
         private UsuarioContext contexto;
-        public DbSet<Alojamiento> Alojamientos { get; set; }
 
         public Agencia(UsuarioContext contexto)
         {
-            try
-            {
-                // Creo Contexto
-                this.contexto = contexto;
-                this.Alojamientos = contexto.Alojamiento;
-            }
-            catch (Exception)
-            {
-            }
+            this.contexto = contexto;
         }
 
         #region ABM DE ALOJAMIENTO
-        public bool AgregarAlojamiento(Alojamiento alojamiento)
-        {
-            try
-            {
-                contexto.Alojamiento.Add(alojamiento);
-                contexto.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        public bool ModificarAlojamiento(Alojamiento alojamiento)
-        {
-            try
-            {
-                var alojamientoEncontrado = this.Alojamientos.FirstOrDefault(a => a.Codigo == alojamiento.Codigo);
-                alojamientoEncontrado.Ciudad = alojamiento.Ciudad;
-                alojamientoEncontrado.Barrio = alojamiento.Barrio;
-                alojamientoEncontrado.Estrellas = alojamiento.Estrellas;
-                alojamientoEncontrado.CantidadDePersonas = alojamiento.CantidadDePersonas;
-                alojamientoEncontrado.Tv = alojamiento.Tv;
-                alojamientoEncontrado.PrecioPorPersona = alojamiento.PrecioPorPersona;
-                alojamientoEncontrado.PrecioPorDia = alojamiento.PrecioPorDia;
-                alojamientoEncontrado.Habitaciones = alojamiento.Habitaciones;
-                alojamientoEncontrado.Banios = alojamiento.Banios;
-                this.Alojamientos.Update(alojamientoEncontrado);
-                contexto.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-        public bool EliminarAlojamiento(int codigoDelAlojamiento)
-        {
-            try
-            {
-                var alojamiento = this.Alojamientos.FirstOrDefault(a => a.Codigo == codigoDelAlojamiento.ToString());
-                this.Alojamientos.Remove(alojamiento);
-                contexto.SaveChanges();
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+        //public bool AgregarAlojamiento(Alojamiento alojamiento)
+        //{
+        //    try
+        //    {
+        //        contexto.Alojamiento.Add(alojamiento);
+        //        contexto.SaveChanges();
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
+        //public bool ModificarAlojamiento(Alojamiento alojamiento)
+        //{
+        //    try
+        //    {
+        //        var alojamientoEncontrado = this.contexto.Alojamiento.FirstOrDefault(a => a.Codigo == alojamiento.Codigo);
+        //        alojamientoEncontrado.Ciudad = alojamiento.Ciudad;
+        //        alojamientoEncontrado.Barrio = alojamiento.Barrio;
+        //        alojamientoEncontrado.Estrellas = alojamiento.Estrellas;
+        //        alojamientoEncontrado.CantidadDePersonas = alojamiento.CantidadDePersonas;
+        //        alojamientoEncontrado.Tv = alojamiento.Tv;
+        //        alojamientoEncontrado.PrecioPorPersona = alojamiento.PrecioPorPersona;
+        //        alojamientoEncontrado.PrecioPorDia = alojamiento.PrecioPorDia;
+        //        alojamientoEncontrado.Habitaciones = alojamiento.Habitaciones;
+        //        alojamientoEncontrado.Banios = alojamiento.Banios;
+        //        this.contexto.Alojamiento.Update(alojamientoEncontrado);
+        //        contexto.SaveChanges();
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
+        //public bool EliminarAlojamiento(int codigoDelAlojamiento)
+        //{
+        //    try
+        //    {
+        //        var alojamiento = this.contexto.Alojamiento.FirstOrDefault(a => a.Codigo == codigoDelAlojamiento.ToString());
+        //        this.contexto.Alojamiento.Remove(alojamiento);
+        //        contexto.SaveChanges();
+        //        return true;
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return false;
+        //    }
+        //}
         #endregion
         
         #region METODOS COMPLEMENTARIOS
-        public List<List<String>> DatosDeAlojamientosParaLasVistasAdmin(String tipoAloj)
-        {
-            List<List<String>> alojamientos = new List<List<string>>();
-            foreach (Alojamiento alojamiento in this.Alojamientos)
-            {
-                if (tipoAloj == "todo")
-                {
-                    double precio = alojamiento.Tipo == "hotel" ? alojamiento.PrecioPorPersona : alojamiento.PrecioPorDia;
-                    alojamientos.Add(new List<String>(){
-                    alojamiento.Codigo.ToString(),
-                    alojamiento.Ciudad,
-                    alojamiento.Barrio,
-                    alojamiento.Estrellas.ToString(),
-                    alojamiento.CantidadDePersonas.ToString(),
-                    alojamiento.Tv ? "si" : "no",
-                    precio.ToString(),
-                    });
-                }
-                else if (alojamiento.Tipo == tipoAloj)
-                {
-                    double precio = alojamiento.Tipo == "hotel" ? alojamiento.PrecioPorPersona : alojamiento.PrecioPorDia;
-                    alojamientos.Add(new List<String>(){
-                    alojamiento.Codigo.ToString(),
-                    alojamiento.Ciudad,
-                    alojamiento.Barrio,
-                    alojamiento.Estrellas.ToString(),
-                    alojamiento.CantidadDePersonas.ToString(),
-                    alojamiento.Tv ? "si" : "no",
-                    precio.ToString(),
-                });
-                }
-            }
-            return alojamientos;
-        }
+        //public List<List<String>> DatosDeAlojamientosParaLasVistasAdmin(String tipoAloj)
+        //{
+        //    List<List<String>> alojamientos = new List<List<string>>();
+        //    foreach (Alojamiento alojamiento in this.Alojamientos)
+        //    {
+        //        if (tipoAloj == "todo")
+        //        {
+        //            double precio = alojamiento.Tipo == "hotel" ? alojamiento.PrecioPorPersona : alojamiento.PrecioPorDia;
+        //            contexto.Alojamiento.Add(new List<String>(){
+        //            alojamiento.Codigo.ToString(),
+        //            alojamiento.Ciudad,
+        //            alojamiento.Barrio,
+        //            alojamiento.Estrellas.ToString(),
+        //            alojamiento.CantidadDePersonas.ToString(),
+        //            alojamiento.Tv ? "si" : "no",
+        //            precio.ToString(),
+        //            });
+        //        }
+        //        else if (alojamiento.Tipo == tipoAloj)
+        //        {
+        //            double precio = alojamiento.Tipo == "hotel" ? alojamiento.PrecioPorPersona : alojamiento.PrecioPorDia;
+        //            contexto.Alojamiento.Add(new List<String>(){
+        //            alojamiento.Codigo.ToString(),
+        //            alojamiento.Ciudad,
+        //            alojamiento.Barrio,
+        //            alojamiento.Estrellas.ToString(),
+        //            alojamiento.CantidadDePersonas.ToString(),
+        //            alojamiento.Tv ? "si" : "no",
+        //            precio.ToString(),
+        //        });
+        //        }
+        //    }
+        //    return alojamientos;
+        //}
 
         public List<List<String>> GetAlojamientoPorCodigo()
         {
-            List<Alojamiento> alojamientos = this.Alojamientos.OrderBy(alojamiento => alojamiento.Codigo).ToList();
+            List<Alojamiento> alojamientos = this.contexto.Alojamiento.OrderBy(alojamiento => alojamiento.Codigo).ToList();
             return this.AlojamientosToLista(alojamientos);
         }
         public List<List<String>> GetAlojamientoPorEstrellas()
         {
-            List<Alojamiento> alojamientos = this.Alojamientos.OrderBy(alojamiento => alojamiento.Estrellas).ToList();
+            List<Alojamiento> alojamientos = this.contexto.Alojamiento.OrderBy(alojamiento => alojamiento.Estrellas).ToList();
             return this.AlojamientosToLista(alojamientos);
         }
         public List<List<String>> GetAlojamientoPorPersonas()
         {
-            List<Alojamiento> alojamientos = this.Alojamientos.OrderBy(alojamiento => alojamiento.CantidadDePersonas).ToList();
+            List<Alojamiento> alojamientos = this.contexto.Alojamiento.OrderBy(alojamiento => alojamiento.CantidadDePersonas).ToList();
             return this.AlojamientosToLista(alojamientos);
         }
         public List<List<String>> AlojamientosToLista(List<Alojamiento> alojamientos = null)
         {
             List<List<String>> listaDeAlojamientos = new List<List<string>>();
 
-            var alojamientosAIterar = alojamientos == null ? this.Alojamientos.ToList() : alojamientos;
+            var alojamientosAIterar = alojamientos == null ? this.contexto.Alojamiento.ToList() : alojamientos;
 
             foreach (Alojamiento al in alojamientosAIterar)
             {
@@ -160,7 +151,7 @@ namespace Trabajo_Final___Grupo_4.Models
         public List<List<String>> GetCabania()
         {
             List<List<String>> cabanias = new List<List<String>>();
-            this.Alojamientos.ToList().ForEach(alojamiento =>
+            this.contexto.Alojamiento.ToList().ForEach(alojamiento =>
             {
                 if (alojamiento.Tipo != "hotel")
                 {
@@ -183,7 +174,7 @@ namespace Trabajo_Final___Grupo_4.Models
         public List<List<String>> GetHoteles()
         {
             List<List<String>> hoteles = new List<List<String>>();
-            this.Alojamientos.ToList().ForEach( alojamiento =>
+            this.contexto.Alojamiento.ToList().ForEach( alojamiento =>
             {
                 if (alojamiento.Tipo == "hotel")
                 {
@@ -203,7 +194,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
         public Alojamiento FindAlojamientoForCodigo(int codigoAlojamiento)
         {
-            return this.Alojamientos.ToList().Find(al => al.Codigo == codigoAlojamiento.ToString());
+            return this.contexto.Alojamiento.ToList().Find(al => al.Codigo == codigoAlojamiento.ToString());
         }
         #endregion
 

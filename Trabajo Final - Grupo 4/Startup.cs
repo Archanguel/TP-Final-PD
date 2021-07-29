@@ -32,6 +32,9 @@ namespace Trabajo_Final___Grupo_4
             //options.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11))));
             options.UseMySql(Credenciales.GetConnectionString()));
             //options.UseSqlServer(Configuration.GetConnectionString("UsuarioContext")));
+            services.AddScoped<AgenciaManager, AgenciaManager>();
+            services.AddScoped<Agencia, Agencia>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

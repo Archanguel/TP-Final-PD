@@ -14,34 +14,12 @@ namespace Trabajo_Final___Grupo_4
     {
         private UsuarioContext contexto;
         private Agencia agencia;
-        public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<Reserva> Reservas { get; set; }
-        public DbSet<Alojamiento> Alojamientos { get; set; }
 
         private Usuario usuarioLogeado;
-        public AgenciaManager()
+        public AgenciaManager(UsuarioContext context, Agencia agencia)
         {
-            try
-            {
-                //creo un contexto
-                contexto = new UsuarioContext();
-
-                //cargo los usuarios
-                contexto.Usuario.Load();
-                this.Usuarios = contexto.Usuario;
-
-                contexto.Reserva.Load();
-                this.Reservas = contexto.Reserva;
-
-                contexto.Alojamiento.Load();
-                this.Alojamientos = contexto.Alojamiento;
-
-                this.usuarioLogeado = null;
-                this.agencia = new Agencia(contexto);
-            }
-            catch (Exception)
-            {
-            }
+            contexto = context;
+            this.agencia = agencia;
         }
 
         #region USUARIO
@@ -71,11 +49,11 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var usuario = this.Usuarios.FirstOrDefault(u => u.Dni == dni);
+                var usuario = this.contexto.Usuario.FirstOrDefault(u => u.Dni == dni);
 		        usuario.Nombre = nombre;
                 usuario.Email = email;
                 usuario.Bloqueado = bloqueado;
-                this.Usuarios.Update(usuario);
+                this.contexto.Usuario.Update(usuario);
                 this.contexto.SaveChanges();
 		        return true;
             }
@@ -88,10 +66,10 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var reservas = this.Reservas.Where(reserva => reserva.Usuario.Dni == dni).ToList();
-                this.Reservas.RemoveRange(reservas.ToArray());
-                var usuario = this.Usuarios.ToList().Find(u => u.Dni == dni);
-                this.Usuarios.Remove(usuario);
+                var reservas = this.contexto.Reserva.Where(reserva => reserva.Usuario.Dni == dni).ToList();
+                this.contexto.Reserva.RemoveRange(reservas.ToArray());
+                var usuario = this.contexto.Usuario.ToList().Find(u => u.Dni == dni);
+                this.contexto.Usuario.Remove(usuario);
                 contexto.SaveChanges();
                 return true;
             }
@@ -102,12 +80,12 @@ namespace Trabajo_Final___Grupo_4
         }*/
         public bool IsUsuarioBloqueado(int dni)
         {
-            Usuario user = this.Usuarios.ToList().Find(user => user.Dni == dni && user.Bloqueado == true);
+            Usuario user = this.contexto.Usuario.ToList().Find(user => user.Dni == dni && user.Bloqueado == true);
             return user == null ? false : true;
         }
         public Usuario FindUserForDNI(int dni)
         {
-            return this.Usuarios.ToList().Find(user => user.Dni == dni);
+            return this.contexto.Usuario.ToList().Find(user => user.Dni == dni);
         }
         public bool autenticarUsuario(int dni, String password)
         {
@@ -119,9 +97,9 @@ namespace Trabajo_Final___Grupo_4
         }
         public bool RecuperarPassword(int dni, String password)
         {
-            var usuario = this.Usuarios.FirstOrDefault(u => u.Dni == dni);
+            var usuario = this.contexto.Usuario.FirstOrDefault(u => u.Dni == dni);
             usuario.Password = Utils.Encriptar(password);
-            this.Usuarios.Update(usuario);
+            this.contexto.Usuario.Update(usuario);
             this.contexto.SaveChanges();
             return true;
         }
@@ -129,7 +107,7 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                return this.Usuarios.Where(user => user.Email == email).First() != null;
+                return this.contexto.Usuario.Where(user => user.Email == email).First() != null;
             }
             catch
             {
@@ -138,10 +116,10 @@ namespace Trabajo_Final___Grupo_4
         }
         public bool BloquearUsuario(int dni)
         {
-            Usuario usuario = this.Usuarios.ToList().Find(u => u.Dni == dni);
+            Usuario usuario = this.contexto.Usuario.ToList().Find(u => u.Dni == dni);
             if (usuario == null) return false;
             usuario.Bloqueado = true;
-            this.Usuarios.Update(usuario);
+            this.contexto.Usuario.Update(usuario);
             this.contexto.SaveChanges();
             return true;
         }
@@ -153,9 +131,9 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var usuario = this.Usuarios.FirstOrDefault(u => u.Dni == dni);
+                var usuario = this.contexto.Usuario.FirstOrDefault(u => u.Dni == dni);
                 usuario.Intentos = 0;
-                this.Usuarios.Update(usuario);
+                this.contexto.Usuario.Update(usuario);
                 this.contexto.SaveChanges();
                 return true;
             }
@@ -168,9 +146,9 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var usuario = this.Usuarios.FirstOrDefault(u => u.Dni == dni);
+                var usuario = this.contexto.Usuario.FirstOrDefault(u => u.Dni == dni);
                 usuario.Intentos = usuario.Intentos + 1;
-                this.Usuarios.Update(usuario);
+                this.contexto.Usuario.Update(usuario);
                 this.contexto.SaveChanges();
                 return true;
             }
@@ -248,8 +226,8 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var reservasDelAlojamiento = this.Reservas.Where(r => r.Alojamiento.Codigo == codigo.ToString()).ToList();
-                this.Reservas.RemoveRange(reservasDelAlojamiento.ToArray());
+                var reservasDelAlojamiento = this.contexto.Reserva.Where(r => r.Alojamiento.Codigo == codigo.ToString()).ToList();
+                this.contexto.Reserva.RemoveRange(reservasDelAlojamiento.ToArray());
                 this.contexto.SaveChanges();
                 return this.agencia.EliminarAlojamiento(codigo);
             }
@@ -260,7 +238,7 @@ namespace Trabajo_Final___Grupo_4
         }*/
         private List<Reserva> getAllReservasForAlojamiento(String codigo)
         {
-            return this.Reservas.ToList().FindAll(reserva => reserva.Alojamiento.Codigo == codigo);
+            return this.contexto.Reserva.ToList().FindAll(reserva => reserva.Alojamiento.Codigo == codigo);
         }
         public bool ExisteAlojamiento(int codigo)
         {
@@ -272,7 +250,7 @@ namespace Trabajo_Final___Grupo_4
         /*public bool AgregarReserva(DateTime fechaDesde, DateTime fechaHasta, String codigoAlojamiento, int dniUsuario, double precio)
         {
             var alojamiento = this.contexto.Alojamiento.Where(a => a.Codigo.Equals(codigoAlojamiento)).FirstOrDefault();
-            var usuario = this.Usuarios.Where(u => u.Dni == dniUsuario).FirstOrDefault();
+            var usuario = this.contexto.Usuario.Where(u => u.Dni == dniUsuario).FirstOrDefault();
             try
             {
                 var reservas = new Reserva
@@ -284,7 +262,7 @@ namespace Trabajo_Final___Grupo_4
                     Precio = precio
                 };
 
-                this.Reservas.Add(reservas);
+                this.contexto.Reserva.Add(reservas);
                 contexto.SaveChanges();
                 return true;
             }
@@ -298,14 +276,14 @@ namespace Trabajo_Final___Grupo_4
             try
             {
                 var alojamiento = this.Alojamientos.FirstOrDefault( a => a.Codigo == alojamiento_id.ToString());
-                var usuario = this.Usuarios.FirstOrDefault( a => a.Dni == usuario_dni );
-                var reserva = this.Reservas.FirstOrDefault( r => r.Id == int.Parse(id) );
+                var usuario = this.contexto.Usuario.FirstOrDefault( a => a.Dni == usuario_dni );
+                var reserva = this.contexto.Reserva.FirstOrDefault( r => r.Id == int.Parse(id) );
                 reserva.FechaDesde = fechaDesde;
                 reserva.FechaHasta = fechaHasta;
                 reserva.Precio = precio;
                 reserva.Alojamiento = alojamiento;
                 reserva.Usuario = usuario;
-                this.Reservas.Update(reserva);
+                this.contexto.Reserva.Update(reserva);
                 contexto.SaveChanges();
                 return true;
             }
@@ -318,7 +296,7 @@ namespace Trabajo_Final___Grupo_4
         {
             try
             {
-                var reserva = this.Reservas.FirstOrDefault(r => r.Id == id);
+                var reserva = this.contexto.Reserva.FirstOrDefault(r => r.Id == id);
                 contexto.Reserva.Remove(reserva);
                 contexto.SaveChanges();
                 return true;
@@ -330,11 +308,11 @@ namespace Trabajo_Final___Grupo_4
         }*/
         public List<Reserva> GetAllReservasForUsuario(int dni)
         {
-            return this.Reservas.ToList().FindAll(reserva => reserva.Usuario.Dni == dni);
+            return this.contexto.Reserva.ToList().FindAll(reserva => reserva.Usuario.Dni == dni);
         }
         private List<Reserva> getAllReservasForAlojamiento(int codigo)
         {
-            return this.Reservas.Where(reserva => reserva.Alojamiento.Codigo == codigo.ToString()).ToList();
+            return this.contexto.Reserva.Where(reserva => reserva.Alojamiento.Codigo == codigo.ToString()).ToList();
         }
         public bool ElAlojamientoEstaDisponible(String codigoDeAlojamiento, DateTime fechaDesde, DateTime fechaHasta)
         {
@@ -372,14 +350,14 @@ namespace Trabajo_Final___Grupo_4
         public List<String> OpcionesDelSelectDeBarrios()
         {
             List<String> tipos = new List<string>() { "todos" };
-            foreach (Alojamiento al in this.agencia.Alojamientos)
+            foreach (Alojamiento al in this.contexto.Alojamiento)
                 tipos.Add(al.Barrio);
             return tipos.Distinct().ToList();
         }
         public List<String> OpcionesDelSelectDeCiudades()
         {
             List<String> tipos = new List<string>() { "todas" };
-            foreach (Alojamiento al in this.agencia.Alojamientos)
+            foreach (Alojamiento al in this.contexto.Alojamiento)
                 tipos.Add(al.Ciudad);
             return tipos.Distinct().ToList();
         }
@@ -393,7 +371,7 @@ namespace Trabajo_Final___Grupo_4
             List<List<String>> alojamientos = new List<List<string>>();
             List<Alojamiento> alojamientosFiltrados = new List<Alojamiento>();
 
-            foreach (var alojamiento in this.GetAgencia().Alojamientos.ToList().FindAll(al => al.Ciudad.Contains(ciudad)))
+            foreach (var alojamiento in this.contexto.Alojamiento.ToList().FindAll(al => al.Ciudad.Contains(ciudad)))
             {
                 if (this.ElAlojamientoEstaDisponible(alojamiento.Codigo, fechaDesde, fechaHasta))
                     alojamientosFiltrados.Add(alojamiento);
@@ -419,7 +397,7 @@ namespace Trabajo_Final___Grupo_4
         public List<List<String>> GetUsuarios()
         {
             var usuarios = new List<List<String>>();
-            foreach (var usuario in this.Usuarios)
+            foreach (var usuario in this.contexto.Usuario)
                 usuarios.Add(new List<string>()
                 {
                     usuario.Dni.ToString(),
@@ -436,7 +414,7 @@ namespace Trabajo_Final___Grupo_4
 
             if (tipoDeUsuario == "admin")
             {
-                foreach (Reserva reserva in this.Reservas)
+                foreach (Reserva reserva in this.contexto.Reserva)
                 {
                     reservas.Add(new List<String>(){
                         reserva.Id.ToString(),
@@ -515,7 +493,7 @@ namespace Trabajo_Final___Grupo_4
 
         
         /* GETTERS */
-        public Agencia GetAgencia() { return this.agencia; }
+        //public Agencia GetAgencia() { return this.agencia; }
         public Usuario GetUsuarioLogeado() { return this.usuarioLogeado; }
     }
 }
