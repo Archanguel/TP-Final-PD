@@ -15,7 +15,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
     {
         private int contadorDeIntentos;
         private int dniIngresado;
-        ILogger<LoginController> logger;
+        //ILogger<LoginController> logger;
 
         private readonly AgenciaManager agencia;
 
@@ -35,18 +35,19 @@ namespace Trabajo_Final___Grupo_4.Controllers
         {
             //int dni = int.Parse("1234");
             //String password = "1234";
+            int intentos = 0;
 
             if (this.agencia.FindUserForDNI(dni) == null) //!_context.Usuario.Any(x => x.Dni == dni)
             {
                 //MessageBox.Show("No existe ese usuario");
                 //return;
                 ViewBag.Error = "Usuario o contraseña invalida";
-                return View();
+                return RedirectToAction("Index");
             }
 
-            this.agencia.BloquearUsuario(dni);
+            //this.agencia.BloquearUsuario(dni);
             // Al bloquear al usuario salgo del metodo con el return
-            //if (this.bloquearUsuarioPorIntentos(dni)) return;
+            //if (this.agencia.bloquearUsuarioPorIntentos(dni)) return;
 
 
             if (this.agencia.autenticarUsuario(dni, password))
@@ -74,10 +75,27 @@ namespace Trabajo_Final___Grupo_4.Controllers
             else
             {
                 this.agencia.IntentosLogueo(dni);
+                intentos += 1;
                 //MessageBox.Show("Contraseña incorrecta");
-                ViewBag.Error = "Usuario o contraseña invalida";
-                return View();
+                if (intentos >= 3)
+                {
+                    this.agencia.BloquearUsuario(dni);
+                    this.agencia.ReiniciarIntentos(dni);
+                    ViewBag.Error = "El usuario ha sido bloqueado, contacte con un administrador";
+                }
+                else
+                {
+                    ViewBag.Error = "Usuario o contraseña invalida";
+                }
+                return RedirectToAction("Index");
             }
         }
+        /*[HttpPost("Logout")]
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SetAuthCookie();
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login");
+        }*/
     }
 }
