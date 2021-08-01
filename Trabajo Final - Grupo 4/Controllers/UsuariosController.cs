@@ -11,7 +11,6 @@ using Trabajo_Final___Grupo_4.Helpers;
 
 namespace Trabajo_Final___Grupo_4.Models
 {
-    [Authorize]
     public class UsuariosController : Controller
     {
         private readonly UsuarioContext _context;
@@ -22,12 +21,14 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Usuarios
+        [Authorize]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Usuario.ToListAsync());
         }
 
         // GET: Usuarios/Details/5
+        [Authorize]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -78,6 +79,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Usuarios/Edit/5
+        [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -97,6 +99,7 @@ namespace Trabajo_Final___Grupo_4.Models
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Dni,Nombre,Email,Password,IsAdmin,Bloqueado,Intentos")] Usuario usuario)
         {
@@ -129,6 +132,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Usuarios/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,6 +152,7 @@ namespace Trabajo_Final___Grupo_4.Models
 
         // POST: Usuarios/Delete/5
         [HttpPost, ActionName("Delete")]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {

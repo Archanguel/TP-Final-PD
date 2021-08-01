@@ -34,7 +34,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> LoginAsync(int dni, String password, String ReturnUrl)
+        public async Task<ActionResult> LoginAsync(int dni, String password)
         {
             //int dni = int.Parse("1234");
             //String password = "1234";
