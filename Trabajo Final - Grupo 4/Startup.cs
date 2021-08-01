@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
 using Trabajo_Final___Grupo_4.Helpers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace Trabajo_Final___Grupo_4
 {
@@ -34,6 +35,17 @@ namespace Trabajo_Final___Grupo_4
             //options.UseSqlServer(Configuration.GetConnectionString("UsuarioContext")));
             services.AddScoped<AgenciaManager, AgenciaManager>();
             services.AddScoped<Agencia, Agencia>();
+            /*services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie();*/
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie(options =>
+                    {
+                        options.LoginPath = "/Login";
+                        //options.ReturnUrlParameter = "/Home";
+                        //options.ExpireTimeSpan.TotalHours.Equals(2);
+                        //options.LogoutPath = "/Login";
+                    });
 
         }
 
@@ -55,10 +67,14 @@ namespace Trabajo_Final___Grupo_4
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
+                //endpoints.MapControllers();
+                //endpoints.MapRazorPages();
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}");
