@@ -4,94 +4,72 @@
     ViewData["Title"] = "Index";
 }
 
-<h1 class="text-center">Alojamientos</h1>
+<h1 class=" display-4 text-center">Alojamientos</h1>
 
 <p>
-    <a asp-action="Create"><button type="button" class="btn btn-success btn-xs">Agregar</button></a>
+    <a asp-action="Create" class="btn btn-success btn-xs">Agregar</a>
 </p>
-<table class="table">
+
+<table class="table table-bordered table-responsive table-striped table-sm mb-4">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Codigo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ciudad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Barrio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Estrellas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CantidadDePersonas)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tipo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioPorPersona)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PrecioPorDia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Habitaciones)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Banios)
-            </th>
-            <th>
-                Acciones
-            </th>
+        <tr class="text-center">
+            <th>@Html.DisplayNameFor(model => model.Codigo)</th>
+            <th>@Html.DisplayNameFor(model => model.Ciudad)</th>
+            <th>@Html.DisplayNameFor(model => model.Barrio)</th>
+            <th>@Html.DisplayNameFor(model => model.Estrellas)</th>
+            <th>@Html.DisplayNameFor(model => model.CantidadDePersonas)</th>
+            <th>@Html.DisplayNameFor(model => model.Tv)</th>
+            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecioPorPersona)</th>
+            <th>@Html.DisplayNameFor(model => model.PrecioPorDia)</th>
+            <th>@Html.DisplayNameFor(model => model.Habitaciones)</th>
+            <th>@Html.DisplayNameFor(model => model.Banios)</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Codigo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ciudad)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Barrio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Estrellas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CantidadDePersonas)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tv)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioPorPersona)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PrecioPorDia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Habitaciones)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Banios)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><button type="button" class="btn btn-warning btn-xs">Editar</button></a>
-                <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
-                <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger btn-xs">Borrar</button></a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Ciudad)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Barrio)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Estrellas)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.CantidadDePersonas)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Tv)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.PrecioPorDia)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Habitaciones)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Banios)
+                </td>
+                <td class="d-flex justify-content-around align-content-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-xs mr-1">Editar</a>
+                    <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-xs ml-1">Borrar</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
