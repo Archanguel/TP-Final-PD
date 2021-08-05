@@ -27,6 +27,12 @@ namespace Trabajo_Final___Grupo_4.Models
             return View(await _context.Alojamiento.ToListAsync());
         }
 
+        // GET: Alojamientoes
+        public async Task<IActionResult> all()
+        {
+            return View(await _context.Alojamiento.ToListAsync());
+        }
+
         // GET: Alojamientoes/Details/5
         public async Task<IActionResult> Details(int? id)
         {

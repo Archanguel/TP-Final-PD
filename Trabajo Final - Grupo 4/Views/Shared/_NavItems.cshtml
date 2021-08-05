@@ -3,7 +3,7 @@
 *@
 
 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-    <ul class="navbar-nav flex-grow-1">
+    <ul class="navbar-nav flex-grow-1 justify-content-center">
         @if (User.IsInRole(true.ToString()))
         {
             <li class="nav-item">
@@ -22,20 +22,23 @@
         else
         {
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="VistaCliente">Home</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Alojamientoes" asp-action="all">Alojamientos</a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Alojamientoes" asp-action="MODIFICAR ESTO">Reservar</a>
-            </li>/* Acá tengo que crear una vista para reservar alojamientos */
+                <a class="nav-link text-dark" asp-area="" asp-controller="Alojamientoes" asp-action="MODIFICAR ESTO">Buscador</a>
+            </li>
+            /* Acá tengo que crear una vista filtrar alojamientos, como la primera pero con una barra de búsqueda */
+
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Reservas" asp-action="MODIFICAR ESTO">Mis Reservaciones</a>
-            </li>/* Acá tengo que crear una vista para ver las reservaciones de este usuario y poder cancelarlas */
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Alojamientoes" asp-action="MODIFICAR ESTO">Buscar Alojamiento</a>
-            </li>/* Acá tengo que crear una vista filtrar alojamientos, como la primera pero con una barra de búsqueda */
+            </li>
+            /* Acá tengo que crear una vista para ver las reservaciones de este usuario y poder cancelarlas */
+
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Usuarios" asp-action="MODIFICAR ESTO">Cambiar Contraseña</a>
-            </li>/* Acá tengo que crear una vista para cambiar la contraseña de este usuario */
+            </li>
+            /* Acá tengo que crear una vista para cambiar la contraseña de este usuario */
         }
 
     </ul>
