@@ -23,6 +23,7 @@ namespace Trabajo_Final___Grupo_4.Models
         // GET: Alojamientoes
         public async Task<IActionResult> Index()
         {
+            var usuarioLogeado = User.Identity;
             return View(await _context.Alojamiento.ToListAsync());
         }
 
