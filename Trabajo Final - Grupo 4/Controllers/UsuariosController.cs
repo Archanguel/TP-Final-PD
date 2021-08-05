@@ -166,5 +166,12 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             return _context.Usuario.Any(e => e.Id == id);
         }
+
+
+        [Authorize]
+        public async Task<IActionResult> CambiarContrasena()
+        {
+            return View(await _context.Usuario.ToListAsync());
+        }
     }
 }
