@@ -20,12 +20,19 @@ namespace Trabajo_Final___Grupo_4.Controllers
             _logger = logger;
         }
 
+        [HttpGet("Abm")]
         public IActionResult Index()
         {
             return View();
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [HttpGet("Home")]
+        public IActionResult VistaCliente()
         {
             return View();
         }

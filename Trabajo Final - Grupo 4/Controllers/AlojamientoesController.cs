@@ -45,6 +45,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Alojamientoes/Create
+
         public IActionResult Create()
         {
             return View();

@@ -76,7 +76,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                 {
                     new Claim(ClaimTypes.Name, this.agencia.GetUsuarioLogeado().Nombre),
                     //new Claim("FullName", user.FullName),
-                    //new Claim(ClaimTypes.Role, "Administrator"),
+                    new Claim(ClaimTypes.Role, this.agencia.GetUsuarioLogeado().IsAdmin.ToString()),
+                    new Claim("id", this.agencia.GetUsuarioLogeado().Id.ToString()),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
@@ -107,7 +108,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     admin.Show();
                     this.Hide();*/
                     //return View("Home");
-                    return Redirect("/Home");
+                    return Redirect("/Abm");
                 }
                 else
                 {
@@ -116,6 +117,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     cliente.Show();
                     this.Hide();*/
                     //return View("Home");
+                    //return Redirect("/VistaCliente");
                     return Redirect("/Home");
                 }
             }
