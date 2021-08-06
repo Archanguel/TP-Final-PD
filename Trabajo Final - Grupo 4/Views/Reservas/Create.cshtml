@@ -1,41 +1,35 @@
 ﻿@model Trabajo_Final___Grupo_4.Models.Reserva
-
+ 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Reservar";
 }
 
-<h1>Create</h1>
+<h1 class="display-4">@ViewData["alojamiento_tipo"]</h1>
 
-<h4>Reserva</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-10">
         <form asp-action="Create">
+            <input type="hidden" name="id_alojamiento" value="@ViewData["alojamiento_id"]" />
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="FechaDesde" class="control-label"></label>
-                <input asp-for="FechaDesde" class="form-control" />
-                <span asp-validation-for="FechaDesde" class="text-danger"></span>
+
+            <div class="row">
+                <div class="form-group col-md-6">
+                    <label for="fechaDesde" class="control-label"></label>
+                    <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" />
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="fechaHasta" class="control-label"></label>
+                    <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" />
+                </div>
             </div>
+            
             <div class="form-group">
-                <label asp-for="FechaHasta" class="control-label"></label>
-                <input asp-for="FechaHasta" class="form-control" />
-                <span asp-validation-for="FechaHasta" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Precio" class="control-label"></label>
-                <input asp-for="Precio" class="form-control" />
-                <span asp-validation-for="Precio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Reservar" class="btn btn-primary" />
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

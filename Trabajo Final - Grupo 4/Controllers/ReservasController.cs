@@ -45,8 +45,24 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas/Create
-        public IActionResult Create()
+        public IActionResult Create(int? id)
         {
+            if (id == null) return NotFound();
+            var alojamiento = this._context.Alojamiento.FirstOrDefaultAsync(alojamiento => alojamiento.Id == id).Result;
+            if (alojamiento == null) return NotFound();
+
+            ViewData["alojamiento_id"] = alojamiento.Id;
+            ViewData["alojamiento_ciudad"] = alojamiento.Ciudad;
+            ViewData["alojamiento_barrio"] = alojamiento.Barrio;
+            ViewData["alojamiento_estrellas"] = alojamiento.Estrellas;
+            ViewData["alojamiento_cantidadDePersonas"] = alojamiento.CantidadDePersonas;
+            ViewData["alojamiento_tv"] = alojamiento.Tv;
+            ViewData["alojamiento_tipo"] = alojamiento.Tipo;
+            ViewData["alojamiento_precioPorPersona"] = alojamiento.PrecioPorPersona;
+            ViewData["alojamiento_precioPorDia"] = alojamiento.PrecioPorDia;
+            ViewData["alojamiento_habitaciones"] = alojamiento.Habitaciones;
+            ViewData["alojamiento_banios"] = alojamiento.Banios;
+
             return View();
         }
 
@@ -55,15 +71,27 @@ namespace Trabajo_Final___Grupo_4.Models
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FechaDesde,FechaHasta,Precio")] Reserva reserva)
+        public async Task<IActionResult> Create(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(reserva);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(reserva);
+            int usuario_id = int.Parse(User.Identity.Name);
+            var usuario = this._context.Usuario.Find(usuario_id);
+            var alojamiento = await this._context.Alojamiento.FindAsync(id_alojamiento);
+            int dias_reservados = (fechaHasta - fechaDesde).Days;
+            double precio = dias_reservados * alojamiento.PrecioPorDia;
+            if (alojamiento.Tipo == "hotel")
+                precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
+
+            var reserva = new Reserva {
+                FechaDesde = fechaDesde,
+                FechaHasta = fechaHasta,
+                Alojamiento = alojamiento,
+                Precio = precio,
+                Usuario = usuario
+            };
+
+            this._context.Reserva.Add(reserva);
+            this._context.SaveChanges();
+            return Redirect("/Alojamientoes/all");
         }
 
         // GET: Reservas/Edit/5
