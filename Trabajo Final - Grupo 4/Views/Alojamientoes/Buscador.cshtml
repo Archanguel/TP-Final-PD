@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Trabajo_Final___Grupo_4.Models.Alojamiento>
+
+
+@{
+    ViewData["Title"] = "Buscador";
+}
+
+<form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
+    <p>
+        Ciudad<input type="text" name="searchCiudad" />
+        
+    </p>
+    <p>
+        Tipo<input type="text" name="searchTipo" />
+        <input type="submit" value="Buscar" />
+        <input type="submit" value="Buscar" />
+    </p>
+
+</form>
+<h1 class="text-center">Buscador</h1>
+<div class="row row-cols-1 row-cols-md-2 ">
+    <div class="form-group col-4">
+        <label class="control-label">Buscar por ciudad</label>
+        <input class="form-control" />
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-group col-4">
+        <label class="control-label">Fecha de ida</label>
+        <input class="form-control" />
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-group col-4">
+        <label class="control-label">Fecha de vuelta</label>
+        <input class="form-control" />
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-group col-12">
+        <input type="submit" name ="Buscador" value="Buscar" class="btn btn-success" />    
+    </div>
+</div>
+    <div class="row row-cols-1 row-cols-md-2 ">
+
+        @foreach (var item in Model)
+        {
+            <div class="col mb-4">
+                <div class="card">
+                    <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize">
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </h5>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            Ciudad: @item.Ciudad
+                        </p>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            Barrio: @item.Barrio
+                        </p>
+                        <p class="card-text mb-0 pb-0">
+                            TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
+                        </p>
+                        <p class="card-text">
+                            @if (item.Tipo == "hotel")
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorDia)
+                            }
+                        </p>
+                        <a asp-area=""
+                           asp-controller="Alojamientoes"
+                           asp-action="all"
+                           class="btn btn-success">
+                            Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

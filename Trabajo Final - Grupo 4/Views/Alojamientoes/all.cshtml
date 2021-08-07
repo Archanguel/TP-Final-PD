@@ -26,11 +26,11 @@
                 <p class="card-text">
                     @if (item.Tipo == "hotel")
                     {
-                        $@Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                        @Html.DisplayFor(modelItem => item.PrecioPorPersona)
                     }
                     else
                     {
-                        $@Html.DisplayFor(modelItem => item.PrecioPorDia)
+                        @Html.DisplayFor(modelItem => item.PrecioPorDia)
                     }
                 </p>
                 <a 
