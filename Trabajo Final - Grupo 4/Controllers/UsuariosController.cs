@@ -167,6 +167,52 @@ namespace Trabajo_Final___Grupo_4.Models
             return _context.Usuario.Any(e => e.Id == id);
         }
 
-      
+        // GET: Cambiar Contraseña
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> CambiarContrasena()
+        {
+            /*var usuario = await _context.Usuario.FindAsync(id); 
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);*/
+            return View(await _context.Usuario.ToListAsync());
+        }
+
+        // POST: Cambiar Contraseña
+        /*[HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CambiarContrasena(int id, [Bind("Id,Dni,Nombre,Email,Password,IsAdmin,Bloqueado,Intentos")] Usuario usuario)
+        {
+            if (id != usuario.Id)
+            {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(usuario);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UsuarioExists(usuario.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(CambiarContrasena));
+            }
+            return View(usuario);
+        }*/
     }
 }

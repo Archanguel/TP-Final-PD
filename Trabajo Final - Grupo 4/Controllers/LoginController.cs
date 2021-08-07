@@ -74,7 +74,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                 */
                 var claims = new List<Claim>
                 {
-                    new Claim(ClaimTypes.Name, this.agencia.GetUsuarioLogeado().Nombre),
+                    new Claim(ClaimTypes.Name, this.agencia.GetUsuarioLogeado().Id.ToString()),
                     //new Claim("FullName", user.FullName),
                     new Claim(ClaimTypes.Role, this.agencia.GetUsuarioLogeado().IsAdmin.ToString()),
                     new Claim("id", this.agencia.GetUsuarioLogeado().Id.ToString()),
@@ -108,7 +108,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     admin.Show();
                     this.Hide();*/
                     //return View("Home");
-                    return Redirect("/Abm");
+                    return Redirect("/Alojamientoes/");
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     this.Hide();*/
                     //return View("Home");
                     //return Redirect("/VistaCliente");
-                    return Redirect("/Home");
+                    return Redirect("/Alojamientoes/all");
                 }
             }
             else
