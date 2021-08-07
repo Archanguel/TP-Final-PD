@@ -28,9 +28,20 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Alojamientoes
-        public async Task<IActionResult> all()
+        public async Task<IActionResult> all(int? precio, String? estrellas, String? cantidadDePersonas)
         {
-            return View(await _context.Alojamiento.ToListAsync());
+            var alojamientos = from alojamiento in this._context.Alojamiento
+                               select alojamiento;
+
+            if (precio != null && estrellas != null && cantidadDePersonas != null)
+            {
+                alojamientos = alojamientos
+                    .Where(al => al.PrecioPorDia >= precio || al.PrecioPorPersona >= precio)
+                    .Where(al => al.Estrellas >= int.Parse(estrellas))
+                    .Where(al => al.CantidadDePersonas >= int.Parse(cantidadDePersonas));
+            }
+
+            return View(alojamientos.ToList());
         }
 
         // GET: Alojamientoes/Details/5
