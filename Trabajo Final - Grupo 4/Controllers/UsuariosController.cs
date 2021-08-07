@@ -14,10 +14,12 @@ namespace Trabajo_Final___Grupo_4.Models
     public class UsuariosController : Controller
     {
         private readonly UsuarioContext _context;
+        private readonly AgenciaManager agencia;
 
-        public UsuariosController(UsuarioContext context)
+        public UsuariosController(UsuarioContext context, AgenciaManager agencia)
         {
             _context = context;
+            this.agencia = agencia;
         }
 
         // GET: Usuarios
@@ -172,17 +174,28 @@ namespace Trabajo_Final___Grupo_4.Models
         [HttpGet]
         public async Task<IActionResult> CambiarContrasena()
         {
-            /*var usuario = await _context.Usuario.FindAsync(id); 
+            /*if (this.agencia.FindUserForDNI(dni) == null)
+            {
+                return NotFound();
+            }
+
+            var usuario = await _context.Usuario.FindAsync(dni);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
+            var usuario = await _context.Usuario.FindAsync(id); 
             if (usuario == null)
             {
                 return NotFound();
             }
             return View(usuario);*/
-            return View(await _context.Usuario.ToListAsync());
+            return View();
         }
 
         // POST: Cambiar Contraseña
-        /*[HttpPost]
+        [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CambiarContrasena(int id, [Bind("Id,Dni,Nombre,Email,Password,IsAdmin,Bloqueado,Intentos")] Usuario usuario)
@@ -213,6 +226,6 @@ namespace Trabajo_Final___Grupo_4.Models
                 return RedirectToAction(nameof(CambiarContrasena));
             }
             return View(usuario);
-        }*/
+        }
     }
 }

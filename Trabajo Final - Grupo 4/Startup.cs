@@ -12,6 +12,11 @@ using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
 using Trabajo_Final___Grupo_4.Helpers;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
+using System.Reflection;
+using Trabajo_Final___Grupo_4.Models;
+using Microsoft.Extensions.Options;
 
 namespace Trabajo_Final___Grupo_4
 {
@@ -38,6 +43,7 @@ namespace Trabajo_Final___Grupo_4
             /*services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie();*/
 
+            // ------------------ ESTO ES PARA LAS COOKIES ------------------
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
                     {
@@ -46,7 +52,39 @@ namespace Trabajo_Final___Grupo_4
                         //options.ExpireTimeSpan.TotalHours.Equals(2);
                         //options.LogoutPath = "/Login";
                     });
+            // --------------------------------------------------------------
 
+            // ------------------ ESTO ES PARA EL MULTI LENGUAJE ------------------
+            services.AddSingleton<LanguageService>();
+            services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            services.AddMvc()
+                .AddViewLocalization()
+                .AddDataAnnotationsLocalization(options =>
+                {
+                    options.DataAnnotationLocalizerProvider = (type, factory) =>
+                    {
+                        var assemblyName = new AssemblyName(typeof(ShareResource).GetTypeInfo().Assembly.FullName);
+                        return factory.Create("ShareResource", assemblyName.Name);
+                    };
+                });
+
+            services.Configure<RequestLocalizationOptions>(
+                options =>
+                {
+                    var supportedCultures = new List<CultureInfo>
+                    {
+                        new CultureInfo("es-ES"),
+                        new CultureInfo("en-US"),
+                    };
+
+                    options.DefaultRequestCulture = new RequestCulture(culture: "es-ES", uiCulture: "es-ES");
+                    options.SupportedCultures = supportedCultures;
+                    options.SupportedUICultures = supportedCultures;
+
+                    options.RequestCultureProviders.Insert(0, new QueryStringRequestCultureProvider());
+                });
+            // --------------------------------------------------------------------
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +100,11 @@ namespace Trabajo_Final___Grupo_4
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            // ------------------ ESTO ES PARA EL MULTI LENGUAJE ------------------
+            var locOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(locOptions.Value);
+            // --------------------------------------------------------------------
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
