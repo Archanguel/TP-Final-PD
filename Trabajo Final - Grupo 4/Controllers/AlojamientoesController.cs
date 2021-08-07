@@ -158,5 +158,25 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             return _context.Alojamiento.Any(e => e.Id == id);
         }
+        // GET: Alojamientoes/Edit/Buscar
+        [Authorize]
+        public async Task<IActionResult> Buscador(String searchCiudad, String searchTipo)
+        {
+            var alojamiento = from a in _context.Alojamiento select a;
+
+            if(!String.IsNullOrEmpty(searchCiudad))
+            {
+                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(searchCiudad));
+            }
+
+            if (!String.IsNullOrEmpty(searchTipo))
+            {
+                alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
+            }
+
+            return View(await alojamiento.ToListAsync());
+        }
+
+
     }
 }
