@@ -1,7 +1,19 @@
 ﻿@model Trabajo_Final___Grupo_4.Models.Reserva
- 
+
 @{
     ViewData["Title"] = "Reservar";
+}
+
+@if (ViewData["message"] != null)
+{
+    <div class="alert alert-danger" role="alert" id="alert-message-alojamiento-no-disponible">
+        <strong>@ViewData["message"]</strong>
+    </div>
+    <script type="text/javascript">
+        setTimeout(() => {
+            document.getElementById("alert-message-alojamiento-no-disponible").remove()
+        }, 4000)
+    </script>
 }
 
 <h1 class="display-4">@ViewData["alojamiento_tipo"]</h1>
@@ -24,7 +36,7 @@
                     <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" />
                 </div>
             </div>
-            
+
             <div class="form-group">
                 <input type="submit" value="Reservar" class="btn btn-primary" />
             </div>
