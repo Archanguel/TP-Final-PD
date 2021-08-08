@@ -11,7 +11,7 @@
 
 <div class="row">
     <div class="col-12">
-        <form asp-action="CambiarContrasena">
+        <form asp-action="CambiarContrasena" id="formulario-editar-passwords">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group row">
@@ -32,12 +32,12 @@
                 </div>
                 <div class="form-group col-6">
                     <label asp-for="Password" class="control-label">New Password</label>
-                    <input type="password" asp-for="Password" class="form-control" placeholder="********" />
+                    <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group col-6">
                     <label class="control-label">Repeat Password</label>
-                    <input type="password" class="form-control" placeholder="********" />
+                    <input type="password" class="form-control" id="password2" placeholder="********" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group col-2 align-self-center d-none">
@@ -122,6 +122,23 @@
 </div>
 -->
 
+<script type="text/javascript">
+    const formulario = document.getElementById("formulario-editar-passwords")
+    const inputPassword1 = document.getElementById("password1")
+    const inputPassword2 = document.getElementById("password2")
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        if (inputPassword1.value != inputPassword2.value) {
+            inputPassword1.value = ""
+            inputPassword2.value = ""
+            alert('Las contraseñas deben ser iguales')
+        } else {
+            formulario.submit()
+        }
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
