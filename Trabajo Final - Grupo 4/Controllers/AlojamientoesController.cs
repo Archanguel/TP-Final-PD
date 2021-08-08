@@ -203,7 +203,73 @@ namespace Trabajo_Final___Grupo_4.Models
                 alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
             }
 
+            
+
             return View(await alojamiento.ToListAsync());
+        }
+
+        public async Task<IActionResult> BuscadorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            var alojamiento = from a in _context.Alojamiento select a;
+
+            var reservas = from r in _context.Reserva select r;
+            foreach (var item in alojamiento)
+            {
+                //foreach(var res in reservas)
+                //{
+                //    bool validarFechaDesde = DateTime.Compare(res.FechaDesde, fechaDesde) == 1 && DateTime.Compare(res.FechaDesde, fechaHasta) == 1;
+                //    bool validarFechaHasta = DateTime.Compare(res.FechaHasta, fechaDesde) == -1 && DateTime.Compare(res.FechaHasta, fechaDesde) == -1;
+                //    if (!validarFechaDesde && !validarFechaHasta)
+                //    {
+                //        alojamiento.Except((IEnumerable<Alojamiento>)item);
+                //    }
+                //}             
+            }
+            return View(await alojamiento.ToListAsync());
+        }
+
+        public async Task<IActionResult> Reservar(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
+        {
+            if (!this.DisponibilidadPorFechas(id_alojamiento, fechaDesde, fechaHasta))
+            {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
+                return Redirect("/Reservas/Create?id=" + User.Identity.Name + "&message=Las-fechas-seleccionadas-no-estan-disponibles");
+            }
+
+            var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
+            var alojamiento = await this._context.Alojamiento.FindAsync(id_alojamiento);
+            int dias_reservados = (fechaHasta - fechaDesde).Days;
+
+            double precio = dias_reservados * alojamiento.PrecioPorDia;
+            if (alojamiento.Tipo == "hotel")
+                precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
+
+            var reserva = new Reserva
+            {
+                FechaDesde = fechaDesde,
+                FechaHasta = fechaHasta,
+                Alojamiento = alojamiento,
+                Precio = precio,
+                Usuario = usuario
+            };
+
+            this._context.Reserva.Add(reserva);
+            this._context.SaveChanges();
+            _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+            _soundPlayer.Play();
+            return Redirect("/Alojamientoes/all");
+        }
+        private bool DisponibilidadPorFechas(int id_alojamiento, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            foreach (var reserva in this._context.Reserva.Where(r => r.Alojamiento.Id == id_alojamiento).ToList())
+            {
+                bool validarFechaDesde = DateTime.Compare(reserva.FechaDesde, fechaDesde) == 1 && DateTime.Compare(reserva.FechaDesde, fechaHasta) == 1;
+                bool validarFechaHasta = DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1 && DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1;
+                if (!validarFechaDesde && !validarFechaHasta)
+                    return false;
+            }
+            return true;
         }
 
     }

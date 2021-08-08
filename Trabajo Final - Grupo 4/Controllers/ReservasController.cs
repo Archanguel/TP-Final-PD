@@ -94,7 +94,7 @@ namespace Trabajo_Final___Grupo_4.Models
             {
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 _soundPlayer.Play();
-                return Redirect("/Reservas/Create?id=" + User.Identity.Name + "&message=Las-fechas-seleccionadas-no-estan-disponibles");
+                return Redirect("/Reservas/Create?id=" + id_alojamiento);
             }
 
             var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
@@ -115,7 +115,7 @@ namespace Trabajo_Final___Grupo_4.Models
             };
 
             this._context.Reserva.Add(reserva);
-            //this._context.SaveChanges();
+            this._context.SaveChanges();
             _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
             _soundPlayer.Play();
             return Redirect("/Alojamientoes/all");

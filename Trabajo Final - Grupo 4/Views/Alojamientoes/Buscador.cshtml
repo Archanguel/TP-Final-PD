@@ -24,44 +24,99 @@
     </p>
 </form>
 
-    <div class="row row-cols-1 row-cols-md-2 ">
+@*empieza*@
 
-        @foreach (var item in Model)
+
+<form asp-controller="Alojamientoes" asp-action="Reservar" method="get" id="formulario-reserva">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label for="fechaDesde" class="control-label"></label>
+            <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="fechaHasta" class="control-label"></label>
+            <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
+        </div>
+    </div>
+    @foreach (var item in Model)
+        if (true)
         {
-            <div class="col mb-4">
-                <div class="card">
-                    <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
-                    <div class="card-body">
-                        <h5 class="card-title text-capitalize">
-                            @Html.DisplayFor(modelItem => item.Tipo)
-                        </h5>
-                        <p class="card-text text-capitalize mb-0 pb-0">
-                            Ciudad: @item.Ciudad
-                        </p>
-                        <p class="card-text text-capitalize mb-0 pb-0">
-                            Barrio: @item.Barrio
-                        </p>
-                        <p class="card-text mb-0 pb-0">
-                            TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
-                        </p>
-                        <p class="card-text">
-                            @if (item.Tipo == "hotel")
-                            {
-                                @Html.DisplayFor(modelItem => item.PrecioPorPersona)
-                            }
-                            else
-                            {
-                                @Html.DisplayFor(modelItem => item.PrecioPorDia)
-                            }
-                        </p>
-                        <a asp-area=""
-                           asp-controller="Alojamientoes"
-                           asp-action="all"
-                           class="btn btn-success">
-                            Reservar
-                        </a>
+            {
+                <div class="row">
+                <div class="col-3 mb-4">                  
+                    <div class="card">
+                        <form asp-area="" asp-controller="Alojamientoes" asp-action="Reservar">
+                            <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
+                            <input name="id_alojamiento" value="@item.Id" />
+                            <div class="card-body">
+                                <h5 class="card-title text-capitalize">
+                                    @Html.DisplayFor(modelItem => item.Tipo)
+                                </h5>
+                                <p class="card-text text-capitalize mb-0 pb-0">
+                                    Ciudad: @item.Ciudad
+                                </p>
+                                <p class="card-text text-capitalize mb-0 pb-0">
+                                    Barrio: @item.Barrio
+                                </p>
+                                <p class="card-text mb-0 pb-0">
+                                    TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
+                                </p>
+                                <p class="card-text">
+                                    @if (item.Tipo == "hotel")
+                                    {
+                                        @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                                    }
+                                    else
+                                    {
+                                        @Html.DisplayFor(modelItem => item.PrecioPorDia)
+                                    }
+                                </p>
+                                <div class="form-group">
+                                    <input type="submit" value="Reservar" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
-            </div>
+                </div>
+            }
         }
-    </div>
+</form>
+
+<script type="text/javascript">
+
+    // Fecha actual
+    const hoy = moment(new Date()).format('YYYY-MM-DD')
+
+    // Formulario
+    const formulario = document.getElementById("formulario-reserva");
+    const inputFechaDesde = document.getElementById("fechaDesde")
+    const inputFechaHasta = document.getElementById("fechaHasta")
+    inputFechaDesde.min = hoy
+    inputFechaHasta.min = hoy
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        const diasFechaDesde = moment(inputFechaDesde.value).dayOfYear()
+        const diasFechaHasta = moment(inputFechaHasta.value).dayOfYear()
+
+        if ((diasFechaHasta - diasFechaDesde) <= 0) {
+            alert('Fechas no validas, vuelva a intentarlo')
+            formulario.reset()
+        } else {
+            if (confirm("¿ Desea realizar la reserva ?")) {
+                formulario.submit()
+            }
+        }
+    })
+</script>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+@*//finnn*@
+
+
