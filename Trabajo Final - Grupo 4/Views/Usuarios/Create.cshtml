@@ -18,7 +18,7 @@
 <body>
     <div class="box2">
         <h1>Registrarse</h1>
-        <form asp-action="Create" class="from-horizontal">
+        <form asp-action="Create" class="from-horizontal" id="formulario-de-registro-usuario">
             <div class="form-group">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -35,10 +35,10 @@
                 </div>
                 <div class="form-group">
                     <!--<label asp-for="Password" class="control-label"></label>-->
-                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+                    <input asp-for="Password" type="password" class="form-control" placeholder="Password" id="password1" />
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Repeat Password" />
+                    <input type="password" class="form-control" id="password2" name="password" placeholder="Repeat Password" />
                 </div>
 
                 <div class="form-group form-check d-none">
@@ -75,13 +75,23 @@
 </html>
 
 
+<script type="text/javascript">
+    const formulario = document.getElementById("formulario-de-registro-usuario")
+    const inputPassword1 = document.getElementById("password1")
+    const inputPassword2 = document.getElementById("password2")
 
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
 
-<!--
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
--->
+        if (inputPassword1.value != inputPassword2.value) {
+            inputPassword1.value = ""
+            inputPassword2.value = ""
+            alert('Las contraseñas deben ser iguales')
+        } else {
+            formulario.submit()
+        }
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
