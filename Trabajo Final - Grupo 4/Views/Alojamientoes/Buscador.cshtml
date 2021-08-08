@@ -8,8 +8,18 @@
 <form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
     <h1 class="text-center">Buscador</h1>
     <p>
-        Ciudad<input type="text" name="searchCiudad" />
-        Tipo<input type="text" name="searchTipo" />
+
+        Ciudad<input list="browsersa" name="searchCiudad" id="searchCiudad" />
+        <datalist id="browsersa">
+            <option value="Neuquen"></option>
+            <option value="Buenos Aires"></option>
+            <option value="Carlos Paz"></option>
+        </datalist>
+        Tipo<input list="browserse" name="searchTipo" />
+        <datalist id="browserse">
+            <option value="hotel"></option>
+            <option value="cabaña"></option>
+        </datalist>
         <input type="submit" value="Buscar" class="btn btn-success" />
     </p>
 </form>

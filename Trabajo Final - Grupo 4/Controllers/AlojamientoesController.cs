@@ -178,7 +178,10 @@ namespace Trabajo_Final___Grupo_4.Models
 
             if (!String.IsNullOrEmpty(searchCiudad))
             {
-                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(searchCiudad));
+                var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
+                Console.WriteLine(CiudadElejida);
+                //int.Parse(searchCiudad);
+                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
             }
 
             if (!String.IsNullOrEmpty(searchTipo))

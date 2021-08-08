@@ -74,7 +74,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                             Banios = 0,
                             Barrio = "Recoleta",
                             CantidadDePersonas = 2,
-                            Ciudad = "Buenos Aires",
+                            Ciudad = "1",
                             Codigo = "352234",
                             Estrellas = 3,
                             Habitaciones = 0,
@@ -89,7 +89,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                             Banios = 2,
                             Barrio = "Sur",
                             CantidadDePersonas = 2,
-                            Ciudad = "Neuquen",
+                            Ciudad = "2",
                             Codigo = "934120",
                             Estrellas = 4,
                             Habitaciones = 4,
@@ -104,7 +104,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                             Banios = 0,
                             Barrio = "Puerto Madero",
                             CantidadDePersonas = 2,
-                            Ciudad = "Buenos Aires",
+                            Ciudad = "1",
                             Codigo = "846445",
                             Estrellas = 2,
                             Habitaciones = 0,
@@ -119,7 +119,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                             Banios = 1,
                             Barrio = "Centro",
                             CantidadDePersonas = 5,
-                            Ciudad = "Carlos Paz",
+                            Ciudad = "3",
                             Codigo = "321632",
                             Estrellas = 1,
                             Habitaciones = 1,
@@ -127,6 +127,55 @@ namespace Trabajo_Final___Grupo_4.Migrations
                             PrecioPorPersona = 0.0,
                             Tipo = "cabaña",
                             Tv = true
+                        });
+                });
+
+            modelBuilder.Entity("Trabajo_Final___Grupo_4.Models.Ciudad", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Codigo")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("Pais")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("Provincia")
+                        .IsRequired()
+                        .HasColumnType("varchar(80)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Ciudad");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Nombre = "Buenos Aires",
+                            Pais = "Argentina",
+                            Provincia = "CABA"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Nombre = "Neuquen",
+                            Pais = "Argentina",
+                            Provincia = "Neuquen"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Nombre = "Carlos paz",
+                            Pais = "Argentina",
+                            Provincia = "Córdoba"
                         });
                 });
 
