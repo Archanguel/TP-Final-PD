@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
 using Trabajo_Final___Grupo_4.Helpers;
+using System.Media;
 
 namespace Trabajo_Final___Grupo_4.Models
 {
     public class UsuariosController : Controller
     {
         private readonly UsuarioContext _context;
+        private SoundPlayer _soundPlayer;
 
         public UsuariosController(UsuarioContext context)
         {
@@ -64,17 +66,22 @@ namespace Trabajo_Final___Grupo_4.Models
             {
                 if (_context.Usuario.Any(x => String.Equals(x.Email, usuario.Email, StringComparison.InvariantCultureIgnoreCase)))
                 {
+                    _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                    _soundPlayer.Play();
                     ModelState.AddModelError("Email", "Email ya registrado");
-                    
                 }
                 else
                 {
                     usuario.Password = Utils.Encriptar(usuario.Password);
                     _context.Add(usuario);
                     await _context.SaveChangesAsync();
+                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                    _soundPlayer.Play();
                     return RedirectToAction(nameof(Index));
                 }
             }
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(usuario);
         }
 
@@ -105,6 +112,8 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             if (id != usuario.Id)
             {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return NotFound();
             }
 
@@ -119,6 +128,8 @@ namespace Trabajo_Final___Grupo_4.Models
                 {
                     if (!UsuarioExists(usuario.Id))
                     {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
                         return NotFound();
                     }
                     else
@@ -126,8 +137,12 @@ namespace Trabajo_Final___Grupo_4.Models
                         throw;
                     }
                 }
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction(nameof(Index));
             }
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(usuario);
         }
 
@@ -159,6 +174,8 @@ namespace Trabajo_Final___Grupo_4.Models
             var usuario = await _context.Usuario.FindAsync(id);
             _context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
+            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            _soundPlayer.Play();
             return RedirectToAction(nameof(Index));
         }
 
@@ -211,6 +228,8 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             if (int.Parse(User.Identity.Name) != usuario.Id)
             {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return NotFound();
             }
 
@@ -226,6 +245,8 @@ namespace Trabajo_Final___Grupo_4.Models
                 {
                     if (!UsuarioExists(usuario.Id))
                     {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
                         return NotFound();
                     }
                     else
@@ -233,9 +254,14 @@ namespace Trabajo_Final___Grupo_4.Models
                         throw;
                     }
                 }
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction(nameof(CambiarContrasena));
             }
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(usuario);
         }
+
     }
 }
