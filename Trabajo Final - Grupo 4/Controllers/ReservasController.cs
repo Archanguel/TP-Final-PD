@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
+using System.Media;
 
 namespace Trabajo_Final___Grupo_4.Models
 {
@@ -14,6 +15,7 @@ namespace Trabajo_Final___Grupo_4.Models
     public class ReservasController : Controller
     {
         private readonly UsuarioContext _context;
+        private SoundPlayer _soundPlayer;
 
         public ReservasController(UsuarioContext context)
         {
@@ -89,7 +91,11 @@ namespace Trabajo_Final___Grupo_4.Models
         public async Task<IActionResult> Create(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
         {
             if (!this.DisponibilidadPorFechas(id_alojamiento, fechaDesde, fechaHasta))
+            {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return Redirect("/Reservas/Create?id=" + User.Identity.Name + "&message=Las-fechas-seleccionadas-no-estan-disponibles");
+            }
 
             var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
             var alojamiento = await this._context.Alojamiento.FindAsync(id_alojamiento);
@@ -110,6 +116,8 @@ namespace Trabajo_Final___Grupo_4.Models
 
             this._context.Reserva.Add(reserva);
             //this._context.SaveChanges();
+            _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+            _soundPlayer.Play();
             return Redirect("/Alojamientoes/all");
         }
 
@@ -138,6 +146,8 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             if (id != reserva.Id)
             {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return NotFound();
             }
 
@@ -152,6 +162,8 @@ namespace Trabajo_Final___Grupo_4.Models
                 {
                     if (!ReservaExists(reserva.Id))
                     {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
                         return NotFound();
                     }
                     else
@@ -159,8 +171,12 @@ namespace Trabajo_Final___Grupo_4.Models
                         throw;
                     }
                 }
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction(nameof(Index));
             }
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(reserva);
         }
 
@@ -190,6 +206,8 @@ namespace Trabajo_Final___Grupo_4.Models
             var reserva = await _context.Reserva.FindAsync(id);
             _context.Reserva.Remove(reserva);
             await _context.SaveChangesAsync();
+            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            _soundPlayer.Play();
             return RedirectToAction(nameof(Index));
         }
 

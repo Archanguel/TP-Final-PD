@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Trabajo_Final___Grupo_4.Models;
+using System.Media;
 
 namespace Trabajo_Final___Grupo_4.Controllers
 {
@@ -17,8 +18,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
     public class HomeController : Controller
     {
         private readonly IStringLocalizer<HomeController> _localizer;
-
         private readonly ILogger<HomeController> _logger;
+        private SoundPlayer _soundPlayer;
 
         public HomeController(ILogger<HomeController> logger, IStringLocalizer<HomeController> localizer)
         {
@@ -47,6 +48,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
