@@ -32,7 +32,7 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             var alojamientos = from alojamiento in this._context.Alojamiento
                                select alojamiento;
-
+       
             if (precio != null && estrellas != null && cantidadDePersonas != null)
             {
                 alojamientos = alojamientos
@@ -40,7 +40,7 @@ namespace Trabajo_Final___Grupo_4.Models
                     .Where(al => al.Estrellas >= int.Parse(estrellas))
                     .Where(al => al.CantidadDePersonas >= int.Parse(cantidadDePersonas));
             }
-
+       
             return View(alojamientos.ToList());
         }
 
@@ -176,7 +176,7 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             var alojamiento = from a in _context.Alojamiento select a;
 
-            if(!String.IsNullOrEmpty(searchCiudad))
+            if (!String.IsNullOrEmpty(searchCiudad))
             {
                 alojamiento = alojamiento.Where(a => a.Ciudad.Contains(searchCiudad));
             }

@@ -23,7 +23,17 @@ namespace Trabajo_Final___Grupo_4.Models
         // GET: Reservas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reserva.ToListAsync());
+            return View(await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario).ToListAsync());
+        }
+
+        // GET: Reservas
+        public async Task<IActionResult> List()
+        {
+            var reservas = from reserva in this._context.Reserva.Include(r => r.Alojamiento) select reserva;
+
+            reservas = reservas.Where(reserva => reserva.Usuario.Id == Int32.Parse(@User.Identity.Name));
+
+            return View(reservas.ToList());
         }
 
         // GET: Reservas/Details/5
@@ -34,7 +44,7 @@ namespace Trabajo_Final___Grupo_4.Models
                 return NotFound();
             }
 
-            var reserva = await _context.Reserva
+            var reserva = await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reserva == null)
             {
@@ -81,7 +91,8 @@ namespace Trabajo_Final___Grupo_4.Models
             if (alojamiento.Tipo == "hotel")
                 precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
 
-            var reserva = new Reserva {
+            var reserva = new Reserva
+            {
                 FechaDesde = fechaDesde,
                 FechaHasta = fechaHasta,
                 Alojamiento = alojamiento,
