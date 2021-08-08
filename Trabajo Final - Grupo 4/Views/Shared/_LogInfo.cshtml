@@ -5,7 +5,7 @@
 
 <div>
     <div class="container ml-auto text-right">
-        <a class="mr-1">@User.Identity.Name</a>
+        <a class="mr-1">@User.FindFirst("Usuario").Value</a>
         <span> | </span>
         <a class="ml-1" asp-area="" asp-controller="Login" asp-action="Logout">@language.Getkey("Salir")</a>
     </div>

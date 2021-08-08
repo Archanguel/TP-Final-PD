@@ -73,7 +73,7 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     new Claim(ClaimTypes.Name, this.agencia.GetUsuarioLogeado().Id.ToString()),
                     //new Claim("FullName", user.FullName),
                     new Claim(ClaimTypes.Role, this.agencia.GetUsuarioLogeado().IsAdmin.ToString()),
-                    new Claim("id", this.agencia.GetUsuarioLogeado().Id.ToString()),
+                    new Claim("Usuario", this.agencia.GetUsuarioLogeado().Nombre),
                 };
 
                 var claimsIdentity = new ClaimsIdentity(
