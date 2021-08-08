@@ -108,6 +108,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     admin.Show();
                     this.Hide();*/
                     //return View("");
+                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                    _soundPlayer.Play();
                     return Redirect("/Home");
                     //return Redirect("/Alojamientoes");
                 }
@@ -119,6 +121,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     this.Hide();*/
                     //return View("Home");
                     //return Redirect("/VistaCliente");
+                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                    _soundPlayer.Play();
                     return Redirect("/Home");
                     //return Redirect("/Alojamientoes/all");
                 }
@@ -138,6 +142,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                 {
                     ViewBag.Error = "Usuario o contraseña invalida";
                 }
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction("Index");
             }
         }
@@ -147,6 +153,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
         {
             await HttpContext.SignOutAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme);
+            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            _soundPlayer.Play();
             return RedirectToAction("Login");
         }
     }

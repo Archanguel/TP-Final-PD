@@ -358,7 +358,7 @@ namespace Trabajo_Final___Grupo_4
         {
             List<String> tipos = new List<string>() { "todas" };
             foreach (Alojamiento al in this.contexto.Alojamiento)
-                tipos.Add(al.Ciudad);
+                tipos.Add(al.Ciudad.ToString());
             return tipos.Distinct().ToList();
         }
         public List<String> OpcionesDelSelectParaElOrdenamiento()
@@ -371,7 +371,7 @@ namespace Trabajo_Final___Grupo_4
             List<List<String>> alojamientos = new List<List<string>>();
             List<Alojamiento> alojamientosFiltrados = new List<Alojamiento>();
 
-            foreach (var alojamiento in this.contexto.Alojamiento.ToList().FindAll(al => al.Ciudad.Contains(ciudad)))
+            foreach (var alojamiento in this.contexto.Alojamiento.ToList().FindAll(al => al.Ciudad.Equals(ciudad)))
             {
                 if (this.ElAlojamientoEstaDisponible(alojamiento.Codigo, fechaDesde, fechaHasta))
                     alojamientosFiltrados.Add(alojamiento);
@@ -383,7 +383,7 @@ namespace Trabajo_Final___Grupo_4
                 {
                     alojamiento.Codigo.ToString(),
                     alojamiento.Tipo is "Hotel" ? "hotel" : "cabaña",
-                    alojamiento.Ciudad,
+                    alojamiento.Ciudad.ToString(),
                     alojamiento.Barrio,
                     alojamiento.Estrellas.ToString(),
                     alojamiento.CantidadDePersonas.ToString(),
@@ -449,7 +449,8 @@ namespace Trabajo_Final___Grupo_4
         public List<List<String>> FiltrarAlojamientos(String tipoAlojamiento, String ciudad, String barrio, double precioMin, double precioMax, String estrellas, String personas)
         {
             List<List<String>> alojamientosFiltrados = new List<List<string>>();
-
+            //var alojamiento = this.contexto.Alojamiento.Where(a => a.Codigo.Equals(codigoAlojamiento)).FirstOrDefault();
+            var ciudades = from Ciudad in this.contexto.Ciudad select ciudad;
             var alojamientos = from alojamiento in this.contexto.Alojamiento
                                select alojamiento;
 
@@ -457,7 +458,7 @@ namespace Trabajo_Final___Grupo_4
                 alojamientos = alojamientos.Where(a => a.Tipo == tipoAlojamiento);
 
             if (ciudad != "todas")
-                alojamientos = alojamientos.Where(a => a.Ciudad == ciudad);
+           //     alojamientos = alojamientos.Where(a => a.Ciudad == int.Parse(ciudad));
 
             if (barrio != "todos")
                 alojamientos = alojamientos.Where(a => a.Barrio == barrio);
@@ -478,7 +479,7 @@ namespace Trabajo_Final___Grupo_4
                 {
                     al.Codigo,
                     al.Tipo,
-                    al.Ciudad,
+                    al.Ciudad.ToString(),
                     al.Barrio,
                     al.Estrellas.ToString(),
                     al.CantidadDePersonas.ToString(),

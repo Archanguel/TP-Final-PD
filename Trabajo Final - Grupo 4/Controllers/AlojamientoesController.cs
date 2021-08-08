@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Trabajo_Final___Grupo_4.Data;
+using System.Media;
 
 namespace Trabajo_Final___Grupo_4.Models
 {
@@ -14,6 +15,7 @@ namespace Trabajo_Final___Grupo_4.Models
     public class AlojamientoesController : Controller
     {
         private readonly UsuarioContext _context;
+        private SoundPlayer _soundPlayer;
 
         public AlojamientoesController(UsuarioContext context)
         {
@@ -80,8 +82,12 @@ namespace Trabajo_Final___Grupo_4.Models
             {
                 _context.Add(alojamiento);
                 await _context.SaveChangesAsync();
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction(nameof(Index));
             }
+            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            _soundPlayer.Play();
             return View(alojamiento);
         }
 
@@ -110,6 +116,8 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             if (id != alojamiento.Id)
             {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return NotFound();
             }
 
@@ -124,6 +132,8 @@ namespace Trabajo_Final___Grupo_4.Models
                 {
                     if (!AlojamientoExists(alojamiento.Id))
                     {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
                         return NotFound();
                     }
                     else
@@ -131,6 +141,8 @@ namespace Trabajo_Final___Grupo_4.Models
                         throw;
                     }
                 }
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction(nameof(Index));
             }
             return View(alojamiento);
@@ -162,6 +174,8 @@ namespace Trabajo_Final___Grupo_4.Models
             var alojamiento = await _context.Alojamiento.FindAsync(id);
             _context.Alojamiento.Remove(alojamiento);
             await _context.SaveChangesAsync();
+            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            _soundPlayer.Play();
             return RedirectToAction(nameof(Index));
         }
 
@@ -178,7 +192,10 @@ namespace Trabajo_Final___Grupo_4.Models
 
             if (!String.IsNullOrEmpty(searchCiudad))
             {
-                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(searchCiudad));
+                var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
+                Console.WriteLine(CiudadElejida);
+                //int.Parse(searchCiudad);
+                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
             }
 
             if (!String.IsNullOrEmpty(searchTipo))

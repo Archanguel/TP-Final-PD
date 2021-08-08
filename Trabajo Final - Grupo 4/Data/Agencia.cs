@@ -137,7 +137,7 @@ namespace Trabajo_Final___Grupo_4.Data
                     {
                         al.Codigo,
                         al.Tipo,
-                        al.Ciudad,
+                        al.Ciudad.ToString(),
                         al.Barrio,
                         al.Estrellas.ToString(),
                         al.CantidadDePersonas.ToString(),
@@ -157,7 +157,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 {
                     cabanias.Add(new List<string>() {
                         alojamiento.Codigo,
-                        alojamiento.Ciudad,
+                        alojamiento.Ciudad.ToString(),
                         alojamiento.Barrio,
                         alojamiento.Estrellas.ToString(),
                         alojamiento.CantidadDePersonas.ToString(),
@@ -180,7 +180,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 {
                     hoteles.Add(new List<string>() {
                         alojamiento.Codigo,
-                        alojamiento.Ciudad,
+                        alojamiento.Ciudad.ToString(),
                         alojamiento.Barrio,
                         alojamiento.Estrellas.ToString(),
                         alojamiento.CantidadDePersonas.ToString(),

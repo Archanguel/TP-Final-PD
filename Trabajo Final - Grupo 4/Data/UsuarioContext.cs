@@ -25,6 +25,7 @@ namespace Trabajo_Final___Grupo_4.Data
         public DbSet<Trabajo_Final___Grupo_4.Models.Reserva> Reserva { get; set; }
 
         public DbSet<Trabajo_Final___Grupo_4.Models.Alojamiento> Alojamiento { get; set; }
+        public DbSet<Trabajo_Final___Grupo_4.Models.Ciudad> Ciudad { get; set; }
 
         /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -70,7 +71,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 new Alojamiento{
                     Id=1,
                     Codigo="352234",
-                    Ciudad="Buenos Aires",
+                    Ciudad ="1",
                     Barrio="Recoleta",
                     Estrellas=3,
                     CantidadDePersonas=2,
@@ -81,7 +82,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 new Alojamiento{
                     Id=2,
                     Codigo="934120",
-                    Ciudad="Neuquen",
+                    Ciudad="2",
                     Barrio="Sur",
                     Estrellas=4,
                     CantidadDePersonas=2,
@@ -94,7 +95,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 new Alojamiento{
                     Id=3,
                     Codigo="846445",
-                    Ciudad="Buenos Aires",
+                    Ciudad="1",
                     Barrio="Puerto Madero",
                     Estrellas=2,
                     CantidadDePersonas=2,
@@ -105,7 +106,7 @@ namespace Trabajo_Final___Grupo_4.Data
                 new Alojamiento{
                     Id=4,
                     Codigo="321632",
-                    Ciudad="Carlos Paz",
+                    Ciudad="3",
                     Barrio="Centro",
                     Estrellas=1,
                     CantidadDePersonas=5,
@@ -114,6 +115,38 @@ namespace Trabajo_Final___Grupo_4.Data
                     PrecioPorDia = 2800,
                     Habitaciones = 1,
                     Banios = 1
+                },
+            });
+            modelBuilder.Entity<Ciudad>(ciudad =>
+            {
+                ciudad.Property(c => c.Nombre).HasColumnType("varchar(80)").IsRequired(true);
+                ciudad.Property(c => c.Provincia).HasColumnType("varchar(80)").IsRequired(true);
+                ciudad.Property(c => c.Pais).HasColumnType("varchar(80)").IsRequired(true);
+            });
+            modelBuilder.Entity<Ciudad>().HasData(new Ciudad[]{
+                new Ciudad
+                {
+                    ID = 1,
+                    Codigo = "1",
+                    Nombre = "Buenos Aires",
+                    Provincia = "CABA",
+                    Pais = "Argentina"
+                },
+                 new Ciudad
+                {
+                    ID = 2,
+                    Codigo = "2",
+                    Nombre = "Neuquen",
+                    Provincia = "Neuquen",
+                    Pais = "Argentina"
+                },
+                  new Ciudad
+                {
+                    ID = 3,
+                    Codigo = "3",
+                    Nombre = "Carlos paz",
+                    Provincia = "Córdoba",
+                    Pais = "Argentina"
                 },
             });
         }
