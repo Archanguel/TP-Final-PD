@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Moment js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 @inject LanguageService language
 <body>
@@ -30,11 +33,11 @@
                         <b>Español</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
                         <div class="triangle"></div>-->
 
-                        <ul class="language">
-                            <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->English</a></li>
-                            <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->Español</a></li>
-                        </ul>
-                    <!--</li>
+                <ul class="language">
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->English</a></li>
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->Español</a></li>
+                </ul>
+                <!--</li>
                 </ul>-->
             </div>
         </nav>
@@ -53,6 +56,7 @@
             &copy; 2021 - Agencia de alojamientos
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
