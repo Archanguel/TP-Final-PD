@@ -55,11 +55,16 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas/Create
-        public IActionResult Create(int? id)
+        [HttpGet]
+        public IActionResult Create(int? id, String? message)
         {
             if (id == null) return NotFound();
             var alojamiento = this._context.Alojamiento.FirstOrDefaultAsync(alojamiento => alojamiento.Id == id).Result;
             if (alojamiento == null) return NotFound();
+
+            ViewData["message"] = null;
+            if (message != null)
+                ViewData["message"] = message.Replace("-", " ");
 
             ViewData["alojamiento_id"] = alojamiento.Id;
             ViewData["alojamiento_ciudad"] = alojamiento.Ciudad;
@@ -83,10 +88,13 @@ namespace Trabajo_Final___Grupo_4.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
         {
-            int usuario_id = int.Parse(User.Identity.Name);
-            var usuario = this._context.Usuario.Find(usuario_id);
+            if (!this.DisponibilidadPorFechas(id_alojamiento, fechaDesde, fechaHasta))
+                return Redirect("/Reservas/Create?id=" + User.Identity.Name + "&message=Las-fechas-seleccionadas-no-estan-disponibles");
+
+            var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
             var alojamiento = await this._context.Alojamiento.FindAsync(id_alojamiento);
             int dias_reservados = (fechaHasta - fechaDesde).Days;
+
             double precio = dias_reservados * alojamiento.PrecioPorDia;
             if (alojamiento.Tipo == "hotel")
                 precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
@@ -101,7 +109,7 @@ namespace Trabajo_Final___Grupo_4.Models
             };
 
             this._context.Reserva.Add(reserva);
-            this._context.SaveChanges();
+            //this._context.SaveChanges();
             return Redirect("/Alojamientoes/all");
         }
 
@@ -188,6 +196,18 @@ namespace Trabajo_Final___Grupo_4.Models
         private bool ReservaExists(int id)
         {
             return _context.Reserva.Any(e => e.Id == id);
+        }
+
+        private bool DisponibilidadPorFechas(int id_alojamiento, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            foreach (var reserva in this._context.Reserva.Where(r => r.Alojamiento.Id == id_alojamiento).ToList())
+            {
+                bool validarFechaDesde = DateTime.Compare(reserva.FechaDesde, fechaDesde) == 1 && DateTime.Compare(reserva.FechaDesde, fechaHasta) == 1;
+                bool validarFechaHasta = DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1 && DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1;
+                if (!validarFechaDesde && !validarFechaHasta)
+                    return false;
+            }
+            return true;
         }
     }
 }
