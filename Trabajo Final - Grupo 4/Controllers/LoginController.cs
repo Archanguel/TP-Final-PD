@@ -16,10 +16,6 @@ namespace Trabajo_Final___Grupo_4.Controllers
 {
     public class LoginController : Controller
     {
-        private int contadorDeIntentos;
-        private int dniIngresado;
-        //ILogger<LoginController> logger;
-
         private readonly AgenciaManager agencia;
 
         public LoginController(AgenciaManager agencia)
@@ -107,8 +103,9 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     /*VistaDashboardAdmin admin = new VistaDashboardAdmin(this.agencia);
                     admin.Show();
                     this.Hide();*/
-                    //return View("Home");
-                    return Redirect("/Alojamientoes/");
+                    //return View("");
+                    return Redirect("/Home");
+                    //return Redirect("/Alojamientoes");
                 }
                 else
                 {
@@ -118,7 +115,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                     this.Hide();*/
                     //return View("Home");
                     //return Redirect("/VistaCliente");
-                    return Redirect("/Alojamientoes/all");
+                    return Redirect("/Home");
+                    //return Redirect("/Alojamientoes/all");
                 }
             }
             else

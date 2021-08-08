@@ -169,6 +169,7 @@ namespace Trabajo_Final___Grupo_4.Models
         {
             return _context.Alojamiento.Any(e => e.Id == id);
         }
+
         // GET: Alojamientoes/Edit/Buscar
         [Authorize]
         public async Task<IActionResult> Buscador(String searchCiudad, String searchTipo)
@@ -187,7 +188,6 @@ namespace Trabajo_Final___Grupo_4.Models
 
             return View(await alojamiento.ToListAsync());
         }
-
 
     }
 }

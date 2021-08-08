@@ -12,14 +12,14 @@
 <body>
     <header>
         <!--LOG INFO-->
-        @Html.Partial("_LogInfo")
+        @await Html.PartialAsync("_LogInfo")
 
         <nav class="navbar navbar-expand-lg navbar-light bg-white border-top border-bottom box-shadow ">
             <div class="container">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                @Html.Partial("_NavItems")
+                @await Html.PartialAsync("_NavItems")
             </div>
 
             <div class="sl-nav">

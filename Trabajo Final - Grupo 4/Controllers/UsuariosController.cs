@@ -14,12 +14,10 @@ namespace Trabajo_Final___Grupo_4.Models
     public class UsuariosController : Controller
     {
         private readonly UsuarioContext _context;
-        private readonly AgenciaManager agencia;
 
-        public UsuariosController(UsuarioContext context, AgenciaManager agencia)
+        public UsuariosController(UsuarioContext context)
         {
             _context = context;
-            this.agencia = agencia;
         }
 
         // GET: Usuarios
@@ -170,11 +168,11 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Cambiar Contraseña
-        [Authorize]
+        /*[Authorize]
         [HttpGet]
-        public async Task<IActionResult> CambiarContrasena()
+        public IActionResult CambiarContrasena()
         {
-            /*if (this.agencia.FindUserForDNI(dni) == null)
+            if (this.agencia.FindUserForDNI(dni) == null)
             {
                 return NotFound();
             }
@@ -190,17 +188,28 @@ namespace Trabajo_Final___Grupo_4.Models
             {
                 return NotFound();
             }
-            return View(usuario);*/
+            return View(usuario);
             return View();
+        }*/
+        [Authorize]
+        [HttpGet("CambiarContrasena")]
+        public async Task<IActionResult> CambiarContrasena()
+        {
+            var usuario = await _context.Usuario.FindAsync(int.Parse(User.Identity.Name));
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            return View(usuario);
         }
 
         // POST: Cambiar Contraseña
-        [HttpPost]
+        [HttpPost("CambiarContrasena")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CambiarContrasena(int id, [Bind("Id,Dni,Nombre,Email,Password,IsAdmin,Bloqueado,Intentos")] Usuario usuario)
+        public async Task<IActionResult> CambiarContrasena(Usuario usuario)
         {
-            if (id != usuario.Id)
+            if (int.Parse(User.Identity.Name) != usuario.Id)
             {
                 return NotFound();
             }
@@ -209,6 +218,7 @@ namespace Trabajo_Final___Grupo_4.Models
             {
                 try
                 {
+                    usuario.Password = Utils.Encriptar(usuario.Password);
                     _context.Update(usuario);
                     await _context.SaveChangesAsync();
                 }
