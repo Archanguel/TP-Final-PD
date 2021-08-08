@@ -10,17 +10,17 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" id="formulario-editar-reserva">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="FechaDesde" class="control-label"></label>
-                <input asp-for="FechaDesde" class="form-control" />
+                <input asp-for="FechaDesde" class="form-control" id="fechaDesde" max="2021/12/31" />
                 <span asp-validation-for="FechaDesde" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FechaHasta" class="control-label"></label>
-                <input asp-for="FechaHasta" class="form-control" />
+                <input asp-for="FechaHasta" class="form-control" id="fechaHasta" max="2021/12/31" />
                 <span asp-validation-for="FechaHasta" class="text-danger"></span>
             </div>
             <div class="form-group d-none">
@@ -38,6 +38,35 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
+
+<script type="text/javascript">
+
+    // Fecha actual
+    const hoy = moment(new Date()).format('YYYY-MM-DD')
+
+    // Formulario
+    const formulario = document.getElementById("formulario-editar-reserva");
+    const inputFechaDesde = document.getElementById("fechaDesde")
+    const inputFechaHasta = document.getElementById("fechaHasta")
+    inputFechaDesde.min = hoy
+    inputFechaHasta.min = hoy
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        const diasFechaDesde = moment(inputFechaDesde.value).dayOfYear()
+        const diasFechaHasta = moment(inputFechaHasta.value).dayOfYear()
+
+        if ((diasFechaHasta - diasFechaDesde) <= 0) {
+            alert('Fechas no validas, vuelva a intentarlo')
+            formulario.reset()
+        } else {
+            if (confirm("¿ Desea editar la reserva ?")) {
+                formulario.submit()
+            }
+        }
+    })
+</script>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
