@@ -23,6 +23,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario).ToListAsync());
@@ -115,7 +116,7 @@ namespace Trabajo_Final___Grupo_4.Models
             };
 
             this._context.Reserva.Add(reserva);
-            //this._context.SaveChanges();
+            this._context.SaveChanges();
             _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
             _soundPlayer.Play();
             return Redirect("/Alojamientoes/all");
@@ -181,7 +182,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, String? message)
         {
             if (id == null)
             {
