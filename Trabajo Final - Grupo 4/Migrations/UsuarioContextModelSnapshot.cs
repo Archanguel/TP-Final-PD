@@ -159,6 +159,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                         new
                         {
                             ID = 1,
+                            Codigo = "1",
                             Nombre = "Buenos Aires",
                             Pais = "Argentina",
                             Provincia = "CABA"
@@ -166,6 +167,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                         new
                         {
                             ID = 2,
+                            Codigo = "2",
                             Nombre = "Neuquen",
                             Pais = "Argentina",
                             Provincia = "Neuquen"
@@ -173,6 +175,7 @@ namespace Trabajo_Final___Grupo_4.Migrations
                         new
                         {
                             ID = 3,
+                            Codigo = "3",
                             Nombre = "Carlos paz",
                             Pais = "Argentina",
                             Provincia = "Córdoba"

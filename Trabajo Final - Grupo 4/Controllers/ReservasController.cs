@@ -23,6 +23,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index()
         {
             return View(await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario).ToListAsync());
@@ -181,7 +182,7 @@ namespace Trabajo_Final___Grupo_4.Models
         }
 
         // GET: Reservas/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(int? id, String? message)
         {
             if (id == null)
             {

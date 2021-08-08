@@ -35,19 +35,16 @@ namespace Trabajo_Final___Grupo_4
             services.AddControllersWithViews();
 
             services.AddDbContext<UsuarioContext>(options =>
-            //options.UseMySql(Credenciales.GetConnectionString(), new MySqlServerVersion(new Version(8, 0, 11))));
             options.UseMySql(Credenciales.GetConnectionString()));
-            //options.UseSqlServer(Configuration.GetConnectionString("UsuarioContext")));
             services.AddScoped<AgenciaManager, AgenciaManager>();
             services.AddScoped<Agencia, Agencia>();
-            /*services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                    .AddCookie();*/
 
             // ------------------ ESTO ES PARA LAS COOKIES ------------------
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie(options =>
                     {
                         options.LoginPath = "/Login";
+                        options.AccessDeniedPath = "/Home";
                         //options.ReturnUrlParameter = "/Home";
                         //options.ExpireTimeSpan.TotalHours.Equals(2);
                         //options.LogoutPath = "/Login";
