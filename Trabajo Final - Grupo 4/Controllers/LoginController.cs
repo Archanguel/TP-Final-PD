@@ -11,12 +11,14 @@ using Trabajo_Final___Grupo_4.Helpers;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using System.Media;
 
 namespace Trabajo_Final___Grupo_4.Controllers
 {
     public class LoginController : Controller
     {
         private readonly AgenciaManager agencia;
+        private SoundPlayer _soundPlayer;
 
         public LoginController(AgenciaManager agencia)
         {
@@ -41,6 +43,8 @@ namespace Trabajo_Final___Grupo_4.Controllers
                 //MessageBox.Show("No existe ese usuario");
                 //return;
                 ViewBag.Error = "Usuario o contraseña invalida";
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
                 return RedirectToAction("Index");
             }
 
