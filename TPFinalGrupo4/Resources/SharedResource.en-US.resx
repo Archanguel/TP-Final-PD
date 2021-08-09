@@ -150,6 +150,9 @@
   <data name="Reservaciones" xml:space="preserve">
     <value>Reservations</value>
   </data>
+  <data name="Reservar" xml:space="preserve">
+    <value>Reserve</value>
+  </data>
   <data name="Salir" xml:space="preserve">
     <value>Log out</value>
   </data>

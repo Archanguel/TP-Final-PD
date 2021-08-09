@@ -30,7 +30,6 @@ namespace TPFinalGrupo4.Controllers
         [HttpGet("Home")]
         public IActionResult Index()
         {
-            //ViewData["Message"] = _localizer["Entrar"];
             return View();
         }
 
@@ -38,12 +37,6 @@ namespace TPFinalGrupo4.Controllers
         {
             return View();
         }
-
-        /*[HttpGet("Home")]
-        public IActionResult VistaCliente()
-        {
-            return View();
-        }*/
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
@@ -59,7 +52,6 @@ namespace TPFinalGrupo4.Controllers
                 CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
                 new CookieOptions() { Expires = DateTimeOffset.UtcNow.AddYears(1) });
 
-            //return Redirect("/Home");
             return Redirect(Request.Headers["Referer"].ToString());
         }
     }

@@ -45,9 +45,6 @@ namespace TPFinalGrupo4
                     {
                         options.LoginPath = "/Login";
                         options.AccessDeniedPath = "/Home";
-                        //options.ReturnUrlParameter = "/Home";
-                        //options.ExpireTimeSpan.TotalHours.Equals(2);
-                        //options.LogoutPath = "/Login";
                     });
             // --------------------------------------------------------------
 
@@ -112,9 +109,6 @@ namespace TPFinalGrupo4
 
             app.UseEndpoints(endpoints =>
             {
-                //endpoints.MapControllers();
-                //endpoints.MapRazorPages();
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Login}/{action=Index}");

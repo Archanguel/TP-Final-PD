@@ -27,20 +27,6 @@ namespace TPFinalGrupo4.Data
         public DbSet<TPFinalGrupo4.Models.Alojamiento> Alojamiento { get; set; }
         public DbSet<TPFinalGrupo4.Models.Ciudad> Ciudad { get; set; }
 
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseMySql(Credenciales.GetConnectionString());
-        }*/
-        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder
-                .UseMySql("server=localhost;user=root;database=inicio-proyecto;port=3306;password=")
-                .UseLoggerFactory(LoggerFactory.Create(b => b
-                    .AddConsole()
-                    .AddFilter(level => level >= LogLevel.Information)))
-                .EnableSensitiveDataLogging()
-                .EnableDetailedErrors();
-        }*/
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>(usuario =>
