@@ -16,33 +16,73 @@
     </script>
 }
 
-<h1 class="display-4">@ViewData["alojamiento_tipo"]</h1>
+<div class="container pt-4">
+    <div class="row justify-content-center align-items-center text-capitalize">
+        <div class="col-10">
+            <h1 class="display-4">@ViewData["alojamiento_tipo"]</h1>
+        </div>
+    </div>
 
-<div class="row">
-    <div class="col-md-10">
-        <form asp-action="Create" id="formulario-reserva">
-            <input type="hidden" name="id_alojamiento" value="@ViewData["alojamiento_id"]" />
+    <div class="row pt-4">
+        <div class="col">
+            <form asp-action="Create" id="formulario-reserva">
+                <input type="hidden" name="id_alojamiento" value="@ViewData["alojamiento_id"]" />
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="row">
-                <div class="form-group col-md-6">
-                    <label for="fechaDesde" class="control-label"></label>
-                    <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
+                <div class="row align-items-center justify-content-center">
+                    <div class="col-md-10 pb-4">
+                        <div class="card shadow bg-light">
+                            <div class="card-body">
+                                <h2>Barrio: @ViewData["alojamiento_barrio"]</h2>
+                                <h2>Estrellas: @ViewData["alojamiento_estrellas"]</h2>
+                                <h2>Cantidad de personas: @ViewData["alojamiento_cantidadDePersonas"]</h2>
+                                @if (@ViewData["alojamiento_tv"].ToString() == "True")
+                                {
+                                    <h2>TV: "Si"</h2>
+                                }
+                                else
+                                {
+                                    <h2>TV: "No"</h2>
+                                }
+                                @if (ViewData["alojamiento_tipo"].ToString() == "hotel")
+                                {
+
+                                    <h2>Precio x Persona: @ViewData["alojamiento_precioPorPersona"]</h2>
+                                }
+                                else
+                                {
+                                    <h2>Precio x Dia: @ViewData["alojamiento_precioPorDia"]</h2>
+                                    <h2>Habitaciones: @ViewData["alojamiento_habitaciones"]</h2>
+                                    <h2>Baños: @ViewData["alojamiento_banios"]</h2>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label for="fechaDesde" class="control-label">Fecha desde: </label>
+                        <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
+                    </div>
+
+                    <div class="form-group col-md-5">
+                        <label for="fechaHasta" class="control-label">Fecha hasta: </label>
+                        <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-10 pt-3">
+                        <input type="submit" value="Reservar" class="btn btn-success" />
+                    </div>
                 </div>
 
-                <div class="form-group col-md-6">
-                    <label for="fechaHasta" class="control-label"></label>
-                    <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Reservar" class="btn btn-primary" />
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </div>
+
+
 <script type="text/javascript">
 
     // Fecha actual
