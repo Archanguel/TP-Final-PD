@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "List";
 }
+@inject LanguageService language
 
 <div class="row row-cols-1 row-cols-md-2 ">
     @foreach (var item in Model)
@@ -14,19 +15,19 @@
                         @Html.DisplayFor(modelItem => item.Alojamiento.Tipo)
                     </h5>
                     <p class="card-text text-capitalize mb-2 pb-0">
-                        Fecha Desde: @item.FechaDesde
+                        @language.Getkey("Fecha Desde"): @item.FechaDesde
                     </p>
                     <p class="card-text text-capitalize mb-2 pb-0">
-                        Fecha Hasta: @item.FechaHasta
+                        @language.Getkey("Fecha Hasta"): @item.FechaHasta
                     </p>
                     <p class="card-text text-capitalize mb-2 pb-0">
-                        Precio: @item.Precio
+                        @language.Getkey("Precio"): @item.Precio
                     </p>
                     <a asp-route-id="@item.Id"
                        asp-controller="Reservas"
                        asp-action="Details"
                        class="btn btn-success">
-                        Ver
+                        @language.Getkey("Ver")
                     </a>
                 </div>
             </div>

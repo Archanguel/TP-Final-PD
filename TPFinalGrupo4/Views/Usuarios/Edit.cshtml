@@ -3,14 +3,14 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@inject LanguageService language
 
-<h1 class="text-center">Editar Usuario</h1>
+<h1 class="text-center">@language.Getkey("Editar Usuario")</h1>
 
-<h4></h4>
 <hr />
 <div class="row">
     <div class="col-12">
-        <form asp-action="Edit" >
+        <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group row">
@@ -50,8 +50,8 @@
                     <span asp-validation-for="Intentos" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
-                    <input type="submit" value="Guardar" class="btn btn-success" />
-                    <a asp-action="Index" class="btn btn-primary">Volver</a>
+                    <input type="submit" value="@language.Getkey("Guardar")" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">@language.Getkey("Volver")</a>
                 </div>
             </div>
         </form>

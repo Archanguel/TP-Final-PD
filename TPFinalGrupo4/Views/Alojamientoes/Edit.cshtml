@@ -3,10 +3,10 @@
 @{
     ViewData["Title"] = "Edit";
 }
+@inject LanguageService language
 
-<h1 class="text-center">Editar Alojamiento</h1>
+<h1 class="text-center">@language.Getkey("Editar Alojamiento")</h1>
 
-<h4></h4>
 <hr />
 <div class="row">
     <div class="col-12">
@@ -73,8 +73,8 @@
                 </div>
 
                 <div class="form-group col-12">
-                    <input type="submit" value="Guardar" class="btn btn-success" />
-                    <a asp-action="Index" class="btn btn-primary">Volver</a>
+                    <input type="submit" value="@language.Getkey("Guardar")" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">@language.Getkey("Volver")</a>
                 </div>
             </div>
         </form>

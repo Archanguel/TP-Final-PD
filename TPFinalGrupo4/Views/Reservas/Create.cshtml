@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Reservar";
 }
+@inject LanguageService language
 
 @if (ViewData["message"] != null)
 {
@@ -27,18 +28,18 @@
 
             <div class="row">
                 <div class="form-group col-md-6">
-                    <label for="fechaDesde" class="control-label"></label>
+                    <label for="fechaDesde" class="control-label">@language.Getkey("Desde")</label>
                     <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label for="fechaHasta" class="control-label"></label>
+                    <label for="fechaHasta" class="control-label">@language.Getkey("Hasta")</label>
                     <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
                 </div>
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Reservar" class="btn btn-primary" />
+                <input type="submit" value="@language.Getkey("Reservar")" class="btn btn-primary" />
             </div>
         </form>
     </div>

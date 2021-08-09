@@ -3,8 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+@inject LanguageService language
 
-<h1 class="text-center">Reservaciones</h1>
+<h1 class="text-center">@language.Getkey("Reservaciones")</h1>
 
 <!--<p>
     <a asp-action="Create">Create New</a>
@@ -41,34 +42,34 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Usuario.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alojamiento.Tipo)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaDesde)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaHasta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Precio)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id"><button type="button" class="btn btn-warning btn-xs">Editar</button></a>
-                <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
-                <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger btn-xs">Borrar</button></a>
-            </td>
-        </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Usuario.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Alojamiento.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaHasta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs">@language.Getkey("Editar")</a>
+                    <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs">@language.Getkey("Borrar")</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>

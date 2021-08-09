@@ -3,12 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
+@inject LanguageService language
 
-<h1 class="text-center">Usuarios</h1>
+<h1 class="text-center">@language.Getkey("Usuarios")</h1>
 
-<!--<p>
-    <a asp-action="Create"><button type="button" class="btn btn-success btn-xs">Create New</button></a>
-</p>-->
 <table class="table">
     <thead>
         <tr>
@@ -64,9 +62,9 @@
                     @Html.DisplayFor(modelItem => item.Intentos)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button type="button" class="btn btn-warning btn-xs">Editar</button></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs">@language.Getkey("Editar")</a>
                     <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button type="button" class="btn btn-danger btn-xs">Borrar</button></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs">@language.Getkey("Borrar")</a>
                 </td>
             </tr>
         }

@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Agregar" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="Alojamientos" xml:space="preserve">
     <value>Lodgings</value>
+  </data>
+  <data name="Barrio" xml:space="preserve">
+    <value>Neighborhood</value>
+  </data>
+  <data name="Borrar" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Borrar Alojamiento" xml:space="preserve">
+    <value>Delete Lodgning</value>
+  </data>
+  <data name="Borrar Usuario" xml:space="preserve">
+    <value>Delete User</value>
   </data>
   <data name="Buscador" xml:space="preserve">
     <value>Searcher</value>
@@ -126,8 +141,23 @@
   <data name="Cambiar Contraseña" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="Ciudad" xml:space="preserve">
+    <value>City</value>
+  </data>
   <data name="Contraseña" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Crear" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Editar" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="Editar Alojamiento" xml:space="preserve">
+    <value>Edit Lodging</value>
+  </data>
+  <data name="Editar Usuario" xml:space="preserve">
+    <value>Edit User</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
@@ -135,11 +165,29 @@
   <data name="Entrar" xml:space="preserve">
     <value>Log in</value>
   </data>
+  <data name="estrellas" xml:space="preserve">
+    <value>stars</value>
+  </data>
+  <data name="Fecha Desde" xml:space="preserve">
+    <value>Date From</value>
+  </data>
+  <data name="Fecha Hasta" xml:space="preserve">
+    <value>Date To</value>
+  </data>
+  <data name="Guardar" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="Mis Reservaciones" xml:space="preserve">
     <value>My Reservations</value>
   </data>
   <data name="Nombre" xml:space="preserve">
     <value>Name</value>
+  </data>
+  <data name="Nueva Contraseña" xml:space="preserve">
+    <value>New Password</value>
+  </data>
+  <data name="Precio" xml:space="preserve">
+    <value>Price</value>
   </data>
   <data name="Registrarse" xml:space="preserve">
     <value>Sign in</value>
@@ -156,7 +204,22 @@
   <data name="Salir" xml:space="preserve">
     <value>Log out</value>
   </data>
+  <data name="Tipo" xml:space="preserve">
+    <value>Type</value>
+  </data>
   <data name="Usuarios" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="Ver" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="Volver" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="¿Está seguro de querer borrar este alojamiento?" xml:space="preserve">
+    <value>Are you sure you want to delete this lodging?</value>
+  </data>
+  <data name="¿Está seguro de querer borrar este usuario?" xml:space="preserve">
+    <value>Are you sure you want to delete this user?</value>
   </data>
 </root>
