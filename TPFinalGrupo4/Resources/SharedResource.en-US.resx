@@ -141,6 +141,12 @@
   <data name="Cambiar Contraseña" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="Cantidad de Estrellas" xml:space="preserve">
+    <value>Number of Stars</value>
+  </data>
+  <data name="Cantidad de Personas" xml:space="preserve">
+    <value>Amount of People</value>
+  </data>
   <data name="Ciudad" xml:space="preserve">
     <value>City</value>
   </data>
@@ -174,8 +180,23 @@
   <data name="Fecha Hasta" xml:space="preserve">
     <value>Date To</value>
   </data>
+  <data name="Filtrar" xml:space="preserve">
+    <value>Filter</value>
+  </data>
   <data name="Guardar" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="Ingrese el precio minimo" xml:space="preserve">
+    <value>Enter the minimum price</value>
+  </data>
+  <data name="Lenguaje" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Minima cantidad de personas" xml:space="preserve">
+    <value>Minimum number of people</value>
+  </data>
+  <data name="Minimas estrellas" xml:space="preserve">
+    <value>Minimum stars</value>
   </data>
   <data name="Mis Reservaciones" xml:space="preserve">
     <value>My Reservations</value>
