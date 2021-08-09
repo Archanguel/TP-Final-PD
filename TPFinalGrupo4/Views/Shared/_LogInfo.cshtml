@@ -1,0 +1,16 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@inject LanguageService language
+
+<div>
+    <div class="container ml-auto text-right">
+        <a class="mr-1">@User.FindFirst("Usuario").Value</a>
+        <span> | </span>
+        <a class="ml-1" asp-area="" asp-controller="Login" asp-action="Logout">@language.Getkey("Salir")</a>
+    </div>
+<<<<<<< HEAD:Trabajo Final - Grupo 4/Views/Shared/_LogInfo.cshtml
+</div>
+=======
+</div>
+>>>>>>> 17f0f89d32e0f8ff1ce9d961e31a954efcf51c7e:TPFinalGrupo4/Views/Shared/_LogInfo.cshtml

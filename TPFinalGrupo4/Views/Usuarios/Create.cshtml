@@ -1,0 +1,98 @@
+﻿@model TPFinalGrupo4.Models.Usuario
+
+@{
+    Layout = null;
+    ViewData["Title"] = "Registrarse";
+}
+@inject LanguageService language
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+</head>
+
+<body>
+    <div class="box2">
+        <h1>Registrarse</h1>
+        <form asp-action="Create" class="from-horizontal" id="formulario-de-registro-usuario">
+            <div class="form-group">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <!--<label asp-for="Dni" class="control-label"></label>-->
+                    <input asp-for="Dni" type="dni" class="form-control" placeholder="Dni" />
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Nombre" class="control-label"></label>-->
+                    <input asp-for="Nombre" type="nombre" class="form-control" placeholder="@language.Getkey("Nombre")" />
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Email" class="control-label"></label>-->
+                    <input asp-for="Email" type="email" class="form-control" placeholder="@language.Getkey("Email")" />
+                </div>
+                <div class="form-group">
+                    <!--<label asp-for="Password" class="control-label"></label>-->
+                    <input asp-for="Password" type="password" class="form-control" placeholder="@language.Getkey("Contraseña")" id="password1" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="password2" name="password" placeholder="@language.Getkey("Repetir Contraseña")" />
+                </div>
+
+                <div class="form-group form-check d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                    </label>
+                </div>
+                <div class="form-group form-check d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                    </label>
+                </div>
+                <div class="form-group d-none">
+                    <label asp-for="Intentos" class="control-label"></label>
+                    <input asp-for="Intentos" class="form-control" value="0" />
+                    <span asp-validation-for="Intentos" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="@language.Getkey("Registrarse")" class="btn btn-success" />
+                </div>
+            </div>
+        </form>
+        <button type="button" class="btn btn-primary btn-xs" onclick="location.href='@Url.Action("Login", "Login")'">@language.Getkey("Login")</button>
+    </div>
+    <div class="alert text-center">
+        <span asp-validation-for="Dni" class="text-danger"></span> <br />
+        <span asp-validation-for="Nombre" class="text-danger"></span> <br />
+        <span asp-validation-for="Email" class="text-danger"></span> <br />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+</body>
+
+</html>
+
+<script type="text/javascript">
+    const formulario = document.getElementById("formulario-de-registro-usuario")
+    const inputPassword1 = document.getElementById("password1")
+    const inputPassword2 = document.getElementById("password2")
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        if (inputPassword1.value != inputPassword2.value) {
+            inputPassword1.value = ""
+            inputPassword2.value = ""
+            alert('Las contraseñas deben ser iguales')
+        } else {
+            formulario.submit()
+        }
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

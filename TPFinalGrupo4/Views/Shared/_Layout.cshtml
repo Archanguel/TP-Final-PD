@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Agencia de alojamientos</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/styles.css" />
+
+    <!-- Moment js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+@inject LanguageService language
+<body>
+    <header>
+        <!--LOG INFO-->
+        @await Html.PartialAsync("_LogInfo")
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-top border-bottom box-shadow ">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                @await Html.PartialAsync("_NavItems")
+            </div>
+
+            <div class="sl-nav">
+                <ul class="language d-flex flex-row list-unstyled align-items-center justify-content-center m-0">
+<<<<<<< HEAD:Trabajo Final - Grupo 4/Views/Shared/_Layout.cshtml
+                Lenguaje:
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->English</a></li>
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->Español</a></li>
+                </ul
+=======
+                    @language.Getkey("Lenguaje")
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->English</a></li>
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->Español</a></li>
+                </ul>
+>>>>>>> 17f0f89d32e0f8ff1ce9d961e31a954efcf51c7e:TPFinalGrupo4/Views/Shared/_Layout.cshtml
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+        <main role="main" class="py-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Agencia de alojamientos
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,72 @@
+﻿@model IEnumerable<TPFinalGrupo4.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@inject LanguageService language
+
+<h1 class="text-center">@language.Getkey("Usuarios")</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dni)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsAdmin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bloqueado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Intentos)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dni)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAdmin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bloqueado)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Intentos)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs">@language.Getkey("Editar")</a>
+                    <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs">@language.Getkey("Borrar")</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
