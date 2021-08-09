@@ -69,12 +69,14 @@
                                 @Html.DisplayFor(modelItem => item.PrecioPorDia)
                             }
                         </p>
-                        <a asp-route-id="@item.Id"
-                           asp-controller="Reservas"
-                           asp-action="Create"
-                           class="btn btn-success btn-block">
-                            Ver
-                        </a>
+                        <div class="row justify-content-end">
+                            <a asp-route-id="@item.Id"
+                               asp-controller="Reservas"
+                               asp-action="Create"
+                               class="btn btn-success px-5">
+                                Ver
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
