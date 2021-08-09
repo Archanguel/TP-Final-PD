@@ -5,7 +5,7 @@
 }
 @inject LanguageService language
 
-<h1 class="text-center">Cambiar Contraseña</h1>
+<h1 class="text-center">@language.Getkey("Cambiar Contraseña")</h1>
 
 <hr />
 <div class="row">
@@ -30,12 +30,12 @@
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group col-6">
-                    <label asp-for="Password" class="control-label">@language.Getkey("New Password")</label>
+                    <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
                     <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group col-6">
-                    <label class="control-label">@language.Getkey("Repeat Password")</label>
+                    <label class="control-label">@language.Getkey("Repetir Contraseña")</label>
                     <input type="password" class="form-control" id="password2" placeholder="********" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>

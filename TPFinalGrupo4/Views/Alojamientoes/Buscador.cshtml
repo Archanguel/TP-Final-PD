@@ -6,7 +6,7 @@
 @inject LanguageService language
 
 <form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
-    <h1 class="text-center">Buscador</h1>
+    <h1 class="text-center">@language.Getkey("Buscador")</h1>
     <p>
 
         @language.Getkey("Ciudad")<input list="browsersa" name="searchCiudad" id="searchCiudad" />
@@ -20,7 +20,7 @@
             <option value="hotel"></option>
             <option value="cabaña"></option>
         </datalist>
-        <input type="submit" value="Buscar" class="btn btn-success" />
+        <input type="submit" value="@language.Getkey("Buscar")" class="btn btn-success" />
     </p>
 </form>
 <!--
