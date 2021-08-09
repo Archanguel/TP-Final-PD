@@ -6,7 +6,11 @@
 }
 
 <form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
-    <h1 class="text-center">Buscador</h1>
+    <div class="row pt-4">
+        <div class="col-12">
+            <h1 class="text-center display-4">Buscador</h1>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-4">
@@ -40,12 +44,12 @@
 
     <div class="row py-2">
         <div class="form-group col-md-6">
-            <label for="fechaDesde" class="control-label"></label>
+            <label for="fechaDesde" class="control-label">Fecha desde</label>
             <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
         </div>
 
         <div class="form-group col-md-6">
-            <label for="fechaHasta" class="control-label"></label>
+            <label for="fechaHasta" class="control-label">Fecha hasta</label>
             <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
         </div>
     </div>
