@@ -23,10 +23,24 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Alojamientoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String searchCiudad, String searchTipo)
         {
+            var alojamiento = from a in _context.Alojamiento select a;
+
+            if (!String.IsNullOrEmpty(searchCiudad))
+            {
+                var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
+                Console.WriteLine(CiudadElejida);
+                //int.Parse(searchCiudad);
+                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
+            }
+
+            if (!String.IsNullOrEmpty(searchTipo))
+            {
+                alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
+            }
             var usuarioLogeado = User.Identity;
-            return View(await _context.Alojamiento.ToListAsync());
+            return View(await alojamiento.ToListAsync());
         }
 
         // GET: Alojamientoes
@@ -206,8 +220,7 @@ namespace TPFinalGrupo4.Models
             
 
             return View(await alojamiento.ToListAsync());
-        }
-
+        }  
         public async Task<IActionResult> BuscadorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
             var alojamiento = from a in _context.Alojamiento select a;
