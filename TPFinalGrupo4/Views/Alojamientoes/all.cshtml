@@ -15,13 +15,13 @@
         <form asp-action="all">
             <div class="form-row justify-content-center">
                 <div class="form-group col-md-3">
-                    <label>Precio: </label>
+                    <label>@language.Getkey("Precio"): </label>
                     <input type="number" name="precio" class="form-control" id="precio" placeholder="Ingrese el precio minimo" required>
                 </div>
                 <div class="form-group col-md-3">
-                    <label>Cantidad de Estrellas: </label>
+                    <label>@language.Getkey("Cantidad de Estrellas"): </label>
                     <select id="estrellas" name="estrellas" class="form-control" required>
-                        <option value="" selected>-- Minimas estrellas --</option>
+                        <option value="" selected>-- @language.Getkey("Minimas estrellas") --</option>
                         @for (int i = 1; i <= 5; i++)
                         {
                             <option value="@i">@i</option>
@@ -29,9 +29,9 @@
                     </select>
                 </div>
                 <div class="form-group col-md-4">
-                    <label>Cantidad de Personas: </label>
+                    <label>@language.Getkey("Cantidad de Personas"): </label>
                     <select id="cantidadDePersonas" name="cantidadDePersonas" class="form-control" required>
-                        <option value="" selected>-- Minima cantidad de personas --</option>
+                        <option value="" selected>-- @language.Getkey("Minima cantidad de personas") --</option>
                         @for (int i = 1; i <= 10; i++)
                         {
                             <option value="@i">@i</option>
@@ -39,7 +39,7 @@
                     </select>
                 </div>
                 <div class="form-group col-md-2 align-self-end">
-                    <button type="submit" class="btn btn-outline-primary btn-block">Filtrar</button>
+                    <button type="submit" class="btn btn-outline-primary btn-block">@language.Getkey("Filtrar")</button>
                 </div>
             </div>
         </form>
@@ -57,13 +57,13 @@
                                 @Html.DisplayFor(modelItem => item.Tipo)
                             </h5>
                             <p class="card-text text-capitalize mb-0 pb-0">
-                                Ciudad: @item.Ciudad
+                                @language.Getkey("Ciudad"): @item.Ciudad
                             </p>
                             <p class="card-text text-capitalize mb-0 pb-0">
-                                Barrio: @item.Barrio
+                                @language.Getkey("Barrio"): @item.Barrio
                             </p>
                             <p class="card-text mb-0 pb-0">
-                                TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
+                                TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) @language.Getkey("estrellas")
                             </p>
                             <p class="card-text">
                                 $
@@ -81,7 +81,7 @@
                                    asp-controller="Reservas"
                                    asp-action="Create"
                                    class="btn btn-success px-5">
-                                    Ver
+                                    @language.Getkey("Ver")
                                 </a>
                             </div>
                         </div>

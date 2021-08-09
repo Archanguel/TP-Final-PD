@@ -8,13 +8,13 @@
 <form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
     <div class="row pt-4">
         <div class="col-12">
-            <h1 class="text-center display-4">Buscador</h1>
+            <h1 class="text-center display-4">@language.Getkey("Buscador")</h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col-4">
-            Ciudad<input class="form-control" list="browsersa" name="searchCiudad" id="searchCiudad" />
+            @language.Getkey("Ciudad")<input class="form-control" list="browsersa" name="searchCiudad" id="searchCiudad" />
             <datalist id="browsersa">
                 <option value="Neuquen"></option>
                 <option value="Buenos Aires"></option>
@@ -23,14 +23,14 @@
 
         </div>
         <div class="col-4">
-            Tipo<input class="form-control" list="browserse" name="searchTipo" />
+            @language.Getkey("Tipo")<input class="form-control" list="browserse" name="searchTipo" />
             <datalist id="browserse">
                 <option value="hotel"></option>
                 <option value="cabaña"></option>
             </datalist>
         </div>
         <div class="col-2 align-self-end">
-            <input type="submit" value="Buscar" class="btn btn-success px-4" />
+            <input type="submit" value="@language.Getkey("Buscar")" class="btn btn-success px-4" />
         </div>
     </div>
 
