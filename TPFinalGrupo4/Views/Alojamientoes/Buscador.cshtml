@@ -1,0 +1,67 @@
+﻿@model IEnumerable<TPFinalGrupo4.Models.Alojamiento>
+
+
+@{
+    ViewData["Title"] = "Buscador";
+}
+
+<form asp-controller="Alojamientoes" asp-action="Buscador" method="get">
+    <h1 class="text-center">Buscador</h1>
+    <p>
+
+        Ciudad<input list="browsersa" name="searchCiudad" id="searchCiudad" />
+        <datalist id="browsersa">
+            <option value="Neuquen"></option>
+            <option value="Buenos Aires"></option>
+            <option value="Carlos Paz"></option>
+        </datalist>
+        Tipo<input list="browserse" name="searchTipo" />
+        <datalist id="browserse">
+            <option value="hotel"></option>
+            <option value="cabaña"></option>
+        </datalist>
+        <input type="submit" value="Buscar" class="btn btn-success" />
+    </p>
+</form>
+
+    <div class="row row-cols-1 row-cols-md-2 ">
+
+        @foreach (var item in Model)
+        {
+            <div class="col mb-4">
+                <div class="card">
+                    <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize">
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </h5>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            Ciudad: @item.Ciudad
+                        </p>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            Barrio: @item.Barrio
+                        </p>
+                        <p class="card-text mb-0 pb-0">
+                            TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
+                        </p>
+                        <p class="card-text">
+                            @if (item.Tipo == "hotel")
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorDia)
+                            }
+                        </p>
+                        <a asp-area=""
+                           asp-controller="Alojamientoes"
+                           asp-action="all"
+                           class="btn btn-success">
+                            Reservar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>

@@ -1,0 +1,63 @@
+﻿@model TPFinalGrupo4.Models.Usuario
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-center">Editar Usuario</h1>
+
+<h4></h4>
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group row">
+                <div class="form-group col-4 d-none">
+                    <label asp-for="Dni" class="control-label"></label>
+                    <input asp-for="Dni" class="form-control" />
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Nombre" class="control-label"></label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4 d-none">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4 d-none">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group col-2 align-self-center">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                    </label>
+                </div>
+                <div class="form-group col-2 align-self-center">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                    </label>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Intentos" class="control-label"></label>
+                    <input asp-for="Intentos" class="form-control" />
+                    <span asp-validation-for="Intentos" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <input type="submit" value="Guardar" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">Volver</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
