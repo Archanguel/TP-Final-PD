@@ -60,12 +60,14 @@
                         <div class="card shadow">
                             <form asp-area="" asp-controller="Alojamientoes" asp-action="Reservar">
                                 <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
-
+                              
                                 <input type="hidden" name="id_alojamiento" value="@item.Id" />
                                 <div class="card-body">
+
                                     <h5 class="card-title text-capitalize">
                                         @Html.DisplayFor(modelItem => item.Tipo)
                                     </h5>
+                                    <img src="~/imgs/@item.Imagen" class="imagenAlojamientos">
                                     <p class="card-text text-capitalize mb-0 pb-0">
                                         Ciudad: @item.Ciudad
                                     </p>

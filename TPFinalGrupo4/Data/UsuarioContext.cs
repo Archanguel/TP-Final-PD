@@ -46,6 +46,7 @@ namespace TPFinalGrupo4.Data
                 alojamiento.Property(a => a.Ciudad).HasColumnType("varchar(50)").IsRequired(true);
                 alojamiento.Property(a => a.Barrio).HasColumnType("varchar(50)").IsRequired(true);
                 alojamiento.Property(a => a.Tipo).HasColumnType("varchar(10)").IsRequired(true);
+                alojamiento.Property(a => a.Imagen).HasColumnType("varchar(20)").IsRequired(true);
             });
             modelBuilder.Entity<Usuario>().HasData(new Usuario[]{
                 new Usuario{Id=1, Dni = 1234, Nombre = "admin", Email = "admin@admin.com", Password = Utils.Encriptar("1234"), IsAdmin=true, Bloqueado=false, Intentos=0},
@@ -63,7 +64,8 @@ namespace TPFinalGrupo4.Data
                     CantidadDePersonas=2,
                     Tv = true,
                     Tipo="hotel" ,
-                    PrecioPorPersona=2400
+                    PrecioPorPersona=2400,
+                    Imagen="Hotel11"
                 },
                 new Alojamiento{
                     Id=2,
@@ -76,7 +78,8 @@ namespace TPFinalGrupo4.Data
                     Tipo="cabaña" ,
                     PrecioPorDia = 1200,
                     Habitaciones = 4,
-                    Banios = 2
+                    Banios = 2,
+                    Imagen="Hotel11"
                 },
                 new Alojamiento{
                     Id=3,
@@ -87,7 +90,8 @@ namespace TPFinalGrupo4.Data
                     CantidadDePersonas=2,
                     Tv = true,
                     Tipo="hotel" ,
-                    PrecioPorPersona=6400
+                    PrecioPorPersona=6400,
+                    Imagen="Hotel11"
                 },
                 new Alojamiento{
                     Id=4,
@@ -100,7 +104,8 @@ namespace TPFinalGrupo4.Data
                     Tipo="cabaña" ,
                     PrecioPorDia = 2800,
                     Habitaciones = 1,
-                    Banios = 1
+                    Banios = 1,
+                    Imagen="Hotel11"
                 },
             });
             modelBuilder.Entity<Ciudad>(ciudad =>
