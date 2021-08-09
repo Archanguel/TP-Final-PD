@@ -27,18 +27,10 @@
 
             <div class="sl-nav">
                 Lenguaje:
-
-                <!--<ul>
-                    <li>
-                        <b>Español</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
-                        <div class="triangle"></div>-->
-
-                <ul class="language">
-                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->English</a></li>
-                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link"><!--<i class="flag-icon flag-icon-gb"></i>-->Español</a></li>
+                <ul class="language d-flex flex-row list-unstyled align-items-center justify-content-center m-0">
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="en-US" class="nav-link">English</a></li>
+                    <li><a asp-controller="Home" asp-action="ChangeLanguage" asp-route-culture="es-ES" class="nav-link">Español</a></li>
                 </ul>
-                <!--</li>
-                </ul>-->
             </div>
         </nav>
     </header>
