@@ -11,6 +11,7 @@
         </div>
     </div>
 
+    <!-- FORMULARIO PARA EL FILTRO -->
     <div class="justify-content-center mt-3">
         <form asp-action="all">
             <div class="form-row justify-content-center">
@@ -50,10 +51,19 @@
         {
             <div class="col-lg-4 mb-4">
                 <div class="card shadow">
-                    <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
+
+                    <!-- IMAGEN -->
+                    @if (item.Tipo == "hotel")
+                    {
+                        <img src="~/imgs/hotel.jpg" class="card-img-top" alt="Imagen de un hotel">
+                    }
+                    else
+                    {
+                        <img src="~/imgs/cabania.jpg" class="card-img-top" alt="Imagen de una cabaña">
+                    }
+
                     <div class="col">
                         <div class="card-body">
-                            <img src="~/imgs/@item.Imagen" class="imagenAlojamientos">
                             <h5 class="card-title text-capitalize">
                                 @Html.DisplayFor(modelItem => item.Tipo)
                             </h5>
