@@ -210,6 +210,12 @@
   <data name="Precio" xml:space="preserve">
     <value>Precio</value>
   </data>
+  <data name="Precio por dia" xml:space="preserve">
+    <value>Precio por dia</value>
+  </data>
+  <data name="Precio por persona" xml:space="preserve">
+    <value>Precio por persona</value>
+  </data>
   <data name="Registrarse" xml:space="preserve">
     <value>Registrarse</value>
   </data>

@@ -4,7 +4,7 @@
 @inject LanguageService language
 
 <div>
-    <div class="container ml-auto text-right">
+    <div class="pr-4 ml-auto text-right">
         <a class="mr-1">@User.FindFirst("Usuario").Value</a>
         <span> | </span>
         <a class="ml-1" asp-area="" asp-controller="Login" asp-action="Logout">@language.Getkey("Salir")</a>

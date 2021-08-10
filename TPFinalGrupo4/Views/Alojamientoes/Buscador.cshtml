@@ -43,12 +43,12 @@
 
     <div class="row py-2">
         <div class="form-group col-md-6">
-            <label for="fechaDesde" class="control-label">Fecha desde</label>
+            <label for="fechaDesde" class="control-label">@language.Getkey("Fecha Desde")</label>
             <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
         </div>
 
         <div class="form-group col-md-6">
-            <label for="fechaHasta" class="control-label">Fecha hasta</label>
+            <label for="fechaHasta" class="control-label">@language.Getkey("Fecha Hasta")</label>
             <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
         </div>
     </div>
@@ -68,10 +68,10 @@
                     @Html.DisplayFor(modelItem => item.Tipo)
                 </h5>
                 <p class="card-text text-capitalize mb-0 pb-0">
-                    Ciudad: @item.Ciudad
+                    @language.Getkey("Ciudad"): @item.Ciudad
                 </p>
                 <p class="card-text text-capitalize mb-0 pb-0">
-                    Barrio: @item.Barrio
+                    @language.Getkey("Barrio"): @item.Barrio
                 </p>
                 <p class="card-text mb-0 pb-0">
                     TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
@@ -83,15 +83,14 @@
                         else
                         {
 @Html.DisplayFor(modelItem => item.PrecioPorDia)}
-                    @*</p>*@
                     <div class="row justify-content-end">
-                        <input type="submit" value="Reservar" class="btn btn-primary px-3 mr-3" />
+                        <input type="submit" value=@language.Getkey("Reservar") class="btn btn-primary px-3 mr-3" />
                     </div>
             </div>
         </form>
     </div>
 </div>}
-                }
+}
     </div>
 </form>
 

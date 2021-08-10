@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Reservar";
 }
+@inject LanguageService language
 
 @if (ViewData["message"] != null)
 {
@@ -36,19 +37,19 @@
                     <div class="col-md-10 pb-4">
                         <dl class="row">
                             <dt class="col-sm-4">
-                                Barrio:
+                                @language.Getkey("Barrio"):
                             </dt>
                             <dd class="col-sm-8">
                                 @ViewData["alojamiento_barrio"]
                             </dd>
                             <dt class="col-sm-4">
-                                Estrellas
+                                @language.Getkey("Estrellas"):
                             </dt>
                             <dd class="col-sm-8">
                                 @ViewData["alojamiento_estrellas"]
                             </dd>
                             <dt class="col-sm-4">
-                                Cantidad de Personas:
+                                @language.Getkey("Cantidad de Personas"):
                             </dt>
                             <dd class="col-sm-8">
                                 @ViewData["alojamiento_cantidadDePersonas"]
@@ -59,7 +60,7 @@
                                     TV:
                                 </dt>
                                 <dd class="col-sm-8">
-                                    "Si"
+                                    @language.Getkey("Si"):
                                 </dd>
                             }
                             else
@@ -68,13 +69,13 @@
                                     TV:
                                 </dt>
                                 <dd class="col-sm-8">
-                                    "No"
+                                    @language.Getkey("No"):
                                 </dd>
                             }
                             @if (ViewData["alojamiento_tipo"].ToString() == "hotel")
                             {
                                 <dt class="col-sm-4">
-                                    Precio x Persona:
+                                    @language.Getkey("Precio por Persona"):
                                 </dt>
                                 <dd class="col-sm-8">
                                     @ViewData["alojamiento_precioPorPersona"]
@@ -83,19 +84,19 @@
                             else
                             {
                                 <dt class="col-sm-4">
-                                    Precio x Dia:
+                                    @language.Getkey("Precio por Dia"):
                                 </dt>
                                 <dd class="col-sm-8">
                                     @ViewData["alojamiento_precioPorDia"]
                                 </dd>
                                 <dt class="col-sm-4">
-                                    Habitaciones:
+                                    @language.Getkey("Habitaciones"):
                                 </dt>
                                 <dd class="col-sm-8">
                                     @ViewData["alojamiento_habitaciones"]
                                 </dd>
                                 <dt class="col-sm-4">
-                                    Baños:
+                                    @language.Getkey("Baños"):
                                 </dt>
                                 <dd class="col-sm-8">
                                     @ViewData["alojamiento_banios"]
@@ -105,18 +106,18 @@
                     </div>
 
                     <div class="form-group col-md-5">
-                        <label for="fechaDesde" class="control-label">Fecha desde: </label>
+                        <label for="fechaDesde" class="control-label">@language.Getkey("Fecha Desde"): </label>
                         <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
                     </div>
 
                     <div class="form-group col-md-5">
-                        <label for="fechaHasta" class="control-label">Fecha hasta: </label>
+                        <label for="fechaHasta" class="control-label">@language.Getkey("Fecha Hasta"): </label>
                         <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
                     </div>
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-10 pt-3">
-                        <input type="submit" value="Reservar" class="btn btn-success" />
+                        <input type="submit" value=@language.Getkey("Reservar") class="btn btn-success" />
                     </div>
                 </div>
 
