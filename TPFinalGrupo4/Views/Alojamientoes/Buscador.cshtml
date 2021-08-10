@@ -1,111 +1,60 @@
 ﻿@model IEnumerable<TPFinalGrupo4.Models.Alojamiento>
 
-@{ ViewData["Title"] = "Buscador"; }
+@{
+    ViewData["Title"] = "Buscador";
+}
 @inject LanguageService language
 
-<form asp-action="Buscador" >
-    <div class="row pt-4">
-        <div class="col-12">
-            <h1 class="text-center display-4">@language.Getkey("Buscador")</h1>
-        </div>
-    </div>
+<!-- FORMULARIO DEL BUSCADOR -->
+<div class="justify-content-center mt-3">
+    <form asp-action="Buscador" method="GET">
+        <div class="form-row justify-content-center">
 
-    <div class="row">
-        <div class="col-4">
-            @language.Getkey("Ciudad")
-            <input class="form-control" list="browsersa" name="searchCiudad" id="searchCiudad" />
-            <datalist id="browsersa">
-                <option value="Neuquen"></option>
-                <option value="Buenos Aires"></option>
-                <option value="Carlos Paz"></option>
-                <option value="Todos"></option>
-            </datalist>
-
-        </div>
-        <div class="col-4">
-            @language.Getkey("Tipo")
-            <input class="form-control" list="browserse" name="searchTipo" />
-            <datalist id="browserse">
-                <option value="hotel"></option>
-                <option value="cabaña"></option>
-                <option value="Todos"></option>
-            </datalist>
-        </div>
-        <div class="col-2 align-self-end">
-            <input type="submit" value="@language.Getkey("Buscar")" class="btn btn-success px-4" />
-        </div>
-    </div>
-
-</form>
-
-@*empieza*@
-
-
-<form asp-controller="Alojamientoes" asp-action="Reservar" method="get" id="formulario-reserva">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-    <div class="row py-2">
-        <div class="form-group col-md-6">
-            <label for="fechaDesde" class="control-label">@language.Getkey("Fecha Desde")</label>
-            <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
-        </div>
-
-        <div class="form-group col-md-6">
-            <label for="fechaHasta" class="control-label">@language.Getkey("Fecha Hasta")</label>
-            <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
-        </div>
-    </div>
-    <div class="row justify-content-start align-items-center">
-        @foreach (var item in Model)
-            if (true)
-            {
-                {
-<div class="col-4 mb-4">
-    <div class="card shadow">
-        <form asp-area="" asp-controller="Alojamientoes" asp-action="Reservar">
-            <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
-
-            <input type="hidden" name="id_alojamiento" value="@item.Id" />
-           
-            <div class="card-body">
-                @if (item.Tipo == "hotel")
-                {
-                    <img src="~/imgs/hotel.jpg" class="imagenAlojamientos" alt="Imagen de un hotel">
-                }
-                else
-                {
-                    <img src="~/imgs/cabania.jpg" class="imagenAlojamientos" alt="Imagen de una cabaña">
-                }
-                <h5 class="card-title text-capitalize">
-                    @Html.DisplayFor(modelItem => item.Tipo)
-                </h5>
-                <p class="card-text text-capitalize mb-0 pb-0">
-                    @language.Getkey("Ciudad"): @item.Ciudad
-                </p>
-                <p class="card-text text-capitalize mb-0 pb-0">
-                    @language.Getkey("Barrio"): @item.Barrio
-                </p>
-                <p class="card-text mb-0 pb-0">
-                    TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) estrellas
-                </p>
-                <p class="card-text">
-                    @if (item.Tipo == "hotel")
-                    {
-                        @Html.DisplayFor(modelItem => item.PrecioPorPersona) }
-                    else
-                    {
-                        @Html.DisplayFor(modelItem => item.PrecioPorDia)}
-                    <div class="row justify-content-end">
-                        <input type="submit" value=@language.Getkey("Reservar") class="btn btn-primary px-3 mr-3" />
-                    </div>
+            <!-- CIUDAD -->
+            <div class="form-group col-md-2">
+                <label for="ciudad">@language.Getkey("Ciudad"): </label>
+                <input type="text" name="ciudad" class="form-control" id="ciudad" placeholder="Ingrese la ciudad..." required>
             </div>
-        </form>
-    </div>
-</div>}
-}
-    </div>
-</form>
 
+            <!-- TIPO DE ALOJAMIENTO-->
+            <div class="form-group col-md-2">
+                <label for="tipoDeAlojamiento">@language.Getkey("Tipo"): </label>
+                <select id="tipoDeAlojamiento" name="tipoDeAlojamiento" class="form-control" required>
+                    <option value="Todos">Todos</option>
+                    <option value="Cabaña">Cabaña</option>
+                    <option value="Hotel">Hotel</option>
+                </select>
+            </div>
+
+            <!-- INPUT FECHA DESDE -->
+            <div class="form-group col-md-3">
+                <label for="fechaDesde" class="control-label">@language.Getkey("Fecha Desde"): </label>
+                <input type="date" class="form-control" name="fechaDesde" id="fechaDesde" max="2021-12-31" required />
+            </div>
+
+            <!-- INPUT FECHA HASTA -->
+            <div class="form-group col-md-3">
+                <label for="fechaHasta" class="control-label">@language.Getkey("Fecha Hasta"): </label>
+                <input type="date" class="form-control" name="fechaHasta" id="fechaHasta" max="2021-12-31" required />
+            </div>
+
+            <!-- BOTON -->
+            <div class="form-group col-12 col-md-2">
+                <input type="submit" value=@language.Getkey("Buscador") class="btn btn-success" />
+            </div>
+        </div>
+    </form>
+</div> <!-- FIN DEL BUSCADOR-->
+
+@foreach (var item in Model)
+{
+    <p>
+        @item.Id <br />
+        @item.Tipo <br />
+    </p>
+}
+
+    <!-- VALIDACION DE FECHAS -->
 <script type="text/javascript">
 
     // Fecha actual
@@ -137,6 +86,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-@*//finnn*@
 
 

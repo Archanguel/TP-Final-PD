@@ -208,35 +208,34 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Alojamientoes/Edit/Buscar
+        [HttpGet]
         [Authorize]
-        public async Task<IActionResult> Buscador(String searchCiudad, String searchTipo)
+        public async Task<IActionResult> Buscador(String? ciudad, String? tipoDeAlojamiento, DateTime? fechaDesde, DateTime? fechaHasta)
         {
-            var alojamiento = from a in _context.Alojamiento select a;
+            var alojamientos = from alojamiento in this._context.Alojamiento
+                               select alojamiento;
 
-            if (!String.IsNullOrEmpty(searchCiudad))
-            {
-                if (!String.Equals(searchCiudad, "Todos"))
-                {
-                    var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
-                    Console.WriteLine(CiudadElejida);
-                    //int.Parse(searchCiudad);
-                    alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
-                }
-                
-            }
+            // Muestra todos los alojamientos porque no se uso el buscador
+            if(ciudad == null || tipoDeAlojamiento == null || fechaDesde == null || fechaHasta == null)
+                return View(await alojamientos.ToListAsync());
 
-            if (!String.IsNullOrEmpty(searchTipo))
-            {
-                if (!String.Equals(searchTipo, "Todos"))
-                {
-                    alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
-                }
-                
-            }
+            // Lista vacia
+            var alojamientosEncontrados = new List<Alojamiento>();
 
+            // Busco por ciudad
+            alojamientos = alojamientos.Where(al => al.Ciudad.Contains(ciudad));
             
+            // Filtro por tipo de alojamiento
+            if (tipoDeAlojamiento != "Todos")
+                alojamientos = alojamientos.Where(al => al.Tipo == tipoDeAlojamiento);
 
-            return View(await alojamiento.ToListAsync());
+            foreach (var alojamiento in alojamientos.ToList())
+            {
+                if (this.DisponibilidadPorFechas(alojamiento.Id, (DateTime)fechaDesde, (DateTime)fechaHasta))
+                    alojamientosEncontrados.Add(alojamiento);
+            }
+
+            return View(alojamientosEncontrados);
         }  
         public async Task<IActionResult> BuscadorFecha(DateTime fechaDesde, DateTime fechaHasta)
         {
