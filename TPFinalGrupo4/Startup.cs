@@ -35,7 +35,8 @@ namespace TPFinalGrupo4
             services.AddControllersWithViews();
 
             services.AddDbContext<UsuarioContext>(options =>
-            options.UseMySql(Credenciales.GetConnectionString()));
+                options.UseMySql(Credenciales.GetConnectionString())
+            );
             services.AddScoped<AgenciaManager, AgenciaManager>();
             services.AddScoped<Agencia, Agencia>();
 

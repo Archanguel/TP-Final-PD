@@ -21,6 +21,12 @@
     <div class="box">
         <img src="~/imgs/avatar-user.png" class="avatar">
         <h1>Login</h1>
+        @if (ViewData["message"] != null)
+        {
+            <div class="text-danger border my-2 py-1">
+                @ViewData["message"]
+            </div>
+        }
         <form action="Login" method="post" class="from-horizontal">
             <!--action="Home"-->
             <div class="form-group">

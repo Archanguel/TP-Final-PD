@@ -18,131 +18,101 @@ namespace TPFinalGrupo4.Controllers
     public class LoginController : Controller
     {
         private readonly AgenciaManager agencia;
+        private readonly UsuarioContext _context;
         private SoundPlayer _soundPlayer;
 
-        public LoginController(AgenciaManager agencia)
+        public LoginController(AgenciaManager agencia, UsuarioContext context)
         {
             this.agencia = agencia;
+            this._context = context;
         }
 
         [HttpGet("Login")]
-        public IActionResult Index()
+        public IActionResult Index(String? message)
         {
+            ViewData["message"] = null;
+            if (message != null)
+                ViewData["message"] = message.Replace("-", " ");
             return View();
         }
 
         [HttpPost("Login")]
         public async Task<ActionResult> LoginAsync(int dni, String password)
         {
-            int intentos = 0;
+            // Validar el DNI
+            var usuario = this._context.Usuario.Where(user => user.Dni == dni).First();
+            var passwordEncriptada = Utils.Encriptar(password);
 
-            if (this.agencia.FindUserForDNI(dni) == null) //!_context.Usuario.Any(x => x.Dni == dni)
+            // Valido el DNI
+            if (usuario == null)
             {
-                //MessageBox.Show("No existe ese usuario");
-                //return;
-                ViewBag.Error = "Usuario o contraseña invalida";
-                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-                _soundPlayer.Play();
-                return RedirectToAction("Index");
+                this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                this._soundPlayer.Play();
+                return Redirect("/Login?message=El-DNI-ingresado-es-incorrecto");
             }
 
-            //this.agencia.BloquearUsuario(dni);
-            // Al bloquear al usuario salgo del metodo con el return
-            //if (this.agencia.bloquearUsuarioPorIntentos(dni)) return;
-
-
-            if (this.agencia.autenticarUsuario(dni, password))
+            // Verifico intentos
+            if(usuario.Bloqueado)
             {
-                /*
-                //Create Cookies
-                HttpCookie UserCookie = new HttpCookie("user", this.agencia.GetUsuarioLogeado().Nombre);
-                Response.Cookies["user"].Value = dni;
+                this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                this._soundPlayer.Play();
+                return Redirect("/Login?message=Su-usuario-esta-bloqueado-por-superar-el-limite-de-intentos-permitidos");
+            }
 
-                //Expire Date
-                //userCookie.Expires.AddDays(10);
-                Response.Cookies["user"].Expires = DateTime.Now.AddHours(2);
+            // Validar la contraseña e Incrementar intentos.
+            if (usuario.Password != passwordEncriptada)
+            {
+                usuario.Intentos++;
 
-                //Save data at Cookies
-                HttpContext.Response.SetCookie(UserCookie);
+                // Bloquear usuario por intentos
+                if (usuario.Intentos >= 3)
+                    usuario.Bloqueado = true;
 
-                //Get user data from Cookie
-                HttpCookie NewCookie = Request.Cookies["user"];
+                this._context.Update(usuario);
+                this._context.SaveChanges();
 
-                //return NewCookie.Value;
-                */
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimTypes.Name, this.agencia.GetUsuarioLogeado().Id.ToString()),
-                    //new Claim("FullName", user.FullName),
-                    new Claim(ClaimTypes.Role, this.agencia.GetUsuarioLogeado().IsAdmin ? "Admin" : "User"),
-                    new Claim("Usuario", this.agencia.GetUsuarioLogeado().Nombre),
-                };
+                this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                this._soundPlayer.Play();
+                return Redirect("/Login?message=La-clave-ingresada-es-incorrecta");
+            }
 
-                var claimsIdentity = new ClaimsIdentity(
-                    claims, "Login"); //CookieAuthenticationDefaults.AuthenticationScheme
+            // LOGEO AL USUARIO
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, usuario.Id.ToString()),
+                //new Claim("FullName", user.FullName),
+                new Claim(ClaimTypes.Role, usuario.IsAdmin ? "Admin" : "User"),
+                new Claim("Usuario", usuario.Nombre),
+            };
 
-                var authProperties = new AuthenticationProperties
-                {
-                    ExpiresUtc = DateTimeOffset.Now.AddMinutes(60)
-                    // The time at which the authentication ticket expires. A 
-                    // value set here overrides the ExpireTimeSpan option of 
-                    // CookieAuthenticationOptions set with AddCookie.
+            //CookieAuthenticationDefaults.AuthenticationScheme
+            var claimsIdentity = new ClaimsIdentity(claims, "Login"); 
+            
+            // Propiedades de la Autenticacion
+            var authProperties = new AuthenticationProperties{ExpiresUtc = DateTimeOffset.Now.AddMinutes(60)};
 
-                    //RedirectUri = <string>
-                };
+            // Autenticar usuario
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties
+            );
 
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    authProperties);
-
-
-
-                this.agencia.ReiniciarIntentos(dni);
-                if (this.agencia.GetUsuarioLogeado().IsAdmin)
-                {
-                    // ADMIN
-                    /*VistaDashboardAdmin admin = new VistaDashboardAdmin(this.agencia);
-                    admin.Show();
-                    this.Hide();*/
-                    //return View("");
-                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                    _soundPlayer.Play();
-                    return Redirect("/Home");
-                    //return Redirect("/Alojamientoes");
-                }
-                else
-                {
-                    // USUARIO CLIENTE
-                    /*VistaDashboardCliente cliente = new VistaDashboardCliente(this.agencia);
-                    cliente.Show();
-                    this.Hide();*/
-                    //return View("Home");
-                    //return Redirect("/VistaCliente");
-                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                    _soundPlayer.Play();
-                    return Redirect("/Home");
-                    //return Redirect("/Alojamientoes/all");
-                }
+            if (usuario.IsAdmin)
+            {
+                // ADMIN
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                _soundPlayer.Play();
+                return Redirect("/Home");
+                //return Redirect("/Alojamientoes");
             }
             else
             {
-                //MessageBox.Show("Contraseña incorrecta");
-                if (intentos >= 3)
-                {
-                    this.agencia.BloquearUsuario(dni);
-                    this.agencia.ReiniciarIntentos(dni);
-                    ViewBag.Error = "El usuario ha sido bloqueado, contacte con un administrador";
-                }
-                else
-                {
-                    intentos += 1;
-                    this.agencia.IntentosLogueo(dni);
-                    ViewBag.Error = "Usuario o contraseña invalida";
-                }
-                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                // USUARIO CLIENTE
+                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
-                return RedirectToAction("Index");
+                //return Redirect("/Home");
+                return Redirect("/Alojamientoes/all");
             }
         }
 
