@@ -37,11 +37,13 @@
     </div>
 
 </form>
-<p>
-    <a asp-action="Create" class="btn btn-success btn-xs">@language.Getkey("Agregar")</a>
-</p>
+<div class="row my-3">
+    <div class="col">
+        <a asp-action="Create" class="btn btn-success btn-xs px-3">@language.Getkey("Agregar")</a>
+    </div>
+</div>
 
-<table class="table table-bordered table-responsive table-striped table-sm mb-4">
+<table class="table table-bordered table-responsive-lg table-striped table-sm mb-4">
     <thead>
         <tr class="text-center">
             <th>@Html.DisplayNameFor(model => model.Codigo)</th>
