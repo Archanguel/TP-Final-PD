@@ -130,11 +130,15 @@ namespace TPFinalGrupo4.Models
                 return NotFound();
             }
 
-            var reserva = await _context.Reserva.FindAsync(id);
+            //var reserva = await _context.Reserva.FindAsync(id);
+            var todasLasreserva = await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario).ToListAsync();
+            var reserva = todasLasreserva.Find(r => r.Id == id);
+
             if (reserva == null)
-            {
                 return NotFound();
-            }
+
+            ViewData["reserva_id"] = id;
+            ViewData["alojamiento_id"] = reserva.Alojamiento.Id;
             return View(reserva);
         }
 
@@ -143,42 +147,41 @@ namespace TPFinalGrupo4.Models
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FechaDesde,FechaHasta,Precio")] Reserva reserva)
+        public async Task<IActionResult> Edit(int reserva_id, int alojamiento_id, DateTime FechaDesde, DateTime FechaHasta)
         {
-            if (id != reserva.Id)
+            var reserva = this._context.Reserva.Find(reserva_id);
+            var alojamiento = this._context.Alojamiento.Find(alojamiento_id);
+            var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
+
+            if(reserva == null || alojamiento == null || usuario == null)
             {
-                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-                _soundPlayer.Play();
+                this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                this._soundPlayer.Play();
                 return NotFound();
             }
+            int diasDeReservas = (FechaHasta - FechaDesde).Days;
+            double precio = alojamiento.Tipo == "Hotel" ? 
+                alojamiento.PrecioPorPersona * diasDeReservas : 
+                alojamiento.PrecioPorDia * alojamiento.CantidadDePersonas * diasDeReservas;
 
-            if (ModelState.IsValid)
+            try
             {
-                try
-                {
-                    _context.Update(reserva);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ReservaExists(reserva.Id))
-                    {
-                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-                        _soundPlayer.Play();
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                _soundPlayer.Play();
+                reserva.FechaDesde = FechaDesde;
+                reserva.FechaHasta = FechaHasta;
+                reserva.Precio = precio;
+                this._context.Reserva.Update(reserva);
+                this._context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                this._soundPlayer.Play();
                 return RedirectToAction(nameof(Index));
             }
-            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-            _soundPlayer.Play();
-            return View(reserva);
+
+            this._soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+            this._soundPlayer.Play();
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Reservas/Delete/5
