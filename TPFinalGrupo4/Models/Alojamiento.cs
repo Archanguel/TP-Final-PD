@@ -18,6 +18,7 @@ namespace TPFinalGrupo4.Models
         public double PrecioPorDia { get; set; }
         public int Habitaciones { get; set; }
         public int Banios { get; set; }
+        public String Imagen { get; set; }
 
     }
 }

@@ -23,10 +23,24 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Alojamientoes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(String searchCiudad, String searchTipo)
         {
+            var alojamiento = from a in _context.Alojamiento select a;
+
+            if (!String.IsNullOrEmpty(searchCiudad))
+            {
+                var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
+                Console.WriteLine(CiudadElejida);
+                //int.Parse(searchCiudad);
+                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
+            }
+
+            if (!String.IsNullOrEmpty(searchTipo))
+            {
+                alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
+            }
             var usuarioLogeado = User.Identity;
-            return View(await _context.Alojamiento.ToListAsync());
+            return View(await alojamiento.ToListAsync());
         }
 
         // GET: Alojamientoes
@@ -80,11 +94,20 @@ namespace TPFinalGrupo4.Models
         {
             if (ModelState.IsValid)
             {
-                _context.Add(alojamiento);
-                await _context.SaveChangesAsync();
-                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                _soundPlayer.Play();
-                return RedirectToAction(nameof(Index));
+                /*if (_context.Alojamiento.Any(x => String.Equals(x.Codigo.ToString(), alojamiento.Codigo.ToString(), StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                    _soundPlayer.Play();
+                    ModelState.AddModelError("Codigo", "Codigo ya registrado");
+                }
+                else
+                {*/
+                    _context.Add(alojamiento);
+                    await _context.SaveChangesAsync();
+                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                    _soundPlayer.Play();
+                    return RedirectToAction(nameof(Index));
+                //}
             }
             _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
             _soundPlayer.Play();
@@ -203,7 +226,72 @@ namespace TPFinalGrupo4.Models
                 alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
             }
 
+            
+
             return View(await alojamiento.ToListAsync());
+        }  
+        public async Task<IActionResult> BuscadorFecha(DateTime fechaDesde, DateTime fechaHasta)
+        {
+            var alojamiento = from a in _context.Alojamiento select a;
+
+            var reservas = from r in _context.Reserva select r;
+            foreach (var item in alojamiento)
+            {
+                //foreach(var res in reservas)
+                //{
+                //    bool validarFechaDesde = DateTime.Compare(res.FechaDesde, fechaDesde) == 1 && DateTime.Compare(res.FechaDesde, fechaHasta) == 1;
+                //    bool validarFechaHasta = DateTime.Compare(res.FechaHasta, fechaDesde) == -1 && DateTime.Compare(res.FechaHasta, fechaDesde) == -1;
+                //    if (!validarFechaDesde && !validarFechaHasta)
+                //    {
+                //        alojamiento.Except((IEnumerable<Alojamiento>)item);
+                //    }
+                //}             
+            }
+            return View(await alojamiento.ToListAsync());
+        }
+
+        public async Task<IActionResult> Reservar(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
+        {
+            if (!this.DisponibilidadPorFechas(id_alojamiento, fechaDesde, fechaHasta))
+            {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
+                return Redirect("/Reservas/Create?id=" + id_alojamiento);
+            }
+
+            var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
+            var alojamiento = await this._context.Alojamiento.FindAsync(id_alojamiento);
+            int dias_reservados = (fechaHasta - fechaDesde).Days;
+
+            double precio = dias_reservados * alojamiento.PrecioPorDia;
+            if (alojamiento.Tipo == "hotel")
+                precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
+
+            var reserva = new Reserva
+            {
+                FechaDesde = fechaDesde,
+                FechaHasta = fechaHasta,
+                Alojamiento = alojamiento,
+                Precio = precio,
+                Usuario = usuario
+            };
+
+            this._context.Reserva.Add(reserva);
+            this._context.SaveChanges();
+            _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+            _soundPlayer.Play();
+            return Redirect("/Alojamientoes/Buscador");
+        }
+        private bool DisponibilidadPorFechas(int id_alojamiento, DateTime fechaDesde, DateTime fechaHasta)
+        {
+            foreach (var reserva in this._context.Reserva.Where(r => r.Alojamiento.Id == id_alojamiento).ToList())
+            {
+                bool validarFechaDesde = DateTime.Compare(reserva.FechaDesde, fechaDesde) == 1 && DateTime.Compare(reserva.FechaDesde, fechaHasta) == 1;
+                bool validarFechaHasta = DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1 && DateTime.Compare(reserva.FechaHasta, fechaDesde) == -1;
+                if (!validarFechaDesde && !validarFechaHasta)
+                    return false;
+            }
+            return true;
         }
 
     }

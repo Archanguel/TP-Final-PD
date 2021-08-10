@@ -84,6 +84,11 @@ table {
     left: calc(50% - 50px);
 }
 
+.imagenAlojamientos {
+    width: 300px;
+    height: 450px;
+}
+
 /* REGISTER */
 .btn-registrar {
     background: none;
