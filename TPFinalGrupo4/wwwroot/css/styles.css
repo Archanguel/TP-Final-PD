@@ -183,3 +183,9 @@ table {
 .btn-login-in-register:hover {
     background: #2ecc71;
 }
+
+/* IMAGEN ALOJAMIENTO - Cliente */
+.image-alojamiento-all{
+    width: 100%;
+    height: 200px;
+}
