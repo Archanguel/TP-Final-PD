@@ -95,7 +95,7 @@ namespace TPFinalGrupo4.Models
             {
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 _soundPlayer.Play();
-                return Redirect("/Reservas/Create?id=" + id_alojamiento);
+                return Redirect("/Reservas/Create?id=" + id_alojamiento +"&message=El-alojamiento-no-esta-disponible-en-esas-fechas");
             }
 
             var usuario = this._context.Usuario.Find(int.Parse(User.Identity.Name));
