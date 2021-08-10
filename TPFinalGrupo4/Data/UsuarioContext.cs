@@ -86,7 +86,7 @@ namespace TPFinalGrupo4.Data
                     Estrellas=2,
                     CantidadDePersonas=2,
                     Tv = true,
-                    Tipo="HSotel" ,
+                    Tipo="Hotel" ,
                     PrecioPorPersona=6400
                 },
                 new Alojamiento{
