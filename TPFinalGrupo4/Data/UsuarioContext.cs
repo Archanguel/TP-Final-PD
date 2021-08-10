@@ -46,7 +46,6 @@ namespace TPFinalGrupo4.Data
                 alojamiento.Property(a => a.Ciudad).HasColumnType("varchar(50)").IsRequired(true);
                 alojamiento.Property(a => a.Barrio).HasColumnType("varchar(50)").IsRequired(true);
                 alojamiento.Property(a => a.Tipo).HasColumnType("varchar(10)").IsRequired(true);
-                alojamiento.Property(a => a.Imagen).HasColumnType("varchar(20)").IsRequired(true);
             });
             modelBuilder.Entity<Usuario>().HasData(new Usuario[]{
                 new Usuario{Id=1, Dni = 1234, Nombre = "admin", Email = "admin@admin.com", Password = Utils.Encriptar("1234"), IsAdmin=true, Bloqueado=false, Intentos=0},
@@ -63,9 +62,8 @@ namespace TPFinalGrupo4.Data
                     Estrellas=3,
                     CantidadDePersonas=2,
                     Tv = true,
-                    Tipo="hotel" ,
-                    PrecioPorPersona=2400,
-                    Imagen="Hotel11"
+                    Tipo="Hotel" ,
+                    PrecioPorPersona=2400
                 },
                 new Alojamiento{
                     Id=2,
@@ -75,11 +73,10 @@ namespace TPFinalGrupo4.Data
                     Estrellas=4,
                     CantidadDePersonas=2,
                     Tv = true,
-                    Tipo="cabaña" ,
+                    Tipo="Cabaña" ,
                     PrecioPorDia = 1200,
                     Habitaciones = 4,
-                    Banios = 2,
-                    Imagen="Hotel11"
+                    Banios = 2
                 },
                 new Alojamiento{
                     Id=3,
@@ -89,9 +86,8 @@ namespace TPFinalGrupo4.Data
                     Estrellas=2,
                     CantidadDePersonas=2,
                     Tv = true,
-                    Tipo="hotel" ,
-                    PrecioPorPersona=6400,
-                    Imagen="Hotel11"
+                    Tipo="HSotel" ,
+                    PrecioPorPersona=6400
                 },
                 new Alojamiento{
                     Id=4,
@@ -101,11 +97,10 @@ namespace TPFinalGrupo4.Data
                     Estrellas=1,
                     CantidadDePersonas=5,
                     Tv = true,
-                    Tipo="cabaña" ,
+                    Tipo="Cabaña" ,
                     PrecioPorDia = 2800,
                     Habitaciones = 1,
-                    Banios = 1,
-                    Imagen="Hotel11"
+                    Banios = 1
                 },
             });
             modelBuilder.Entity<Ciudad>(ciudad =>
