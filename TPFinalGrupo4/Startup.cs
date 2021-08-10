@@ -37,8 +37,6 @@ namespace TPFinalGrupo4
             services.AddDbContext<UsuarioContext>(options =>
                 options.UseMySql(Credenciales.GetConnectionString())
             );
-            services.AddScoped<AgenciaManager, AgenciaManager>();
-            services.AddScoped<Agencia, Agencia>();
 
             // ------------------ ESTO ES PARA LAS COOKIES ------------------
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

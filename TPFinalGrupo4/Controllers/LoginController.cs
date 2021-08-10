@@ -17,13 +17,11 @@ namespace TPFinalGrupo4.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly AgenciaManager agencia;
         private readonly UsuarioContext _context;
         private SoundPlayer _soundPlayer;
 
-        public LoginController(AgenciaManager agencia, UsuarioContext context)
+        public LoginController( UsuarioContext context)
         {
-            this.agencia = agencia;
             this._context = context;
         }
 
