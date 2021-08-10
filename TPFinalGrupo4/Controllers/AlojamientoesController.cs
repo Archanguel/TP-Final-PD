@@ -215,15 +215,23 @@ namespace TPFinalGrupo4.Models
 
             if (!String.IsNullOrEmpty(searchCiudad))
             {
-                var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
-                Console.WriteLine(CiudadElejida);
-                //int.Parse(searchCiudad);
-                alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
+                if (!String.Equals(searchCiudad, "Todos"))
+                {
+                    var CiudadElejida = this._context.Ciudad.FirstOrDefault(nombreCiudad => nombreCiudad.Nombre == searchCiudad);
+                    Console.WriteLine(CiudadElejida);
+                    //int.Parse(searchCiudad);
+                    alojamiento = alojamiento.Where(a => a.Ciudad.Contains(CiudadElejida.Codigo));
+                }
+                
             }
 
             if (!String.IsNullOrEmpty(searchTipo))
             {
-                alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
+                if (!String.Equals(searchTipo, "Todos"))
+                {
+                    alojamiento = alojamiento.Where(a => a.Tipo.Contains(searchTipo));
+                }
+                
             }
 
             

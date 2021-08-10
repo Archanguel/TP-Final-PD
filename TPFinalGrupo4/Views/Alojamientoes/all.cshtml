@@ -53,17 +53,18 @@
                 <div class="card shadow">
 
                     <!-- IMAGEN -->
-                    @if (item.Tipo == "Hotel")
-                    {
-                        <img src="~/imgs/hotel.jpg" class="card-img-top" alt="Imagen de un hotel">
-                    }
-                    else
-                    {
-                        <img src="~/imgs/cabania.jpg" class="card-img-top" alt="Imagen de una cabaña">
-                    }
-
+                   
                     <div class="col">
                         <div class="card-body">
+                            @if (item.Tipo == "hotel")
+                            {
+                                <img src="~/imgs/hotel.jpg" class="imagenAlojamientos" alt="Imagen de un hotel">
+                            }
+                            else
+                            {
+                                <img src="~/imgs/cabania.jpg" class="imagenAlojamientos" alt="Imagen de una cabaña">
+                            }
+
                             <h5 class="card-title text-capitalize">
                                 @Html.DisplayFor(modelItem => item.Tipo)
                             </h5>

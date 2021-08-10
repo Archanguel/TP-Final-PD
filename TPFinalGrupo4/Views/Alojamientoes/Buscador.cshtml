@@ -13,19 +13,21 @@
     <div class="row">
         <div class="col-4">
             @language.Getkey("Ciudad")<input class="form-control" list="browsersa" name="searchCiudad" id="searchCiudad" />
-            <datalist id="browsersa">
-                <option value="Neuquen"></option>
-                <option value="Buenos Aires"></option>
-                <option value="Carlos Paz"></option>
-            </datalist>
+                                      <datalist id="browsersa">
+                                          <option value="Neuquen"></option>
+                                          <option value="Buenos Aires"></option>
+                                          <option value="Carlos Paz"></option>
+                                          <option value="Todos"></option>
+                                      </datalist>
 
         </div>
         <div class="col-4">
             @language.Getkey("Tipo")<input class="form-control" list="browserse" name="searchTipo" />
-            <datalist id="browserse">
-                <option value="hotel"></option>
-                <option value="cabaña"></option>
-            </datalist>
+                                    <datalist id="browserse">
+                                        <option value="hotel"></option>
+                                        <option value="cabaña"></option>
+                                        <option value="Todos"></option>
+                                    </datalist>
         </div>
         <div class="col-2 align-self-end">
             <input type="submit" value="@language.Getkey("Buscar")" class="btn btn-success px-4" />
@@ -62,7 +64,16 @@
             <!--<img src="https://picsum.photos/100/100?random=@item.Id" class="card-img-top" alt="...">-->
 
             <input type="hidden" name="id_alojamiento" value="@item.Id" />
+           
             <div class="card-body">
+                @if (item.Tipo == "hotel")
+                {
+                    <img src="~/imgs/hotel.jpg" class="imagenAlojamientos" alt="Imagen de un hotel">
+                }
+                else
+                {
+                    <img src="~/imgs/cabania.jpg" class="imagenAlojamientos" alt="Imagen de una cabaña">
+                }
                 <h5 class="card-title text-capitalize">
                     @Html.DisplayFor(modelItem => item.Tipo)
                 </h5>
@@ -78,10 +89,10 @@
                 <p class="card-text">
                     @if (item.Tipo == "hotel")
                     {
-@Html.DisplayFor(modelItem => item.PrecioPorPersona) }
-                        else
-                        {
-@Html.DisplayFor(modelItem => item.PrecioPorDia)}
+                        @Html.DisplayFor(modelItem => item.PrecioPorPersona) }
+                    else
+                    {
+                        @Html.DisplayFor(modelItem => item.PrecioPorDia)}
                     <div class="row justify-content-end">
                         <input type="submit" value=@language.Getkey("Reservar") class="btn btn-primary px-3 mr-3" />
                     </div>
