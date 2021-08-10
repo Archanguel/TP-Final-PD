@@ -64,20 +64,29 @@ namespace TPFinalGrupo4.Models
         {
             if (ModelState.IsValid)
             {
-                if (_context.Usuario.Any(x => String.Equals(x.Email, usuario.Email, StringComparison.InvariantCultureIgnoreCase)))
+                if (_context.Usuario.Any(x => String.Equals(x.Dni.ToString(), usuario.Dni.ToString(), StringComparison.InvariantCultureIgnoreCase)))
                 {
                     _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                     _soundPlayer.Play();
-                    ModelState.AddModelError("Email", "Email ya registrado");
+                    ModelState.AddModelError("Dni", "Dni ya registrado");
                 }
                 else
                 {
-                    usuario.Password = Utils.Encriptar(usuario.Password);
-                    _context.Add(usuario);
-                    await _context.SaveChangesAsync();
-                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                    _soundPlayer.Play();
-                    return RedirectToAction(nameof(Index));
+                    if (_context.Usuario.Any(x => String.Equals(x.Email, usuario.Email, StringComparison.InvariantCultureIgnoreCase)))
+                    {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
+                        ModelState.AddModelError("Email", "Email ya registrado");
+                    }
+                    else
+                    {
+                        usuario.Password = Utils.Encriptar(usuario.Password);
+                        _context.Add(usuario);
+                        await _context.SaveChangesAsync();
+                        _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                        _soundPlayer.Play();
+                        return RedirectToAction(nameof(Index));
+                    }
                 }
             }
             _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");

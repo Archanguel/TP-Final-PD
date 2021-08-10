@@ -34,8 +34,6 @@ namespace TPFinalGrupo4.Controllers
         [HttpPost("Login")]
         public async Task<ActionResult> LoginAsync(int dni, String password)
         {
-            //int dni = int.Parse("1234");
-            //String password = "1234";
             int intentos = 0;
 
             if (this.agencia.FindUserForDNI(dni) == null) //!_context.Usuario.Any(x => x.Dni == dni)
@@ -129,8 +127,6 @@ namespace TPFinalGrupo4.Controllers
             }
             else
             {
-                this.agencia.IntentosLogueo(dni);
-                intentos += 1;
                 //MessageBox.Show("Contraseña incorrecta");
                 if (intentos >= 3)
                 {
@@ -140,6 +136,8 @@ namespace TPFinalGrupo4.Controllers
                 }
                 else
                 {
+                    intentos += 1;
+                    this.agencia.IntentosLogueo(dni);
                     ViewBag.Error = "Usuario o contraseña invalida";
                 }
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
