@@ -219,7 +219,7 @@ namespace TPFinalGrupo4.Models
         }*/
         [Authorize]
         [HttpGet("MisDatos")]
-        public async Task<IActionResult> MisDatos(String? message)
+        public async Task<IActionResult> MisDatos()
         {
             var usuario = await _context.Usuario.FindAsync(int.Parse(User.Identity.Name));
             if (usuario == null)
@@ -233,7 +233,7 @@ namespace TPFinalGrupo4.Models
         [HttpPost("MisDatos")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni, String? message)
+        public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni)
         {
             var usuarioActual = this._context.Usuario.Where(user => user.Dni == Dni).FirstOrDefault();
 
@@ -323,7 +323,7 @@ namespace TPFinalGrupo4.Models
             {
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 _soundPlayer.Play();
-                return Redirect("MisDatos?message=Contraseña-incorrecta");
+                return Redirect("MisDatos?message=Contrasenia-incorrecta");
             }
             // return redirect("Usuarios/MisDatos?message=asd-as-asd-asd-asd-";
             return View(usuario);
