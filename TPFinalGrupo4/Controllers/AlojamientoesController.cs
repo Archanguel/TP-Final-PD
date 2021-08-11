@@ -212,18 +212,19 @@ namespace TPFinalGrupo4.Models
         [Authorize]
         public async Task<IActionResult> Buscador(String? ciudad, String? tipoDeAlojamiento, DateTime? fechaDesde, DateTime? fechaHasta)
         {
-            var alojamientos = from alojamiento in this._context.Alojamiento
-                               select alojamiento;
-
             // Muestra todos los alojamientos porque no se uso el buscador
-            if(ciudad == null || tipoDeAlojamiento == null || fechaDesde == null || fechaHasta == null)
-                return View(await alojamientos.ToListAsync());
+            if (tipoDeAlojamiento == null || fechaDesde == null || fechaHasta == null)
+                return View(await this._context.Alojamiento.Where(a => 1==0).ToListAsync());
 
             // Lista vacia
             var alojamientosEncontrados = new List<Alojamiento>();
+            // Todos los alojamientos
+            var alojamientos = from alojamiento in this._context.Alojamiento
+                               select alojamiento;
 
             // Busco por ciudad
-            alojamientos = alojamientos.Where(al => al.Ciudad.Contains(ciudad));
+            if(ciudad != null)
+                alojamientos = alojamientos.Where(al => al.Ciudad.Contains(ciudad));
             
             // Filtro por tipo de alojamiento
             if (tipoDeAlojamiento != "Todos")
@@ -234,6 +235,8 @@ namespace TPFinalGrupo4.Models
                 if (this.DisponibilidadPorFechas(alojamiento.Id, (DateTime)fechaDesde, (DateTime)fechaHasta))
                     alojamientosEncontrados.Add(alojamiento);
             }
+            ViewData["fechaDesde"] = ((DateTime)fechaDesde).ToString();
+            ViewData["fechaHasta"] = ((DateTime)fechaHasta).ToString();
 
             return View(alojamientosEncontrados);
         }  

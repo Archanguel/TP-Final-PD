@@ -61,7 +61,7 @@
                     {
                         <img src="~/imgs/cabania.jpg" class="card-img-top image-alojamiento-all" alt="Imagen de una cabaña">
                     }
-                    <div class="col">
+                    <div class="col mx-0">
                         <div class="card-body">
                             <h5 class="card-title text-capitalize">
                                 @Html.DisplayFor(modelItem => item.Tipo)
@@ -77,7 +77,7 @@
                             </p>
                             <p class="card-text">
                                 $
-                                @if (item.Tipo == "hotel")
+                                @if (item.Tipo == "Hotel")
                                 {
                                     @Html.DisplayFor(modelItem => item.PrecioPorPersona)
                                 }
@@ -86,14 +86,13 @@
                                     @Html.DisplayFor(modelItem => item.PrecioPorDia)
                                 }
                             </p>
-                            <div class="row justify-content-end">
-                                <a asp-route-id="@item.Id"
-                                   asp-controller="Reservas"
-                                   asp-action="Create"
-                                   class="btn btn-success px-5">
-                                    @language.Getkey("Ver")
-                                </a>
-                            </div>
+                            <!-- Link a detalle del alojamiento -->
+                            <a asp-route-id="@item.Id"
+                               asp-controller="Reservas"
+                               asp-action="Create"
+                               class="btn btn-success btn-block px-5">
+                                @language.Getkey("Ver")
+                            </a>
                         </div>
                     </div>
                 </div>
