@@ -6,37 +6,6 @@
 @inject LanguageService language
 
 <h1 class=" display-4 text-center">@language.Getkey("Alojamientos")</h1>
-
-<form asp-controller="Alojamientoes" asp-action="Index" method="get">
-    <div class="row pt-4">
-        <div class="col-12">
-            <h1 class="text-center display-4">@language.Getkey("Buscador")</h1>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-4">
-            @language.Getkey("Ciudad")<input class="form-control" list="browsersa" name="searchCiudad" id="searchCiudad" />
-            <datalist id="browsersa">
-                <option value="Neuquen"></option>
-                <option value="Buenos Aires"></option>
-                <option value="Carlos Paz"></option>
-            </datalist>
-
-        </div>
-        <div class="col-4">
-            @language.Getkey("Tipo")<input class="form-control" list="browserse" name="searchTipo" />
-            <datalist id="browserse">
-                <option value="hotel"></option>
-                <option value="cabaña"></option>
-            </datalist>
-        </div>
-        <div class="col-2 align-self-end">
-            <input type="submit" value="@language.Getkey("Buscar")" class="btn btn-success px-4" />
-        </div>
-    </div>
-
-</form>
 <p>
     <a asp-action="Create" class="btn btn-success btn-xs">@language.Getkey("Agregar")</a>
 </p>
