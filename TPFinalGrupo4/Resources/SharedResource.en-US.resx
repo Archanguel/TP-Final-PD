@@ -267,4 +267,7 @@
   <data name="¿Está seguro de querer borrar este usuario?" xml:space="preserve">
     <value>Are you sure you want to delete this user?</value>
   </data>
+  <data name="Contraseña actual" xml:space="preserve">
+    <value>Current password</value>
+  </data>
 </root>
