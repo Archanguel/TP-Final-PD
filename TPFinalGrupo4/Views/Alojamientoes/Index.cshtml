@@ -12,18 +12,18 @@
 <table class="table table-bordered table-responsive-lg table-striped table-sm mb-4">
     <thead>
         <tr class="text-center">
-            <th>@Html.DisplayNameFor(model => model.Codigo)</th>
-            <th>@Html.DisplayNameFor(model => model.Ciudad)</th>
-            <th>@Html.DisplayNameFor(model => model.Barrio)</th>
-            <th>@Html.DisplayNameFor(model => model.Estrellas)</th>
-            <th>@Html.DisplayNameFor(model => model.CantidadDePersonas)</th>
-            <th>@Html.DisplayNameFor(model => model.Tv)</th>
-            <th>@Html.DisplayNameFor(model => model.Tipo)</th>
-            <th>@Html.DisplayNameFor(model => model.PrecioPorPersona)</th>
-            <th>@Html.DisplayNameFor(model => model.PrecioPorDia)</th>
-            <th>@Html.DisplayNameFor(model => model.Habitaciones)</th>
-            <th>@Html.DisplayNameFor(model => model.Banios)</th>
-            <th>Acciones</th>
+            <th>@language.Getkey("Codigo")</th>
+            <th>@language.Getkey("Ciudad")</th>
+            <th>@language.Getkey("Barrio")</th>
+            <th>@language.Getkey("Estrellas")</th>
+            <th>@language.Getkey("Cantidad de Personas")</th>
+            <th>@language.Getkey("Tv")</th>
+            <th>@language.Getkey("Tipo")</th>
+            <th>@language.Getkey("Precio por Persona")</th>
+            <th>@language.Getkey("Precio por Dia")</th>
+            <th>@language.Getkey("Habitaciones")</th>
+            <th>@language.Getkey("Baños")</th>
+            <th>@language.Getkey("Acciones")</th>
         </tr>
     </thead>
     <tbody>
@@ -34,13 +34,12 @@
         @Html.DisplayFor(modelItem => item.Codigo)
     </td>
     <td class="align-middle">
-        <!--Html.DisplayFor(modelItem => item.Ciudad)-->
         @foreach (var items in context.Ciudad)
         {
             if (item.Ciudad == items.ID.ToString())
             {
 @items.Nombre}
-}
+                }
     </td>
     <td class="align-middle">
         @Html.DisplayFor(modelItem => item.Barrio)
@@ -73,7 +72,6 @@
         <a asp-action="Edit" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-warning btn-xs mr-1"><i class="fas fa-edit mr-2"></i>@language.Getkey("Editar")</a>
         <a asp-action="Delete" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-danger btn-xs ml-1"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</a>
     </td>
-</tr>
-}
+</tr>}
     </tbody>
 </table>
