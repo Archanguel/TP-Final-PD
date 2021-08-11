@@ -229,7 +229,7 @@ namespace TPFinalGrupo4.Models
             ViewData["message"] = null;
             if(message != null)
             {
-                ViewData["message"] = message.Replace("-"," ");
+                ViewData["message"] = message.Replace("-"," ");              
             }
             return View(usuario);
         }
@@ -283,9 +283,17 @@ namespace TPFinalGrupo4.Models
 
                 try
                 {
-                        usuarioActual.Email = Email;
+                    usuarioActual.Email = Email;
                     _context.Update(usuarioActual);
-                    await _context.SaveChangesAsync();
+                        try
+                        {
+                            await _context.SaveChangesAsync();
+                        }
+                        catch
+                        {                        
+                            _context.Dispose();
+                            return Redirect("MisDatos?message=Email-ya-registrado");
+                        }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -306,6 +314,7 @@ namespace TPFinalGrupo4.Models
             {
                 try
                 {
+               
                     usuarioActual.Password = Utils.Encriptar(usuario.Password);
                     _context.Update(usuarioActual);
                     await _context.SaveChangesAsync();
