@@ -1,0 +1,107 @@
+﻿@model TPFinalGrupo4.Models.Alojamiento
+
+@{
+    ViewData["Title"] = "Create";
+}
+@inject LanguageService language
+@inject UsuarioContext context 
+
+<h1 class="text-center">@language.Getkey("Crear Alojamiento")</h1>
+
+<hr />
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <div class="form-group col-4">
+                    <label asp-for="Codigo" class="control-label">@language.Getkey("Codigo")</label>
+                    <input asp-for="Codigo" class="form-control" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Ciudad" class="control-label">@language.Getkey("Ciudad")</label>
+                    <select asp-for="Ciudad" class="form-control">
+                        @foreach (var item in context.Ciudad)
+                        {
+                            <option value="@item.ID">@item.Nombre</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Ciudad" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Barrio" class="control-label">@language.Getkey("Barrio")</label>
+                    <input asp-for="Barrio" class="form-control" />
+                    <span asp-validation-for="Barrio" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-3">
+                    <label asp-for="Estrellas" class="control-label">@language.Getkey("Estrellas")</label>
+                    <select asp-for="Estrellas" class="form-control">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Estrellas" class="text-danger"></span>
+                </div>
+                <div class="form-group col-3">
+                    <label asp-for="CantidadDePersonas" class="control-label">@language.Getkey("Cantidad de Personas")</label>
+                    <select asp-for="CantidadDePersonas" class="form-control" >
+                        @for (int i=1; i<=10;i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                    <span asp-validation-for="CantidadDePersonas" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check align-self-center col-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Tv" /> @Html.DisplayNameFor(model => model.Tv)
+                    </label>
+                </div>
+                <div class="form-group col-3">
+                    <label asp-for="Tipo" class="control-label">@language.Getkey("Tipo")</label>
+                    <select asp-for="Tipo" class="form-control">
+                        <option value="Hotel">@language.Getkey("Hotel")</option>
+                        <option value="Cabaña">@language.Getkey("Cabaña")</option>
+                    </select>
+                    <span asp-validation-for="Tipo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12">
+                    <label asp-for="PrecioPorPersona" class="control-label">@language.Getkey("Precio por Persona")</label>
+                    <input asp-for="PrecioPorPersona" class="form-control" />
+                    <span asp-validation-for="PrecioPorPersona" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-4">
+                    <label asp-for="PrecioPorDia" class="control-label">@language.Getkey("Precio por Dia")</label>
+                    <input asp-for="PrecioPorDia" class="form-control" />
+                    <span asp-validation-for="PrecioPorDia" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Habitaciones" class="control-label">@language.Getkey("Habitaciones")</label>
+                    <input asp-for="Habitaciones" class="form-control" />
+                    <span asp-validation-for="Habitaciones" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="Banios" class="control-label">@language.Getkey("Baños")</label>
+                    <input asp-for="Banios" class="form-control" />
+                    <span asp-validation-for="Banios" class="text-danger"></span>
+                </div>
+
+                <div class="form-group col-12">
+                    <input type="submit" value="@language.Getkey("Crear")" class="btn btn-success" />
+                    <a asp-action="Index" class="btn btn-primary">@language.Getkey("Volver")</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

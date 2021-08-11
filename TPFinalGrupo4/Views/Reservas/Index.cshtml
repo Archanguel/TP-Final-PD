@@ -1,0 +1,73 @@
+﻿@model IEnumerable<TPFinalGrupo4.Models.Reserva>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@inject LanguageService language
+
+<h1 class="text-center my-4">@language.Getkey("Reservaciones")</h1>
+
+<hr class="my-4" />
+
+<table class="table table-bordered table-responsive-lg table-striped mb-4">
+    <thead>
+        <tr class="text-center">
+            <th>
+                @language.Getkey("ID")
+            </th>
+            <th>
+                @language.Getkey("Nombre")
+            </th>
+            <th>
+                @language.Getkey("Dni")
+            </th>
+            <th>
+                @language.Getkey("Tipo")
+            </th>
+            <th>
+                @language.Getkey("Fecha Desde")
+            </th>
+            <th>
+                @language.Getkey("Fecha Hasta")
+            </th>
+            <th>
+                @language.Getkey("Precio")
+            </th>
+            <th>
+                @language.Getkey("Acciones")
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Usuario.Dni)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Alojamiento.Tipo)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.FechaDesde)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.FechaHasta)
+                </td>
+                <td class="align-middle">
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td class="d-flex justify-content-around align-content-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs mr-2"><i class="fas fa-edit mr-2"></i>@language.Getkey("Editar")</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
