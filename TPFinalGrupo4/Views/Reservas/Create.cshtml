@@ -60,7 +60,7 @@
                                     TV:
                                 </dt>
                                 <dd class="col-sm-8">
-                                    @language.Getkey("Si"):
+                                    @language.Getkey("Si")
                                 </dd>
                             }
                             else
@@ -69,7 +69,7 @@
                                     TV:
                                 </dt>
                                 <dd class="col-sm-8">
-                                    @language.Getkey("No"):
+                                    @language.Getkey("No")
                                 </dd>
                             }
                             @if (ViewData["alojamiento_tipo"].ToString() == "hotel")
@@ -78,7 +78,7 @@
                                     @language.Getkey("Precio por Persona"):
                                 </dt>
                                 <dd class="col-sm-8">
-                                    @ViewData["alojamiento_precioPorPersona"]
+                                    $ @ViewData["alojamiento_precioPorPersona"]
                                 </dd>
                             }
                             else
@@ -87,7 +87,7 @@
                                     @language.Getkey("Precio por Dia"):
                                 </dt>
                                 <dd class="col-sm-8">
-                                    @ViewData["alojamiento_precioPorDia"]
+                                    $ @ViewData["alojamiento_precioPorDia"]
                                 </dd>
                                 <dt class="col-sm-4">
                                     @language.Getkey("Habitaciones"):
