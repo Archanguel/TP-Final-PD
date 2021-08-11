@@ -66,14 +66,12 @@ namespace TPFinalGrupo4.Controllers
                 if (usuario.Intentos >= 3)
                     usuario.Bloqueado = true;
 
+                usuario.Intentos = 0;
                 this._context.Update(usuario);
                 this._context.SaveChanges();
 
                 this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 this._soundPlayer.Play();
-                usuario.Intentos = 0;
-                this._context.Update(usuario);
-                this._context.SaveChanges();
                 return Redirect("/Login?message=La-clave-ingresada-es-incorrecta");
             }
 
