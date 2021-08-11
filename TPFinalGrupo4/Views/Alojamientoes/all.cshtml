@@ -5,11 +5,11 @@
 }
 @inject LanguageService language
 
-    <div class="row pt-4">
-        <div class="col-12">
-            <h1 class="text-center">Alojamientos</h1>
-        </div>
+<div class="row pt-4">
+    <div class="col-12">
+        <h1 class="text-center">@language.Getkey("Alojamientos")</h1>
     </div>
+</div>
 
 <!-- FORMULARIO PARA EL FILTRO -->
 <div class="justify-content-center mt-3">
@@ -40,62 +40,63 @@
                 </select>
             </div>
             <div class="form-group col-md-2 align-self-end">
-                <button type="submit" class="btn btn-outline-primary btn-block">@language.Getkey("Filtrar")</button>
+                <button type="submit" class="btn btn-outline-primary btn-block"><i class="fas fa-filter"></i> @language.Getkey("Filtrar")</button>
             </div>
         </div>
     </form>
 </div>
 
-    <div class="row row-cols-1 row-cols-md-2 mt-4">
-        @foreach (var item in Model)
-        {
-            <div class="col-12 col-md-3 mb-4 ">
-                <div class="card shadow">
+<div class="row row-cols-1 row-cols-md-2 mt-4">
+    @foreach (var item in Model)
+    {
+        <div class="col-12 col-md-3 mb-4 ">
+            <div class="card shadow">
 
-                    <!-- IMAGEN -->
-                    @if (item.Tipo == "Hotel")
-                    {
-                        <img src="~/imgs/hotel.jpg" class="card-img-top image-alojamiento-all" alt="Imagen de un hotel">
-                    }
-                    else
-                    {
-                        <img src="~/imgs/cabania.jpg" class="card-img-top image-alojamiento-all" alt="Imagen de una cabaña">
-                    }
-                    <div class="col mx-0">
-                        <div class="card-body">
-                            <h5 class="card-title text-capitalize">
-                                @Html.DisplayFor(modelItem => item.Tipo)
-                            </h5>
-                            <p class="card-text text-capitalize mb-0 pb-0">
-                                @language.Getkey("Ciudad"): @item.Ciudad
-                            </p>
-                            <p class="card-text text-capitalize mb-0 pb-0">
-                                @language.Getkey("Barrio"): @item.Barrio
-                            </p>
-                            <p class="card-text mb-0 pb-0">
-                                TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) @language.Getkey("estrellas")
-                            </p>
-                            <p class="card-text">
-                                $
-                                @if (item.Tipo == "Hotel")
-                                {
-                                    @Html.DisplayFor(modelItem => item.PrecioPorPersona)
-                                }
-                                else
-                                {
-                                    @Html.DisplayFor(modelItem => item.PrecioPorDia)
-                                }
-                            </p>
-                            <!-- Link a detalle del alojamiento -->
-                            <a asp-route-id="@item.Id"
-                               asp-controller="Reservas"
-                               asp-action="Create"
-                               class="btn btn-success btn-block px-5">
-                                @language.Getkey("Ver")
-                            </a>
-                        </div>
+                <!-- IMAGEN -->
+                @if (item.Tipo == "Hotel")
+                {
+                    <img src="~/imgs/hotel.jpg" class="card-img-top image-alojamiento-all" alt="Imagen de un hotel">
+                }
+                else
+                {
+                    <img src="~/imgs/cabania.jpg" class="card-img-top image-alojamiento-all" alt="Imagen de una cabaña">
+                }
+                <div class="col mx-0">
+                    <div class="card-body">
+                        <h5 class="card-title text-capitalize">
+                            @Html.DisplayFor(modelItem => item.Tipo)
+                        </h5>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            @language.Getkey("Ciudad"): @item.Ciudad
+                        </p>
+                        <p class="card-text text-capitalize mb-0 pb-0">
+                            @language.Getkey("Barrio"): @item.Barrio
+                        </p>
+                        <p class="card-text mb-0 pb-0">
+                            TV @Html.DisplayFor(modelItem => item.Tv) | @Html.DisplayFor(modelItem => item.Estrellas) @language.Getkey("estrellas")
+                        </p>
+                        <p class="card-text">
+                            $
+                            @if (item.Tipo == "Hotel")
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+                            }
+                            else
+                            {
+                                @Html.DisplayFor(modelItem => item.PrecioPorDia)
+                            }
+                        </p>
+                        <!-- Link a detalle del alojamiento -->
+                        <a asp-route-id="@item.Id"
+                           asp-controller="Reservas"
+                           asp-action="Create"
+                           class="btn btn-success btn-block px-5">
+                            <i class="fas fa-search mr-2"></i>
+                            @language.Getkey("Ver")
+                        </a>
                     </div>
                 </div>
             </div>
-        }
-    </div>
+        </div>
+    }
+</div>

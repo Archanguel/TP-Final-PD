@@ -126,6 +126,9 @@
   <data name="Barrio" xml:space="preserve">
     <value>Barrio</value>
   </data>
+  <data name="Baños" xml:space="preserve">
+    <value>Baños</value>
+  </data>
   <data name="Borrar" xml:space="preserve">
     <value>Borrar</value>
   </data>
@@ -186,6 +189,18 @@
   <data name="Guardar" xml:space="preserve">
     <value>Guardar</value>
   </data>
+  <data name="Habitaciones" xml:space="preserve">
+    <value>Habitaciones</value>
+  </data>
+  <data name="Ingresa tu DNI" xml:space="preserve">
+    <value>Ingresa tu DNI</value>
+  </data>
+  <data name="Ingresa tu nuevo Email" xml:space="preserve">
+    <value>Ingresa tu nuevo Email</value>
+  </data>
+  <data name="Ingresa tu nuevo nombre" xml:space="preserve">
+    <value>Ingresa tu nuevo nombre</value>
+  </data>
   <data name="Ingrese el precio minimo" xml:space="preserve">
     <value>Ingrese el precio minimo</value>
   </data>
@@ -197,6 +212,9 @@
   </data>
   <data name="Minimas estrellas" xml:space="preserve">
     <value>Minimas estrellas</value>
+  </data>
+  <data name="Mis Datos" xml:space="preserve">
+    <value>Mis Datos</value>
   </data>
   <data name="Mis Reservaciones" xml:space="preserve">
     <value>Mis Reservaciones</value>

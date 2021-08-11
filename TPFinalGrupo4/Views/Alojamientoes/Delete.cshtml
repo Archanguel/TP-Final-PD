@@ -81,7 +81,7 @@
 
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />
-        <input type="submit" value="@language.Getkey("Borrar")" class="btn btn-danger" />
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</button>
         <a asp-action="Index" class="btn btn-primary">@language.Getkey("Volver")</a>
     </form>
 </div>
