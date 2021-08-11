@@ -7,9 +7,9 @@
 
 <h1 class="text-center">@language.Getkey("Usuarios")</h1>
 
-<table class="table">
+<table class="table table-bordered table-responsive-lg table-striped table-sm mb-4">
     <thead>
-        <tr>
+        <tr class="text-center">
             <th>
                 @Html.DisplayNameFor(model => model.Dni)
             </th>
@@ -39,31 +39,30 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr class="text-center">
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Dni)
                 </td>
-                <td>
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
-                <td>
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td class="d-none">
                     @Html.DisplayFor(modelItem => item.Password)
                 </td>
-                <td>
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.IsAdmin)
                 </td>
-                <td>
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Bloqueado)
                 </td>
-                <td>
+                <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Intentos)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs">@language.Getkey("Editar")</a>
-                    <!--<a asp-action="Details" asp-route-id="@item.Id">Details</a> |-->
+                <td class="d-flex justify-content-around align-content-center">
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs mr-2">@language.Getkey("Editar")</a>
                     <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs">@language.Getkey("Borrar")</a>
                 </td>
             </tr>

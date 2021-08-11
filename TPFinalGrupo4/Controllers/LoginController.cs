@@ -78,12 +78,10 @@ namespace TPFinalGrupo4.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, usuario.Id.ToString()),
-                //new Claim("FullName", user.FullName),
                 new Claim(ClaimTypes.Role, usuario.IsAdmin ? "Admin" : "User"),
                 new Claim("Usuario", usuario.Nombre),
             };
 
-            //CookieAuthenticationDefaults.AuthenticationScheme
             var claimsIdentity = new ClaimsIdentity(claims, "Login"); 
             
             // Propiedades de la Autenticacion
