@@ -218,8 +218,8 @@ namespace TPFinalGrupo4.Models
             return View();
         }*/
         [Authorize]
-        [HttpGet("CambiarContrasena")]
-        public async Task<IActionResult> CambiarContrasena()
+        [HttpGet("MisDatos")]
+        public async Task<IActionResult> MisDatos()
         {
             var usuario = await _context.Usuario.FindAsync(int.Parse(User.Identity.Name));
             if (usuario == null)
@@ -230,17 +230,33 @@ namespace TPFinalGrupo4.Models
         }
 
         // POST: Cambiar Contraseña
-        [HttpPost("CambiarContrasena")]
+        [HttpPost("MisDatos")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CambiarContrasena(Usuario usuario)
+        public async Task<IActionResult> MisDatos(Usuario usuario, String nombreNuevo, String emailNuevo)
         {
+            String contra = usuario.Password;
             if (int.Parse(User.Identity.Name) != usuario.Id)
             {
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 _soundPlayer.Play();
                 return NotFound();
             }
+
+            if(nombreNuevo != null)
+            {
+                usuario.Nombre = emailNuevo;
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+
+            if(nombreNuevo != null)
+            {
+                usuario.Nombre = nombreNuevo;
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+
 
             if (ModelState.IsValid)
             {
@@ -265,7 +281,7 @@ namespace TPFinalGrupo4.Models
                 }
                 _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
-                return RedirectToAction(nameof(CambiarContrasena));
+                return RedirectToAction(nameof(MisDatos));
             }
             _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
             _soundPlayer.Play();
