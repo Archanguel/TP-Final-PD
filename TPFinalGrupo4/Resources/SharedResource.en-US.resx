@@ -126,6 +126,9 @@
   <data name="Barrio" xml:space="preserve">
     <value>Neighborhood</value>
   </data>
+  <data name="Baños" xml:space="preserve">
+    <value>Bathrooms</value>
+  </data>
   <data name="Borrar" xml:space="preserve">
     <value>Delete</value>
   </data>
@@ -171,8 +174,8 @@
   <data name="Entrar" xml:space="preserve">
     <value>Log in</value>
   </data>
-  <data name="estrellas" xml:space="preserve">
-    <value>stars</value>
+  <data name="Estrellas" xml:space="preserve">
+    <value>Stars</value>
   </data>
   <data name="Fecha Desde" xml:space="preserve">
     <value>Date From</value>
@@ -186,6 +189,18 @@
   <data name="Guardar" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="Habitaciones" xml:space="preserve">
+    <value>Rooms</value>
+  </data>
+  <data name="Ingresa tu DNI" xml:space="preserve">
+    <value>Enter you NIC</value>
+  </data>
+  <data name="Ingresa tu nuevo Email" xml:space="preserve">
+    <value>Enter your new Email</value>
+  </data>
+  <data name="Ingresa tu nuevo nombre" xml:space="preserve">
+    <value>Enter your new name</value>
+  </data>
   <data name="Ingrese el precio minimo" xml:space="preserve">
     <value>Enter the minimum price</value>
   </data>
@@ -197,6 +212,9 @@
   </data>
   <data name="Minimas estrellas" xml:space="preserve">
     <value>Minimum stars</value>
+  </data>
+  <data name="Mis Datos" xml:space="preserve">
+    <value>My Profile</value>
   </data>
   <data name="Mis Reservaciones" xml:space="preserve">
     <value>My Reservations</value>
@@ -210,11 +228,11 @@
   <data name="Precio" xml:space="preserve">
     <value>Price</value>
   </data>
-  <data name="Precio por dia" xml:space="preserve">
-    <value>Price per day</value>
+  <data name="Precio por Dia" xml:space="preserve">
+    <value>Price per Day</value>
   </data>
   <data name="Precio por persona" xml:space="preserve">
-    <value>Price per person</value>
+    <value>Price per Person</value>
   </data>
   <data name="Registrarse" xml:space="preserve">
     <value>Sign up</value>
@@ -229,7 +247,7 @@
     <value>Reserve</value>
   </data>
   <data name="Salir" xml:space="preserve">
-    <value>Log out</value>
+    <value>Sign out</value>
   </data>
   <data name="Tipo" xml:space="preserve">
     <value>Type</value>
