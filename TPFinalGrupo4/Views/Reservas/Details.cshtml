@@ -3,10 +3,11 @@
 @{
     ViewData["Title"] = "Details";
 }
+@inject LanguageService language
 
 <div class="row pt-4">
     <div class="col-12">
-        <h1 class="text-center display-4">Details</h1>
+        <h1 class="text-center display-4">@language.Getkey("Detalles")</h1>
     </div>
 </div>
 
@@ -18,37 +19,37 @@
         <div class="container">
             <dl class="row">
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Alojamiento.Tipo)
+                    @language.Getkey("Tipo")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Alojamiento.Tipo)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Usuario.Nombre)
+                    @language.Getkey("Nombre")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Usuario.Nombre)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Usuario.Dni)
+                    @language.Getkey("Dni")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Usuario.Dni)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.FechaDesde)
+                    @language.Getkey("Fecha Desde")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.FechaDesde)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.FechaHasta)
+                    @language.Getkey("Fecha Hasta")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.FechaHasta)
                 </dd>
                 <dt class="col-sm-4">
-                    @Html.DisplayNameFor(model => model.Precio)
+                    @language.Getkey("Precio")
                 </dt>
                 <dd class="col-sm-8">
                     @Html.DisplayFor(model => model.Precio)
@@ -60,8 +61,8 @@
 @if (User.IsInRole("Admin"))
 {
     <div>
-        <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a> |
-        <a asp-action="Index" class="btn btn-outline-secondary">Back to List</a>
+        <a asp-action="Delete" asp-route-id="@Model.Id">@language.Getkey("Borrar")</a> |
+        <a asp-action="Index" class="btn btn-outline-secondary">@language.Getkey("Volver")</a>
     </div>
 }
 else
@@ -69,7 +70,7 @@ else
     <form asp-action="Delete" id="formulario-reserva-delete">
         <input type="hidden" asp-for="Id" />
         <input type="submit" value="Delete" class="btn btn-danger px-4 mr-2" />
-        <button asp-action="List" class="btn btn-outline-secondary">Back to List</button>
+        <button asp-action="List" class="btn btn-outline-secondary">@language.Getkey("Volver")</button>
     </form>
 }
 
