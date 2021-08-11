@@ -57,7 +57,7 @@ namespace TPFinalGrupo4.Data
                 new Alojamiento{
                     Id=1,
                     Codigo="352234",
-                    Ciudad ="1",
+                    Ciudad="1",
                     Barrio="Recoleta",
                     Estrellas=3,
                     CantidadDePersonas=2,
