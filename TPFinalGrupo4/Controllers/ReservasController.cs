@@ -23,9 +23,11 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Reservas
-        [Authorize(Roles = "Admin")]
+      
         public async Task<IActionResult> Index()
         {
+            if (!this._context.Usuario.Find(int.Parse(User.Identity.Name)).IsAdmin)
+                return Redirect("/Alojamientoes/all?message=No-tenes-permiso-de-administrador");
             return View(await _context.Reserva.Include(r => r.Alojamiento).Include(r => r.Usuario).ToListAsync());
         }
 
@@ -119,7 +121,7 @@ namespace TPFinalGrupo4.Models
             this._context.SaveChanges();
             _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
             _soundPlayer.Play();
-            return Redirect("/Alojamientoes/all");
+            return Redirect("/Reservas/List");
         }
 
         // GET: Reservas/Edit/5

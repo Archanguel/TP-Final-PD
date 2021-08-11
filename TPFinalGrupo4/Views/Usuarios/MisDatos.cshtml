@@ -5,87 +5,99 @@
 }
 @inject LanguageService language
 
-    <div class="row pt-4">
-        <div class="col-12">
-            <h1 class="text-center display-4">@language.Getkey("Mis Datos")</h1>
-        </div>
+@if (ViewData["message"] != null)
+{
+    <!-- Mensaje al usuario -->
+    <div class="alert alert-danger" role="alert" id="Contraseña-incorrecta">
+        <strong>@ViewData["message"]</strong>
     </div>
-
-    <hr />
-    <div class="row pt-3">
-        <div class="col-12">
-            <form asp-action="MisDatos" id="formulario-editar-passwords">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="Id" />
-                <div class="form-group d-flex flex-column align-items-center">
-                    <div class="form-group col-6 ">
-                        <label asp-for="Dni" class="control-label">@language.Getkey("Ingresa tu DNI")</label>
-                        <input asp-for="Dni" class="form-control" readonly />
-                        <span asp-validation-for="Dni" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-6 ">
-                        <label asp-for="Nombre" class="control-label">@language.Getkey("Ingresa tu nuevo nombre")</label>
-                        <input asp-for="Nombre" class="form-control" />
-                        <span asp-validation-for="Nombre" name="nombreNuevo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-6 ">
-                        <label asp-for="Email" class="control-label">@language.Getkey("Ingresa tu nuevo Email")</label>
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" name="emailNuevo" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-6">
-                        <label class="control-label">@language.Getkey("Contraseña actual")</label>
-                        <input type="password" asp-for="Password" name="contraseñaActual" class="form-control" placeholder="********" />
-                    </div>
-                    <div class="form-group col-6">
-                        <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
-                        <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
-                    </div>
-                    <div class="form-group col-6">
-                        <label class="control-label">@language.Getkey("Repetir Contraseña")</label>
-                        <input type="password" class="form-control" id="password2" placeholder="********" />
-                    </div>
-                    <div class="form-group col-2 align-self-center d-none">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
-                        </label>
-                    </div>
-                    <div class="form-group col-2 align-self-center d-none">
-                        <label class="form-check-label">
-                            <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
-                        </label>
-                    </div>
-                    <div class="form-group col-6 d-none">
-                        <label asp-for="Intentos" class="control-label"></label>
-                        <input asp-for="Intentos" class="form-control" />
-                        <span asp-validation-for="Intentos" class="text-danger"></span>
-                    </div>
-                    <div class="form-group col-6 pt-3">
-                        <input type="submit" value="@language.Getkey("Guardar")" class="btn btn-success px-4" />
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-
     <script type="text/javascript">
-        const formulario = document.getElementById("formulario-editar-passwords")
-        const inputPassword1 = document.getElementById("password1")
-        const inputPassword2 = document.getElementById("password2")
-
-        formulario.addEventListener("submit", (e) => {
-            e.preventDefault()
-
-            if (inputPassword1.value != inputPassword2.value) {
-                inputPassword1.value = ""
-                inputPassword2.value = ""
-                alert('Las contraseñas deben ser iguales')
-            } else {
-                formulario.submit()
-            }
-        })
+        setTimeout(() => {
+            document.getElementById("Contraseña-incorrecta").remove()
+        }, 4000)
     </script>
+}
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+<div class="row pt-4">
+    <div class="col-12">
+        <h1 class="text-center display-4">@language.Getkey("Mis Datos")</h1>
+    </div>
+</div>
+<hr />
+<div class="row pt-3">
+    <div class="col-12">
+        <form asp-action="MisDatos" id="formulario-editar-passwords">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group d-flex flex-column align-items-center">
+                <div class="form-group col-6 ">
+                    <label asp-for="Dni" class="control-label">@language.Getkey("Ingresa tu DNI")</label>
+                    <input asp-for="Dni" class="form-control" readonly />
+                    <span asp-validation-for="Dni" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 ">
+                    <label asp-for="Nombre" class="control-label">@language.Getkey("Ingresa tu nuevo nombre")</label>
+                    <input asp-for="Nombre" class="form-control" />
+                    <span asp-validation-for="Nombre" name="nombreNuevo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 ">
+                    <label asp-for="Email" class="control-label">@language.Getkey("Ingresa tu nuevo Email")</label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" name="emailNuevo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6">
+                    <label class="control-label">@language.Getkey("Contraseña actual")</label>
+                    <input type="password" asp-for="Password" name="contraseñaActual" class="form-control" placeholder="********" />
+                </div>
+                <div class="form-group col-6">
+                    <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
+                    <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
+                </div>
+                <div class="form-group col-6">
+                    <label class="control-label">@language.Getkey("Repetir Contraseña")</label>
+                    <input type="password" class="form-control" id="password2" placeholder="********" />
+                </div>
+                <div class="form-group col-2 align-self-center d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                    </label>
+                </div>
+                <div class="form-group col-2 align-self-center d-none">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                    </label>
+                </div>
+                <div class="form-group col-6 d-none">
+                    <label asp-for="Intentos" class="control-label"></label>
+                    <input asp-for="Intentos" class="form-control" />
+                    <span asp-validation-for="Intentos" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 pt-3">
+                    <input type="submit" value="@language.Getkey("Guardar")" class="btn btn-success px-4" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const formulario = document.getElementById("formulario-editar-passwords")
+    const inputPassword1 = document.getElementById("password1")
+    const inputPassword2 = document.getElementById("password2")
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        if (inputPassword1.value != inputPassword2.value) {
+            inputPassword1.value = ""
+            inputPassword2.value = ""
+            alert('Las contraseñas deben ser iguales')
+        } else {
+            formulario.submit()
+        }
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
