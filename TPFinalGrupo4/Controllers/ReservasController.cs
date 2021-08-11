@@ -121,7 +121,7 @@ namespace TPFinalGrupo4.Models
             this._context.SaveChanges();
             _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
             _soundPlayer.Play();
-            return Redirect("/Alojamientoes/all");
+            return Redirect("/Reservas/List");
         }
 
         // GET: Reservas/Edit/5
