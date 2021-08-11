@@ -16,11 +16,11 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group row">
                 <div class="form-group col-4 d-none">
-                    <label asp-for="Codigo" class="control-label"></label>
+                    <label asp-for="Codigo" class="control-label">@language.Getkey("Codigo")</label>
                     <input asp-for="Codigo" class="form-control" />
                 </div>
                 <div class="form-group  col-6 col-lg-4">
-                    <label asp-for="Ciudad" class="control-label"></label>
+                    <label asp-for="Ciudad" class="control-label">@language.Getkey("Ciudad")</label>
                     <select asp-for="Ciudad" class="form-control">
                         @foreach (var item in context.Ciudad)
                         {
@@ -30,7 +30,7 @@
                     <span asp-validation-for="Ciudad" class="text-danger"></span>
                 </div>
                 <div class="form-group col-6 col-lg-4">
-                    <label asp-for="Barrio" class="control-label"></label>
+                    <label asp-for="Barrio" class="control-label">@language.Getkey("Estrellas")</label>
                     <input asp-for="Barrio" class="form-control" />
                     <span asp-validation-for="Barrio" class="text-danger"></span>
                 </div>
@@ -38,7 +38,7 @@
                 <div class="col-4">
                     <div class="row align-items-center justify-content-center">
                         <div class="form-group col-4 col-lg-3">
-                            <label asp-for="Estrellas" class="control-label"></label>
+                            <label asp-for="Estrellas" class="control-label">@language.Getkey("Estrellas")</label>
                             <select asp-for="Estrellas" class="form-control">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -50,7 +50,7 @@
                         </div>
 
                         <div class="form-group col-5 col-lg-3">
-                            <label asp-for="CantidadDePersonas" class="control-label">@language.Getkey("Personas")</label>
+                            <label asp-for="CantidadDePersonas" class="control-label">@language.Getkey("Cantidad de Personas")</label>
                             <select asp-for="CantidadDePersonas" class="form-control">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -73,32 +73,32 @@
                     </div>
                 </div>
                 <div class="form-group col-3">
-                    <label asp-for="Tipo" class="control-label"></label>
+                    <label asp-for="Tipo" class="control-label">@language.Getkey("Tipo")</label>
                     <select asp-for="Tipo" class="form-control">
-                        <option value="Hotel">Hotel</option>
-                        <option value="Cabaña">Cabaña</option>
+                        <option value="Hotel">@language.Getkey("Hotel")</option>
+                        <option value="Cabaña">@language.Getkey("Cabaña")</option>
                     </select>
                     <span asp-validation-for="Tipo" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-5 col-lg-4">
-                    <label asp-for="PrecioPorPersona" class="control-label"></label>
+                    <label asp-for="PrecioPorPersona" class="control-label">@language.Getkey("Precio por Persona")</label>
                     <input asp-for="PrecioPorPersona" class="form-control" />
                     <span asp-validation-for="PrecioPorPersona" class="text-danger"></span>
                 </div>
 
                 <div class="form-group col-4">
-                    <label asp-for="PrecioPorDia" class="control-label"></label>
+                    <label asp-for="PrecioPorDia" class="control-label">@language.Getkey("Precio por Dia")</label>
                     <input asp-for="PrecioPorDia" class="form-control" />
                     <span asp-validation-for="PrecioPorDia" class="text-danger"></span>
                 </div>
                 <div class="form-group col-2">
-                    <label asp-for="Habitaciones" class="control-label"></label>
+                    <label asp-for="Habitaciones" class="control-label">@language.Getkey("Habitaciones")</label>
                     <input asp-for="Habitaciones" class="form-control" />
                     <span asp-validation-for="Habitaciones" class="text-danger"></span>
                 </div>
                 <div class="form-group col-2">
-                    <label asp-for="Banios" class="control-label"></label>
+                    <label asp-for="Banios" class="control-label">@language.Getkey("Baños")</label>
                     <input asp-for="Banios" class="form-control" />
                     <span asp-validation-for="Banios" class="text-danger"></span>
                 </div>
