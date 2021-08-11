@@ -62,8 +62,8 @@
                     @Html.DisplayFor(modelItem => item.Precio)
                 </td>
                 <td class="d-flex justify-content-around align-content-center">
-                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs mr-2"><i class="fas fa-edit"></i>@language.Getkey("Editar")</a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i>@language.Getkey("Borrar")</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" type="button" class="btn btn-warning btn-xs mr-2"><i class="fas fa-edit mr-2"></i>@language.Getkey("Editar")</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" type="button" class="btn btn-danger btn-xs"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</a>
                 </td>
             </tr>
         }
