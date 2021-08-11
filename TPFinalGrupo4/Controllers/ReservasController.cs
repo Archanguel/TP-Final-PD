@@ -83,6 +83,18 @@ namespace TPFinalGrupo4.Models
             ViewData["alojamiento_habitaciones"] = alojamiento.Habitaciones;
             ViewData["alojamiento_banios"] = alojamiento.Banios;
 
+            double precio = 0;
+            if (alojamiento.Tipo == "Hotel")
+            {
+                precio = alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
+            }
+            else
+            {
+                precio = alojamiento.PrecioPorDia;
+            }
+
+            ViewData["precioTotal"] = precio;
+
             return View();
         }
 

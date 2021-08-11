@@ -28,6 +28,7 @@
 
     <div class="row pt-4">
         <div class="col">
+            <div class="d-none" id="precioTotal">@ViewData["precioTotal"]</div>
             <form asp-action="Create" id="formulario-reserva">
                 <input type="hidden" name="id_alojamiento" value="@ViewData["alojamiento_id"]" />
 
@@ -78,7 +79,7 @@
                                     @language.Getkey("Precio por Persona"):
                                 </dt>
                                 <dd class="col-sm-8">
-                                    $ @ViewData["alojamiento_precioPorPersona"]
+                                    @ViewData["alojamiento_precioPorPersona"]
                                 </dd>
                             }
                             else
@@ -87,7 +88,7 @@
                                     @language.Getkey("Precio por Dia"):
                                 </dt>
                                 <dd class="col-sm-8">
-                                    $ @ViewData["alojamiento_precioPorDia"]
+                                    @ViewData["alojamiento_precioPorDia"]
                                 </dd>
                                 <dt class="col-sm-4">
                                     @language.Getkey("Habitaciones"):
@@ -141,15 +142,18 @@
 
     formulario.addEventListener("submit", (e) => {
         e.preventDefault()
-
+        const precioAlojamiento = parseFloat(document.getElementById("precioTotal").innerText);
         const diasFechaDesde = moment(inputFechaDesde.value).dayOfYear()
         const diasFechaHasta = moment(inputFechaHasta.value).dayOfYear()
+        const diasDeReserva = diasFechaHasta - diasFechaDesde
+        const precioTotal = precioAlojamiento * diasDeReserva
 
-        if ((diasFechaHasta - diasFechaDesde) <= 0) {
+        if (diasDeReserva <= 0) {
             alert('Fechas no validas, vuelva a intentarlo')
             formulario.reset()
         } else {
-            if (confirm("¿ Desea realizar la reserva ?")) {
+            const mensaje = `¿ Desea realizar la siguiente reserva ?\nDias: ${diasDeReserva}\nPrecio: ${precioTotal}`
+            if (confirm(mensaje)) {
                 formulario.submit()
             }
         }
