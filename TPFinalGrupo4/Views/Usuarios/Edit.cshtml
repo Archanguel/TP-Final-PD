@@ -15,22 +15,22 @@
             <input type="hidden" asp-for="Id" />
             <div class="form-group d-flex flex-column align-items-center mt-3">
                 <div class="form-group col-5 d-none">
-                    <label asp-for="Dni" class="control-label"></label>
+                    <label asp-for="Dni" class="control-label">@language.Getkey("Dni")</label>
                     <input asp-for="Dni" class="form-control" />
                     <span asp-validation-for="Dni" class="text-danger"></span>
                 </div>
                 <div class="form-group col-5">
-                    <label asp-for="Nombre" class="control-label"></label>
+                    <label asp-for="Nombre" class="control-label">@language.Getkey("Nombre")</label>
                     <input asp-for="Nombre" class="form-control" />
                     <span asp-validation-for="Nombre" class="text-danger"></span>
                 </div>
                 <div class="form-group col-5 d-none">
-                    <label asp-for="Email" class="control-label"></label>
+                    <label asp-for="Email" class="control-label">@language.Getkey("Email")</label>
                     <input asp-for="Email" class="form-control" />
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </div>
                 <div class="form-group col-5 d-none">
-                    <label asp-for="Password" class="control-label"></label>
+                    <label asp-for="Password" class="control-label">@language.Getkey("Contraseña")</label>
                     <input asp-for="Password" class="form-control" />
                     <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
@@ -39,18 +39,18 @@
 
                         <div class="form-group col-4 align-self-center">
                             <label class="form-check-label">
-                                <input class="form-check-input" asp-for="IsAdmin" /> @Html.DisplayNameFor(model => model.IsAdmin)
+                                <input class="form-check-input" asp-for="IsAdmin" /> @language.Getkey("¿Es Admin?")
                             </label>
                         </div>
                         <div class="form-group col-4 align-self-center">
                             <label class="form-check-label">
-                                <input class="form-check-input" asp-for="Bloqueado" /> @Html.DisplayNameFor(model => model.Bloqueado)
+                                <input class="form-check-input" asp-for="Bloqueado" /> @language.Getkey("Bloqueado")
                             </label>
                         </div>
                     </div>
                 </div>
                 <div class="form-group col-5">
-                    <label asp-for="Intentos" class="control-label"></label>
+                    <label asp-for="Intentos" class="control-label">@language.Getkey("Intentos")</label>
                     <input asp-for="Intentos" class="form-control" />
                     <span asp-validation-for="Intentos" class="text-danger"></span>
                 </div>

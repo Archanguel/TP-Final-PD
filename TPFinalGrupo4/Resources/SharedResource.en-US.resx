@@ -207,7 +207,7 @@
   <data name="Ingresa tu nuevo nombre" xml:space="preserve">
     <value>Enter your new name</value>
   </data>
-  <data name="Ingrese el precio minimo" xml:space="preserve">
+  <data name="Ingrese el precio mínimo" xml:space="preserve">
     <value>Enter the minimum price</value>
   </data>
   <data name="Lenguaje" xml:space="preserve">
@@ -275,5 +275,41 @@
   </data>
   <data name="Contraseña actual" xml:space="preserve">
     <value>Current password</value>
+  </data>
+  <data name="Bloqueado" xml:space="preserve">
+    <value>Blocked</value>
+  </data>
+  <data name="Borrar Reserva" xml:space="preserve">
+    <value>Delete Reservation</value>
+  </data>
+  <data name="Cabaña" xml:space="preserve">
+    <value>Cottage</value>
+  </data>
+  <data name="Crear Alojamiento" xml:space="preserve">
+    <value>Create Accommodation</value>
+  </data>
+  <data name="Detalles" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Editar Reserva" xml:space="preserve">
+    <value>Edit Reservation</value>
+  </data>
+  <data name="Hotel" xml:space="preserve">
+    <value>Hotel</value>
+  </data>
+  <data name="Ingrese una ciudad" xml:space="preserve">
+    <value>Log a city</value>
+  </data>
+  <data name="Intentos" xml:space="preserve">
+    <value>Attempts</value>
+  </data>
+  <data name="Todos" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="¿Es Admin?" xml:space="preserve">
+    <value>Is Admin?</value>
+  </data>
+  <data name="¿Está seguro de querer borrar esta reserva?" xml:space="preserve">
+    <value>Are you sure you want to delete this reservation?</value>
   </data>
 </root>
