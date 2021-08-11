@@ -5,9 +5,13 @@
 @inject UsuarioContext context
 
 <h1 class="text-center my-4">@language.Getkey("Alojamientos")</h1>
-<p>
+
+<hr />
+
+<p class="mt-3">
     <a asp-action="Create" class="btn btn-success btn-xs"><i class="fas fa-plus mr-2"></i>@language.Getkey("Agregar")</a>
 </p>
+
 
 <table class="table table-bordered table-responsive-lg table-striped table-sm mb-4">
     <thead>
@@ -39,7 +43,7 @@
             if (item.Ciudad == items.ID.ToString())
             {
 @items.Nombre}
-                }
+}
     </td>
     <td class="align-middle">
         @Html.DisplayFor(modelItem => item.Barrio)
@@ -72,6 +76,7 @@
         <a asp-action="Edit" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-warning btn-xs mr-1"><i class="fas fa-edit mr-2"></i>@language.Getkey("Editar")</a>
         <a asp-action="Delete" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-danger btn-xs ml-1"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</a>
     </td>
-</tr>}
+</tr>
+}
     </tbody>
 </table>

@@ -103,8 +103,7 @@ namespace TPFinalGrupo4.Controllers
                 usuario.Intentos = 0;
                 this._context.Update(usuario);
                 this._context.SaveChanges();
-                return Redirect("/Home");
-                //return Redirect("/Alojamientoes");
+                return Redirect("/Alojamientoes");
             }
             else
             {
@@ -114,7 +113,6 @@ namespace TPFinalGrupo4.Controllers
                 usuario.Intentos = 0;
                 this._context.Update(usuario);
                 this._context.SaveChanges();
-                //return Redirect("/Home");
                 return Redirect("/Alojamientoes/all");
             }
         }

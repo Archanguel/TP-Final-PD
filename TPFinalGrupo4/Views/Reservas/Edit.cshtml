@@ -5,10 +5,12 @@
 }
 @inject LanguageService language
 
-<h1>@language.Getkey("Editar Reserva")</h1>
+<div class="row justify-content-center align-items-center py-3">
+    <h1>@language.Getkey("Editar Reserva")</h1>
+</div>
 
 <hr />
-<div class="row">
+<div class="row justify-content-center pt-3">
     <div class="col-md-4">
         <form asp-action="Edit" id="formulario-editar-reserva">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -24,16 +26,15 @@
                 <input asp-for="FechaHasta" class="form-control" id="fechaHasta" type="date" max="2021-12-31" />
                 <span asp-validation-for="FechaHasta" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="@language.Getkey("Guardar")" class="btn btn-primary" />
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary mr-3"><i class="fas fa-save mr-2"></i>@language.Getkey("Guardar")</button>
+                <a asp-action="Index">@language.Getkey("Volver")</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">@language.Getkey("Volver")</a>
-</div>
+
 
 <script type="text/javascript">
 
