@@ -5,6 +5,20 @@
 }
 @inject LanguageService language
 
+
+@if (ViewData["message"] != null)
+{
+    <!-- Mensaje al usuario -->
+    <div class="alert alert-danger" role="alert" id="alert-message-permisos">
+        <strong>@ViewData["message"]</strong>
+    </div>
+    <script type="text/javascript">
+        setTimeout(() => {
+            document.getElementById("alert-message-permisos").remove()
+        }, 4000)
+    </script>
+}
+
 <div class="row pt-4">
     <div class="col-12">
         <h1 class="text-center">@language.Getkey("Alojamientos")</h1>

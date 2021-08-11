@@ -25,6 +25,9 @@ namespace TPFinalGrupo4.Models
         // GET: Alojamientoes
         public async Task<IActionResult> Index(String searchCiudad, String searchTipo)
         {
+            if (!this._context.Usuario.Find(int.Parse(User.Identity.Name)).IsAdmin)
+                return Redirect("/Alojamientoes/all?message=No-tenes-permiso-de-administrador");
+
             var alojamiento = from a in _context.Alojamiento select a;
 
             if (!String.IsNullOrEmpty(searchCiudad))
@@ -44,8 +47,13 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Alojamientoes
-        public async Task<IActionResult> all(int? precio, String? estrellas, String? cantidadDePersonas)
+        public async Task<IActionResult> all(int? precio, String? estrellas, String? cantidadDePersonas, String? message)
         {
+            ViewData["message"] = null;
+            if (message != null)
+                ViewData["message"] = message.Replace("-", " ");
+
+
             var alojamientos = from alojamiento in this._context.Alojamiento
                                select alojamiento;
        
