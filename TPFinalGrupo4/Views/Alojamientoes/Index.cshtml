@@ -4,6 +4,7 @@
     ViewData["Title"] = "Index";
 }
 @inject LanguageService language
+@inject UsuarioContext context
 
 <h1 class=" display-4 text-center">@language.Getkey("Alojamientos")</h1>
 <p>
@@ -35,7 +36,14 @@
                     @Html.DisplayFor(modelItem => item.Codigo)
                 </td>
                 <td class="align-middle">
-                    @Html.DisplayFor(modelItem => item.Ciudad)
+                    <!--Html.DisplayFor(modelItem => item.Ciudad)-->
+                    @foreach (var items in context.Ciudad)
+                    {
+                        if (item.Ciudad == items.ID.ToString())
+                        {
+                            @items.Nombre
+                        }
+                    }
                 </td>
                 <td class="align-middle">
                     @Html.DisplayFor(modelItem => item.Barrio)
