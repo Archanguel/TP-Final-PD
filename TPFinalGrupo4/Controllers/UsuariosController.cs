@@ -233,9 +233,13 @@ namespace TPFinalGrupo4.Models
         [HttpPost("MisDatos")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MisDatos(Usuario usuario, String nombreNuevo, String emailNuevo)
+        public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni)
         {
-            String contra = usuario.Password;
+            var usuarioActual = this._context.Usuario.Where(user => user.Dni == Dni).FirstOrDefault();
+
+            if (Utils.Encriptar(contraseñaActual).Equals(usuarioActual.Password))
+            {
+
             if (int.Parse(User.Identity.Name) != usuario.Id)
             {
                 _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
@@ -243,27 +247,39 @@ namespace TPFinalGrupo4.Models
                 return NotFound();
             }
 
-            if(nombreNuevo != null)
+            if(Nombre != null)
             {
-                usuario.Nombre = emailNuevo;
-                _context.Update(usuario);
-                await _context.SaveChangesAsync();
+              try
+              {
+                        usuarioActual.Nombre = Nombre;
+                  _context.Update(usuarioActual);
+                  await _context.SaveChangesAsync();
+
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UsuarioExists(usuario.Id))
+                    {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
 
-            if(nombreNuevo != null)
+            if(Email != null)
             {
-                usuario.Nombre = nombreNuevo;
-                _context.Update(usuario);
-                await _context.SaveChangesAsync();
-            }
 
+                
 
-            if (ModelState.IsValid)
-            {
                 try
                 {
-                    usuario.Password = Utils.Encriptar(usuario.Password);
-                    _context.Update(usuario);
+                        usuarioActual.Email = Email;
+                    _context.Update(usuarioActual);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -279,12 +295,32 @@ namespace TPFinalGrupo4.Models
                         throw;
                     }
                 }
-                _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                _soundPlayer.Play();
-                return RedirectToAction(nameof(MisDatos));
             }
-            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-            _soundPlayer.Play();
+
+            if (usuario.Password != null)
+            {
+                try
+                {
+                    usuarioActual.Password = Utils.Encriptar(usuario.Password);
+                    _context.Update(usuarioActual);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!UsuarioExists(usuario.Id))
+                    {
+                        _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                        _soundPlayer.Play();
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+            }
+            }
+         
             return View(usuario);
         }
 
