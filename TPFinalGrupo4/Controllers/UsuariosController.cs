@@ -233,7 +233,7 @@ namespace TPFinalGrupo4.Models
         [HttpPost("MisDatos")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni)
+        public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni, String? message)
         {
             var usuarioActual = this._context.Usuario.Where(user => user.Dni == Dni).FirstOrDefault();
 
@@ -319,6 +319,11 @@ namespace TPFinalGrupo4.Models
                     }
                 }
             }
+            } else
+            {
+                _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                _soundPlayer.Play();
+                return Redirect("MisDatos?message=Contraseña-incorrecta");
             }
             // return redirect("Usuarios/MisDatos?message=asd-as-asd-asd-asd-";
             return View(usuario);
