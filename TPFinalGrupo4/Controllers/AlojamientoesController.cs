@@ -94,11 +94,20 @@ namespace TPFinalGrupo4.Models
         {
             if (ModelState.IsValid)
             {
+                if (_context.Alojamiento.Any(x => String.Equals(x.Codigo, alojamiento.Codigo, StringComparison.InvariantCultureIgnoreCase)))
+                {
+                    _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+                    _soundPlayer.Play();
+                    ModelState.AddModelError("Dni", "Dni ya registrado");
+                }
+                else
+                {
                     _context.Add(alojamiento);
                     await _context.SaveChangesAsync();
                     _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                     _soundPlayer.Play();
                     return RedirectToAction(nameof(Index));
+                }
             }
             _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
             _soundPlayer.Play();

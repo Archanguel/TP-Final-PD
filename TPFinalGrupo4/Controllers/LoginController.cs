@@ -38,7 +38,7 @@ namespace TPFinalGrupo4.Controllers
         public async Task<ActionResult> LoginAsync(int dni, String password)
         {
             // Validar el DNI
-            var usuario = this._context.Usuario.Where(user => user.Dni == dni).First();
+            var usuario = this._context.Usuario.Where(user => user.Dni == dni).FirstOrDefault();
             var passwordEncriptada = Utils.Encriptar(password);
 
             // Valido el DNI
