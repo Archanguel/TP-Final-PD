@@ -1,0 +1,70 @@
+﻿@model TPFinalGrupo4.Models.Reserva
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@inject LanguageService language
+
+<div class="row justify-content-center align-items-center py-3">
+    <h1>@language.Getkey("Editar Reserva")</h1>
+</div>
+
+<hr />
+<div class="row justify-content-center pt-3">
+    <div class="col-md-4">
+        <form asp-action="Edit" id="formulario-editar-reserva">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="reserva_id" value='@ViewData["reserva_id"]' />
+            <input type="hidden" name="alojamiento_id" value='@ViewData["alojamiento_id"]' />
+            <div class="form-group">
+                <label asp-for="FechaDesde" class="control-label">@language.Getkey("Fecha Desde")</label>
+                <input asp-for="FechaDesde" class="form-control" id="fechaDesde" type="date" max="2021-12-31" />
+                <span asp-validation-for="FechaDesde" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaHasta" class="control-label">@language.Getkey("Fecha Hasta")</label>
+                <input asp-for="FechaHasta" class="form-control" id="fechaHasta" type="date" max="2021-12-31" />
+                <span asp-validation-for="FechaHasta" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-4">
+                <button type="submit" class="btn btn-primary mr-3"><i class="fas fa-save mr-2"></i>@language.Getkey("Guardar")</button>
+                <a asp-action="Index">@language.Getkey("Volver")</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+
+    // Fecha actual
+    const hoy = moment(new Date()).format('YYYY-MM-DD')
+
+    // Formulario
+    const formulario = document.getElementById("formulario-editar-reserva");
+    const inputFechaDesde = document.getElementById("fechaDesde")
+    const inputFechaHasta = document.getElementById("fechaHasta")
+    inputFechaDesde.min = hoy
+    inputFechaHasta.min = hoy
+
+    formulario.addEventListener("submit", (e) => {
+        e.preventDefault()
+
+        const diasFechaDesde = moment(inputFechaDesde.value).dayOfYear()
+        const diasFechaHasta = moment(inputFechaHasta.value).dayOfYear()
+
+        if ((diasFechaHasta - diasFechaDesde) <= 0) {
+            alert('Fechas no validas, vuelva a intentarlo')
+            formulario.reset()
+        } else {
+            if (confirm("¿ Desea editar la reserva ?")) {
+                formulario.submit()
+            }
+        }
+    })
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

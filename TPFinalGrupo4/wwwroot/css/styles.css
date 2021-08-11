@@ -1,0 +1,191 @@
+﻿body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+}
+
+/* TABLA */
+
+.page-header {
+    text-align: center;
+}
+
+table, td {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* LOGIN */
+
+.box {
+    width: 450px;
+    height: 500px;
+    padding: 100px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 30px;
+}
+
+    .box h1 {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .box input[type = "dni"], .box input[type = "password"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+
+        .box input[type = "dni"]:focus, .box input[type = "password"]:focus {
+            width: 250px;
+            border-color: #2ecc71;
+        }
+
+    .box button[type = "submit"] {
+        background: none;
+        display: block;
+        margin: 20px auto;
+        margin-bottom: 5px;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 10px 30px;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+
+        .box button[type = "submit"]:hover {
+            background: #2ecc71;
+        }
+
+.avatar {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -60px;
+    left: calc(50% - 50px);
+}
+
+.imagenAlojamientos {
+    width: 100%;
+    height: auto;
+}
+
+/* REGISTER */
+.btn-registrar {
+    background: none;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+.btn-registrar:hover {
+    background: #2ecc71;
+}
+
+.box2 {
+    width: 450px;
+    height: 500px;
+    /*padding: 100px;*/
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    background: #191919;
+    text-align: center;
+    border-radius: 30px;
+}
+
+    .box2 h1 {
+        color: white;
+        text-transform: uppercase;
+        font-weight: 500;
+    }
+
+    .box2 input[type = "dni"], .box2 input[type = "nombre"], .box2 input[type = "email"], .box2 input[type = "password"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #3498db;
+        padding: 14px 10px;
+        width: 200px;
+        outline: none;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+    }
+
+        .box2 input[type = "dni"]:focus, .box2 input[type = "nombre"]:focus, .box2 input[type = "email"]:focus, .box2 input[type = "password"]:focus {
+            width: 250px;
+            border-color: #2ecc71;
+        }
+
+    .box2 input[type = "submit"] {
+        border: 0;
+        background: none;
+        display: block;
+        margin: 20px auto;
+        text-align: center;
+        border: 2px solid #2ecc71;
+        padding: 10px 30px;
+        color: white;
+        border-radius: 24px;
+        transition: 0.25s;
+        cursor: pointer;
+    }
+
+        .box2 input[type = "submit"]:hover {
+            background: #2ecc71;
+        }
+
+.avatar2 {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -60px;
+    left: calc(50% - 50px);
+}
+
+.btn-login-in-register {
+    background: none;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.btn-login-in-register:hover {
+    background: #2ecc71;
+}
+
+/* IMAGEN ALOJAMIENTO - Cliente */
+.image-alojamiento-all{
+    width: 100%;
+    height: 200px;
+}

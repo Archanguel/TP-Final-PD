@@ -1,0 +1,87 @@
+﻿@model TPFinalGrupo4.Models.Alojamiento
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@inject LanguageService language
+
+<h1 class="text-center">@language.Getkey("Borrar Alojamiento")</h1>
+
+<h3 class="text-center">@language.Getkey("¿Está seguro de querer borrar este alojamiento?")</h3>
+<hr class="my-4" />
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @language.Getkey("Codigo")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Codigo)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Ciudad")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ciudad)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Barrio")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Barrio)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Estrellas")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Estrellas)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Cantidad de Personas")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CantidadDePersonas)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Tv")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tv)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Tipo")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Precio por Persona")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrecioPorPersona)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Precio por Dia")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PrecioPorDia)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Habitaciones")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Habitaciones)
+        </dd>
+        <dt class="col-sm-2">
+            @language.Getkey("Baños")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Banios)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</button>
+        <a asp-action="Index" class="btn btn-primary">@language.Getkey("Volver")</a>
+    </form>
+</div>

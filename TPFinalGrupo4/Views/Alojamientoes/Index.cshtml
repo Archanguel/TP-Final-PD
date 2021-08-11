@@ -1,0 +1,82 @@
+﻿@model IEnumerable<TPFinalGrupo4.Models.Alojamiento>
+
+@{ ViewData["Title"] = "Index"; }
+@inject LanguageService language
+@inject UsuarioContext context
+
+<h1 class="text-center my-4">@language.Getkey("Alojamientos")</h1>
+
+<hr />
+
+<p class="mt-3">
+    <a asp-action="Create" class="btn btn-success btn-xs"><i class="fas fa-plus mr-2"></i>@language.Getkey("Agregar")</a>
+</p>
+
+
+<table class="table table-bordered table-responsive-lg table-striped table-sm mb-4">
+    <thead>
+        <tr class="text-center">
+            <th>@language.Getkey("Codigo")</th>
+            <th>@language.Getkey("Ciudad")</th>
+            <th>@language.Getkey("Barrio")</th>
+            <th>@language.Getkey("Estrellas")</th>
+            <th>@language.Getkey("Cantidad de Personas")</th>
+            <th>@language.Getkey("Tv")</th>
+            <th>@language.Getkey("Tipo")</th>
+            <th>@language.Getkey("Precio por Persona")</th>
+            <th>@language.Getkey("Precio por Dia")</th>
+            <th>@language.Getkey("Habitaciones")</th>
+            <th>@language.Getkey("Baños")</th>
+            <th>@language.Getkey("Acciones")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr class="text-center">
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Codigo)
+    </td>
+    <td class="align-middle">
+        @foreach (var items in context.Ciudad)
+        {
+            if (item.Ciudad == items.ID.ToString())
+            {
+@items.Nombre}
+}
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Barrio)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Estrellas)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.CantidadDePersonas)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Tv)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Tipo)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.PrecioPorPersona)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.PrecioPorDia)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Habitaciones)
+    </td>
+    <td class="align-middle">
+        @Html.DisplayFor(modelItem => item.Banios)
+    </td>
+    <td class="d-flex justify-content-around align-content-center">
+        <a asp-action="Edit" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-warning btn-xs mr-1"><i class="fas fa-edit mr-2"></i>@language.Getkey("Editar")</a>
+        <a asp-action="Delete" asp-route-id="@item.Id" class="d-flex justify-content-center align-items-center btn btn-danger btn-xs ml-1"><i class="fas fa-trash-alt mr-2"></i>@language.Getkey("Borrar")</a>
+    </td>
+</tr>
+}
+    </tbody>
+</table>
