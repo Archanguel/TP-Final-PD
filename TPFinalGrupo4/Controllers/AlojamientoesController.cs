@@ -294,25 +294,6 @@ namespace TPFinalGrupo4.Models
 
             return View(alojamientosEncontrados);
         }  
-        public async Task<IActionResult> BuscadorFecha(DateTime fechaDesde, DateTime fechaHasta)
-        {
-            var alojamiento = from a in _context.Alojamiento select a;
-
-            var reservas = from r in _context.Reserva select r;
-            foreach (var item in alojamiento)
-            {
-                //foreach(var res in reservas)
-                //{
-                //    bool validarFechaDesde = DateTime.Compare(res.FechaDesde, fechaDesde) == 1 && DateTime.Compare(res.FechaDesde, fechaHasta) == 1;
-                //    bool validarFechaHasta = DateTime.Compare(res.FechaHasta, fechaDesde) == -1 && DateTime.Compare(res.FechaHasta, fechaDesde) == -1;
-                //    if (!validarFechaDesde && !validarFechaHasta)
-                //    {
-                //        alojamiento.Except((IEnumerable<Alojamiento>)item);
-                //    }
-                //}             
-            }
-            return View(await alojamiento.ToListAsync());
-        }
 
         public async Task<IActionResult> Reservar(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
         {
