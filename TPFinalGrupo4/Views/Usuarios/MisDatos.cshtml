@@ -19,9 +19,9 @@
                 <input type="hidden" asp-for="Id" />
                 <div class="form-group row">
                     <div class="form-group col-4 ">
-                        <label asp-for="Dni" class="control-label">Ingresa tu DNI</label>
-                        <input asp-for="Dni" class="form-control" />
-                        <span asp-validation-for="Dni" class="text-danger"></span>
+                        <label asp-for="Dni" class="control-label">Tu DNI es</label>
+                        <input asp-for="Dni" class="form-control" readonly />
+                        <span asp-validation-for="Dni"class="text-danger"></span>
                     </div>
                     <div class="form-group col-4 ">
                         <label asp-for="Nombre" class="control-label">Ingresa tu nuevo nombre</label>
@@ -35,13 +35,15 @@
                     </div>
                     <div class="form-group col-6">
                         <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
-                        <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" value="user.password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
+                    </div>
+                    <div class="form-group col-6">
+                        <label class="control-label">@language.Getkey("Contraseña actual")</label>
+                        <input type="password" asp-for="Password" id="password1" name="contraseñaActual" class="form-control" placeholder="********" />
                     </div>
                     <div class="form-group col-6">
                         <label class="control-label">@language.Getkey("Repetir Contraseña")</label>
-                        <input type="password" class="form-control" id="password2" placeholder="********" value="user.password" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
+                        <input type="password" class="form-control" id="password2" placeholder="********" />
                     </div>
                     <div class="form-group col-2 align-self-center d-none">
                         <label class="form-check-label">
