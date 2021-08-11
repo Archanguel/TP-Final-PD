@@ -102,8 +102,13 @@ namespace TPFinalGrupo4.Models
 
         // GET: Alojamientoes/Create
 
-        public IActionResult Create()
-        {
+        public IActionResult Create(String? message)
+        {        
+            ViewData["message"] = null;
+            if (message != null)
+            {
+                ViewData["message"] = message.Replace("-", " ");
+            }
             return View();
         }
 
@@ -133,7 +138,7 @@ namespace TPFinalGrupo4.Models
             }
             _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
             _soundPlayer.Play();
-            return View(alojamiento);
+            return Redirect("/Alojamientoes/Create?message=El-codigo-ingresado-ya-existe");
         }
 
         // GET: Alojamientoes/Edit/5

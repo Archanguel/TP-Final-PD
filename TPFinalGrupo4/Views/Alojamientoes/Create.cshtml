@@ -4,7 +4,20 @@
     ViewData["Title"] = "Create";
 }
 @inject LanguageService language
-@inject UsuarioContext context 
+@inject UsuarioContext context
+
+@if (ViewData["message"] != null)
+{
+    <!-- Mensaje al usuario -->
+    <div class="alert alert-danger" role="alert" id="Codigo-incorrecto">
+        <strong>@ViewData["message"]</strong>
+    </div>
+    <script type="text/javascript">
+        setTimeout(() => {
+            document.getElementById("Codigo-incorrecto").remove()
+        }, 4000)
+    </script>
+}
 
 <h1 class="text-center">@language.Getkey("Crear Alojamiento")</h1>
 
@@ -47,8 +60,8 @@
                 </div>
                 <div class="form-group col-3">
                     <label asp-for="CantidadDePersonas" class="control-label">@language.Getkey("Cantidad de Personas")</label>
-                    <select asp-for="CantidadDePersonas" class="form-control" >
-                        @for (int i=1; i<=10;i++)
+                    <select asp-for="CantidadDePersonas" class="form-control">
+                        @for (int i = 1; i <= 10; i++)
                         {
                             <option value="@i">@i</option>
                         }
