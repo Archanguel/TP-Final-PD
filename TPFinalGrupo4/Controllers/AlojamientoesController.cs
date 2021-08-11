@@ -56,8 +56,21 @@ namespace TPFinalGrupo4.Models
                     .Where(al => al.Estrellas >= int.Parse(estrellas))
                     .Where(al => al.CantidadDePersonas >= int.Parse(cantidadDePersonas));
             }
-       
-            return View(alojamientos.ToList());
+
+            // Ciudades
+            var ciudades = this._context.Ciudad.ToList();
+
+            // Todos los alojamientos o alojamientos filtrados
+            var alojamientosParaVistas = new List<Alojamiento>();
+
+            // Agrego el nombre de la ciudad 
+            foreach (var alojamiento in await alojamientos.ToListAsync())
+            {
+                alojamiento.Ciudad = ciudades.First(c => c.Codigo == alojamiento.Ciudad).Nombre;
+                alojamientosParaVistas.Add(alojamiento);
+            }
+
+            return View(alojamientosParaVistas);
         }
 
         // GET: Alojamientoes/Details/5
@@ -222,9 +235,19 @@ namespace TPFinalGrupo4.Models
             var alojamientos = from alojamiento in this._context.Alojamiento
                                select alojamiento;
 
-            // Busco por ciudad
+            // Buscar por ciudad
             if(ciudad != null)
-                alojamientos = alojamientos.Where(al => al.Ciudad.Contains(ciudad));
+            {
+                // Ciudades que coinciden
+                var ciudades = this._context.Ciudad.Where(c => c.Nombre.ToUpper().Contains(ciudad.ToUpper())).Select(c => c.Codigo).ToList();
+
+                // Si no encontro ciudades devuelvo una lista vacia
+                if( ciudades.Count == 0)
+                {
+                    return View(await this._context.Alojamiento.Where(a => 1 == 0).ToListAsync());
+                }
+                alojamientos = alojamientos.Where(al => ciudades.Contains(al.Ciudad));
+            }
             
             // Filtro por tipo de alojamiento
             if (tipoDeAlojamiento != "Todos")
