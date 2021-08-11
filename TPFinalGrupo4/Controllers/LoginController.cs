@@ -71,6 +71,9 @@ namespace TPFinalGrupo4.Controllers
 
                 this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
                 this._soundPlayer.Play();
+                usuario.Intentos = 0;
+                this._context.Update(usuario);
+                this._context.SaveChanges();
                 return Redirect("/Login?message=La-clave-ingresada-es-incorrecta");
             }
 
@@ -99,6 +102,9 @@ namespace TPFinalGrupo4.Controllers
                 // ADMIN
                 _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
+                usuario.Intentos = 0;
+                this._context.Update(usuario);
+                this._context.SaveChanges();
                 return Redirect("/Home");
                 //return Redirect("/Alojamientoes");
             }
@@ -107,6 +113,9 @@ namespace TPFinalGrupo4.Controllers
                 // USUARIO CLIENTE
                 _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
+                usuario.Intentos = 0;
+                this._context.Update(usuario);
+                this._context.SaveChanges();
                 //return Redirect("/Home");
                 return Redirect("/Alojamientoes/all");
             }
