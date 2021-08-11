@@ -47,6 +47,7 @@ namespace TPFinalGrupo4.Models
         }
 
         // GET: Alojamientoes
+        [Authorize(Roles = "User")]
         public async Task<IActionResult> all(int? precio, String? estrellas, String? cantidadDePersonas, String? message)
         {
             ViewData["message"] = null;

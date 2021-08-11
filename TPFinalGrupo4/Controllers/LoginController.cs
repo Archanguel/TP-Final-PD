@@ -99,15 +99,13 @@ namespace TPFinalGrupo4.Controllers
                 // ADMIN
                 _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
-                return Redirect("/Home");
-                //return Redirect("/Alojamientoes");
+                return Redirect("/Alojamientoes");
             }
             else
             {
                 // USUARIO CLIENTE
                 _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
                 _soundPlayer.Play();
-                //return Redirect("/Home");
                 return Redirect("/Alojamientoes/all");
             }
         }
