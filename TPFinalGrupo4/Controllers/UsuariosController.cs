@@ -219,12 +219,17 @@ namespace TPFinalGrupo4.Models
         }*/
         [Authorize]
         [HttpGet("MisDatos")]
-        public async Task<IActionResult> MisDatos()
+        public async Task<IActionResult> MisDatos(String? message)
         {
             var usuario = await _context.Usuario.FindAsync(int.Parse(User.Identity.Name));
             if (usuario == null)
             {
                 return NotFound();
+            }
+            ViewData["message"] = null;
+            if(message != null)
+            {
+                ViewData["message"] = message.Replace("-"," ");
             }
             return View(usuario);
         }
