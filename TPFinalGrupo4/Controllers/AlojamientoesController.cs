@@ -258,6 +258,23 @@ namespace TPFinalGrupo4.Models
                 if (this.DisponibilidadPorFechas(alojamiento.Id, (DateTime)fechaDesde, (DateTime)fechaHasta))
                     alojamientosEncontrados.Add(alojamiento);
             }
+
+            if (alojamientosEncontrados.Count != 0)
+            {
+                // Ciudades
+                var ciudades = this._context.Ciudad.ToList();
+
+                // Todos los alojamientos o alojamientos filtrados
+                var alojamientosParaVistas = new List<Alojamiento>();
+
+                // Agrego el nombre de la ciudad 
+                foreach (var alojamiento in await alojamientos.ToListAsync())
+                {
+                    alojamiento.Ciudad = ciudades.First(c => c.Codigo == alojamiento.Ciudad).Nombre;
+                    alojamientosParaVistas.Add(alojamiento);
+                }
+                alojamientosEncontrados = alojamientosParaVistas;
+            }
             ViewData["fechaDesde"] = ((DateTime)fechaDesde).ToString();
             ViewData["fechaHasta"] = ((DateTime)fechaHasta).ToString();
 
