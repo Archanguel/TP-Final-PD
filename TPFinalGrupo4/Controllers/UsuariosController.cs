@@ -233,7 +233,7 @@ namespace TPFinalGrupo4.Models
         [HttpPost("CambiarContrasena")]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CambiarContrasena(Usuario usuario)
+        public async Task<IActionResult> CambiarContrasena(Usuario usuario, String nombreNuevo, String emailNuevo)
         {
             if (int.Parse(User.Identity.Name) != usuario.Id)
             {
@@ -241,6 +241,21 @@ namespace TPFinalGrupo4.Models
                 _soundPlayer.Play();
                 return NotFound();
             }
+
+            if(nombreNuevo != null)
+            {
+                usuario.Nombre = emailNuevo;
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+
+            if(nombreNuevo != null)
+            {
+                usuario.Nombre = nombreNuevo;
+                _context.Update(usuario);
+                await _context.SaveChangesAsync();
+            }
+
 
             if (ModelState.IsValid)
             {
