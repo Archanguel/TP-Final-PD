@@ -34,12 +34,12 @@
                         <span asp-validation-for="Email" name="emailNuevo" class="text-danger"></span>
                     </div>
                     <div class="form-group col-6">
-                        <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
-                        <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
-                    </div>
-                    <div class="form-group col-6">
                         <label class="control-label">@language.Getkey("Contraseña actual")</label>
                         <input type="password" asp-for="Password" id="password1" name="contraseñaActual" class="form-control" placeholder="********" />
+                    </div>
+                    <div class="form-group col-6">
+                        <label asp-for="Password" class="control-label">@language.Getkey("Nueva Contraseña")</label>
+                        <input type="password" asp-for="Password" id="password1" class="form-control" placeholder="********" />
                     </div>
                     <div class="form-group col-6">
                         <label class="control-label">@language.Getkey("Repetir Contraseña")</label>

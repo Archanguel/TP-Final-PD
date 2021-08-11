@@ -237,7 +237,7 @@ namespace TPFinalGrupo4.Models
         {
             var usuarioActual = this._context.Usuario.Where(user => user.Dni == Dni).FirstOrDefault();
 
-            if (Utils.Encriptar(contraseñaActual).Equals(usuarioActual.Password))
+            if (contraseñaActual != null && Utils.Encriptar(contraseñaActual).Equals(usuarioActual.Password))
             {
 
             if (int.Parse(User.Identity.Name) != usuario.Id)
