@@ -117,7 +117,7 @@ namespace TPFinalGrupo4.Models
             int dias_reservados = (fechaHasta - fechaDesde).Days;
 
             double precio = dias_reservados * alojamiento.PrecioPorDia;
-            if (alojamiento.Tipo == "hotel")
+            if (alojamiento.Tipo == "Hotel")
                 precio = dias_reservados * alojamiento.CantidadDePersonas * alojamiento.PrecioPorPersona;
 
             var reserva = new Reserva
@@ -226,7 +226,14 @@ namespace TPFinalGrupo4.Models
             await _context.SaveChangesAsync();
             _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
             _soundPlayer.Play();
-            return RedirectToAction(nameof(List));
+            if (User.IsInRole("Admin"))
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(List));
+            }
         }
 
         private bool ReservaExists(int id)
