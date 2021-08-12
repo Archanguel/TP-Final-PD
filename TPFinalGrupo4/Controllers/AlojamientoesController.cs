@@ -294,6 +294,7 @@ namespace TPFinalGrupo4.Models
 
             return View(alojamientosEncontrados);
         }  
+
         public async Task<IActionResult> Reservar(DateTime fechaDesde, DateTime fechaHasta, int id_alojamiento)
         {
             if (!this.DisponibilidadPorFechas(id_alojamiento, fechaDesde, fechaHasta))

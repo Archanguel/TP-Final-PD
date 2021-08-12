@@ -229,7 +229,7 @@ namespace TPFinalGrupo4.Models
             ViewData["message"] = null;
             if(message != null)
             {
-                ViewData["message"] = message.Replace("-"," ");
+                ViewData["message"] = message.Replace("-"," ");              
             }
             return View(usuario);
         }
@@ -241,6 +241,7 @@ namespace TPFinalGrupo4.Models
         public async Task<IActionResult> MisDatos(Usuario usuario, String Nombre, String Email, String contraseñaActual, int Dni)
         {
             var usuarioActual = this._context.Usuario.Where(user => user.Dni == Dni).FirstOrDefault();
+            String cambios = "MisDatos?message=";
 
             if (contraseñaActual != null && Utils.Encriptar(contraseñaActual).Equals(usuarioActual.Password))
             {
@@ -252,17 +253,18 @@ namespace TPFinalGrupo4.Models
                 return NotFound();
             }
 
-            if(Nombre != null)
+            if(Nombre != null && Nombre != usuarioActual.Nombre)
             {
               try
               {
                         usuarioActual.Nombre = Nombre;
                   _context.Update(usuarioActual);
                   await _context.SaveChangesAsync();
+                        cambios = cambios + "Nombre-cambiado-con-exito";
 
-                }
+              }
                 catch (DbUpdateConcurrencyException)
-                {
+              {
                     if (!UsuarioExists(usuario.Id))
                     {
                         _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
@@ -273,19 +275,28 @@ namespace TPFinalGrupo4.Models
                     {
                         throw;
                     }
-                }
+              }
             }
 
-            if(Email != null)
-            {
-
+            if(Email != null && Email != usuarioActual.Email)
+                {
+                
                 
 
                 try
                 {
-                        usuarioActual.Email = Email;
+                    usuarioActual.Email = Email;
                     _context.Update(usuarioActual);
-                    await _context.SaveChangesAsync();
+                        try
+                        {
+                            await _context.SaveChangesAsync();
+                            cambios = cambios + "-Email-cambiado-con-exito";
+                        }
+                        catch
+                        {                        
+                            _context.Dispose();
+                            return Redirect("MisDatos?message=Email-ya-registrado");
+                        }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -306,10 +317,12 @@ namespace TPFinalGrupo4.Models
             {
                 try
                 {
+               
                     usuarioActual.Password = Utils.Encriptar(usuario.Password);
                     _context.Update(usuarioActual);
                     await _context.SaveChangesAsync();
-                }
+                        cambios = cambios + "-Contraseña-cambiada-con-exito";
+                    }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!UsuarioExists(usuario.Id))
@@ -331,7 +344,7 @@ namespace TPFinalGrupo4.Models
                 return Redirect("MisDatos?message=Contrasenia-incorrecta");
             }
             // return redirect("Usuarios/MisDatos?message=asd-as-asd-asd-asd-";
-            return View(usuario);
+            return Redirect(cambios);
         }
 
     }
