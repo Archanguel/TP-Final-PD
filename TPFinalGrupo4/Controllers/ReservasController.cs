@@ -226,7 +226,7 @@ namespace TPFinalGrupo4.Models
             await _context.SaveChangesAsync();
             _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
             _soundPlayer.Play();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(List));
         }
 
         private bool ReservaExists(int id)
