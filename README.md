@@ -117,6 +117,18 @@ Aparecen todos los usuarios registrados en la aplicación y tendremos las mismas
 
 En la opción **Modificar**, en este caso, podremos cambiar todos los datos y a su vez se podrá realizar el cambio de tipo de usuario de Usuario común a Usuario administrador, además, desde esta opción es donde se podrá realizar el desbloqueo de los usuarios que hayan sido bloqueados por haberse logeado de manera incorrecta más de 3 veces seguidas.
 
+---
+
+## Extras Realizados
+
+* Agregamos fotos a los alojamientos para vizualizar los resultados de la busqueda para Cabañas o Hoteles.
+* Manejo de Multilenguaje.
+* Login con manejo de cookes de sesión y encriptado de contraseñas a nivel base de datos
+* Mejoras a nivel visual (Uso de Bootstrap + FontAwesome)
+* Agregamos Sonidos de confirmacion y error.
+* Validacion de Tiempo de sesión con las propiedades de Autenticación
+
+---
 ## Screenshots
 
 ### Login Admin / User
