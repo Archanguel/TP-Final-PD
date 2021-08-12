@@ -129,15 +129,26 @@ namespace TPFinalGrupo4.Models
                 }
                 else
                 {
-                    _context.Add(alojamiento);
-                    await _context.SaveChangesAsync();
-                    _soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
-                    _soundPlayer.Play();
+                    if (alojamiento.Tipo == "Hotel")
+                    {
+                        alojamiento.PrecioPorDia = 0;
+                        alojamiento.Habitaciones = 0;
+                        alojamiento.Banios = 0;
+                    }
+                    else
+                    {
+                        alojamiento.PrecioPorPersona = 0;
+                    }
+
+                    this._context.Add(alojamiento);
+                    await this._context.SaveChangesAsync();
+                    this._soundPlayer = new SoundPlayer("Resources/SuccessSound.wav");
+                    this._soundPlayer.Play();
                     return RedirectToAction(nameof(Index));
                 }
             }
-            _soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
-            _soundPlayer.Play();
+            this._soundPlayer = new SoundPlayer("Resources/ErrorSound.wav");
+            this._soundPlayer.Play();
             return Redirect("/Alojamientoes/Create?message=El-codigo-ingresado-ya-existe");
         }
 
