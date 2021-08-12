@@ -47,6 +47,13 @@ namespace TPFinalGrupo4.Data
                 alojamiento.Property(a => a.Barrio).HasColumnType("varchar(50)").IsRequired(true);
                 alojamiento.Property(a => a.Tipo).HasColumnType("varchar(10)").IsRequired(true);
             });
+            modelBuilder.Entity<Ciudad>(ciudad =>
+            {
+                ciudad.Property(c => c.Nombre).HasColumnType("varchar(80)").IsRequired(true);
+                ciudad.Property(c => c.Provincia).HasColumnType("varchar(80)").IsRequired(true);
+                ciudad.Property(c => c.Pais).HasColumnType("varchar(80)").IsRequired(true);
+            });
+            
             modelBuilder.Entity<Usuario>().HasData(new Usuario[]{
                 new Usuario{Id=1, Dni = 1234, Nombre = "admin", Email = "admin@admin.com", Password = Utils.Encriptar("1234"), IsAdmin=true, Bloqueado=false, Intentos=0},
                 new Usuario{Id=2, Dni = 12312312, Nombre = "prueba1", Email = "prueba1@gmail.com", Password = Utils.Encriptar("1234"), IsAdmin=false, Bloqueado=false, Intentos=0},
@@ -102,12 +109,43 @@ namespace TPFinalGrupo4.Data
                     Habitaciones = 1,
                     Banios = 1
                 },
-            });
-            modelBuilder.Entity<Ciudad>(ciudad =>
-            {
-                ciudad.Property(c => c.Nombre).HasColumnType("varchar(80)").IsRequired(true);
-                ciudad.Property(c => c.Provincia).HasColumnType("varchar(80)").IsRequired(true);
-                ciudad.Property(c => c.Pais).HasColumnType("varchar(80)").IsRequired(true);
+                new Alojamiento{
+                    Id=5,
+                    Codigo="523412",
+                    Ciudad="3",
+                    Barrio="Sur",
+                    Estrellas=3,
+                    CantidadDePersonas=4,
+                    Tv = true,
+                    Tipo="Cabaña" ,
+                    PrecioPorDia = 3100,
+                    Habitaciones = 1,
+                    Banios = 1
+                },
+                new Alojamiento{
+                    Id=6,
+                    Codigo="678677",
+                    Ciudad="2",
+                    Barrio="Centro",
+                    Estrellas=4,
+                    CantidadDePersonas=6,
+                    Tv = true,
+                    Tipo="Cabaña" ,
+                    PrecioPorDia = 3600,
+                    Habitaciones = 2,
+                    Banios = 1
+                },
+                new Alojamiento{
+                    Id=7,
+                    Codigo="881123",
+                    Ciudad="1",
+                    Barrio="Puerto Madero",
+                    Estrellas=3,
+                    CantidadDePersonas=2,
+                    Tv = true,
+                    Tipo="Hotel" ,
+                    PrecioPorPersona=4100
+                },
             });
             modelBuilder.Entity<Ciudad>().HasData(new Ciudad[]{
                 new Ciudad

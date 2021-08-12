@@ -264,7 +264,7 @@ namespace TPFinalGrupo4.Models
             if(ciudad != null)
             {
                 // Ciudades que coinciden
-                var ciudades = this._context.Ciudad.Where(c => c.Nombre.ToUpper().Contains(ciudad.ToUpper())).Select(c => c.Codigo).ToList();
+                var ciudades = await this._context.Ciudad.Where(c => c.Nombre.ToUpper().Contains(ciudad.ToUpper())).Select(c => c.Codigo).ToListAsync();
 
                 // Si no encontro ciudades devuelvo una lista vacia
                 if( ciudades.Count == 0)
@@ -278,7 +278,7 @@ namespace TPFinalGrupo4.Models
             if (tipoDeAlojamiento != "Todos")
                 alojamientos = alojamientos.Where(al => al.Tipo == tipoDeAlojamiento);
 
-            foreach (var alojamiento in alojamientos.ToList())
+            foreach (var alojamiento in await alojamientos.ToListAsync())
             {
                 if (this.DisponibilidadPorFechas(alojamiento.Id, (DateTime)fechaDesde, (DateTime)fechaHasta))
                     alojamientosEncontrados.Add(alojamiento);
@@ -287,7 +287,7 @@ namespace TPFinalGrupo4.Models
             if (alojamientosEncontrados.Count != 0)
             {
                 // Ciudades
-                var ciudades = this._context.Ciudad.ToList();
+                var ciudades = await this._context.Ciudad.ToListAsync();
 
                 // Todos los alojamientos o alojamientos filtrados
                 var alojamientosParaVistas = new List<Alojamiento>();
