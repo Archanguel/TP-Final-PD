@@ -22,22 +22,25 @@ En la interfaz de Registro tenemos 5 campos a completar:
   * Contraseña
   * Repetir Contraseña
 
+El dni y el mail son valores únicos, esto quiere decir que no pueden ser repeditos por otro usuario.
+En el caso de repetirse se le avisará al usuario y este deberá ingresar los datos válidos.
+
 ---
 
 ## 👤 Vista Usuario 👤
 
 Una vez logeados
 
-* En la parte superior izquierda se podrá ver el nombre de la persona conectada y un botón para cerrar sesión y ademas el cambio de lenguaje Ingles/Español.
+* En la parte superior derecha se podrá ver el nombre de la persona conectada y un botón para cerrar sesión y ademas el cambio de lenguaje Ingles/Español.
 * En la parte central superior de la aplicación se puede ver la barra de navegación con la que podremos navegar entre distintas pantallas de la web:
 
 ### Buscador
 
-En esta vista se encuentran los filtros "Buscar por ciudad", "Fecha de ida" y "Fecha de vuelta" para reservar rápidamente.
+En esta vista se encuentran los filtros "Buscar por ciudad", "Tipo de alojamiento" (cabañas, hoteles o ambos), "Fecha de ida" y "Fecha de vuelta" para reservar rápidamente.
 
 ### Alojamientos
 
-Dentro de esta vista podremos elegir los distintos tipos de alojamientos que nos ofrece la aplicación (Cabañas o Hoteles). Tenemos distintas herramientas para realizar filtrados para nuestras preferencias, entre estos filtrados están:
+Tenemos distintas herramientas para realizar filtrados para nuestras preferencias, entre estos filtrados están:
   
 * **Precio**: Se puede colocar un precio minimo para el filtrado.
 * **Estrella**: La cantidad de estrellas del alojamiento.
@@ -45,27 +48,29 @@ Dentro de esta vista podremos elegir los distintos tipos de alojamientos que nos
 
 Una vez completadas estas opciones a la derecha se encuentra un botón **filtrar** que ejecuta estas preferencias y nos lo muestra en un grid view en la parte central de la web.
 
-Al ingresar en una tarjeta/card de alojamiento nos enviara al detalle de la misma con la que podremos ver:
+Al ingresar en una tarjeta/card de alojamiento (se haya filtrado o no) nos enviara al detalle de la misma con la que podremos ver:
 
+El título con el tipo de alojamiento
 * **Barrio**
 * **Estrellas**
 * **Cantidad de personas**
 * **TV**
-* **Precio por persona**
+* **Precio por persona** (si es un hotel)
+* **Precio por día** (si es un cabaña)
+* **Habitaciones** (si es un cabaña)
+* **Baños** (si es un cabaña)
 
-Y podremos ademas ingresar la fecha desde y hasta para poder **reservar** el alojamiento.
+Y deberemos ingresar una fecha desde y una fecha hasta para poder **reservar** el alojamiento, una vez oprimido el botón aparecerá un cartel para la confirmación de esta acción.
 
 ### Mis Reservaciones
 
-Dentro de esta vista podremos ver los distintos tipos de alojamientos que hemos reservado con anticipacion y podremos ver con mas detalle su informacion al hacer click en el boton 'Ver'
+Dentro de esta vista podremos ver los distintos tipos de alojamientos que hemos reservado con anticipación y podremos ver con mas detalle su información al hacer click en el botón 'Ver'.
 
-Al ingresar al detalle, podremos volver a la pantalla anterior o borrar la reservacón de la misma si lo desea
+Al ingresar al detalle, podremos volver a la pantalla anterior o borrar la reservacón de la misma si lo desea.
 
 ### Mis Datos
 
-En esta vista podremos ver nuestros datos de la cuenta y poder cambiar tanto Nombre, Email como Contraseña si lo desea.
-
-Este ordenamiento se realiza de menor a mayor
+En esta vista podremos ver nuestros datos de la cuenta y podremos cambiar tanto Nombre, Email como Contraseña si lo desea (para realizar estas acciones es necesaria la utilización de la contraseña actual).
 
 ---
 
