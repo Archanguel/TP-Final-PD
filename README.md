@@ -22,7 +22,7 @@ En la interfaz de Registro tenemos 5 campos a completar:
   * Contraseña
   * Repetir Contraseña
 
-El dni y el mail son valores únicos, esto quiere decir que no pueden ser repeditos por otro usuario.
+El dni y el mail son valores únicos, esto quiere decir que no pueden ser repetidos por otro usuario.
 En el caso de repetirse se le avisará al usuario y este deberá ingresar los datos válidos.
 
 ---
@@ -31,7 +31,7 @@ En el caso de repetirse se le avisará al usuario y este deberá ingresar los da
 
 Una vez logeados
 
-* En la parte superior derecha se podrá ver el nombre de la persona conectada y un botón para cerrar sesión y ademas el cambio de lenguaje Ingles/Español.
+* En la parte superior derecha se podrá ver el nombre de la persona conectada y un botón para cerrar sesión y además el cambio de lenguaje Ingles/Español.
 * En la parte central superior de la aplicación se puede ver la barra de navegación con la que podremos navegar entre distintas pantallas de la web:
 
 ### Buscador
@@ -42,7 +42,7 @@ En esta vista se encuentran los filtros "Buscar por ciudad", "Tipo de alojamient
 
 Tenemos distintas herramientas para realizar filtrados para nuestras preferencias, entre estos filtrados están:
   
-* **Precio**: Se puede colocar un precio minimo para el filtrado.
+* **Precio**: Se puede colocar un precio mínimo para el filtrado.
 * **Estrella**: La cantidad de estrellas del alojamiento.
 * **Personas**: La cantidad de personas para el alojamiento.
 
@@ -66,7 +66,7 @@ Y deberemos ingresar una fecha desde y una fecha hasta para poder **reservar** e
 
 Dentro de esta vista podremos ver los distintos tipos de alojamientos que hemos reservado con anticipación y podremos ver con mas detalle su información al hacer click en el botón 'Ver'.
 
-Al ingresar al detalle, podremos volver a la pantalla anterior o borrar la reservacón de la misma si lo desea.
+Al ingresar al detalle, podremos volver a la pantalla anterior o borrar la reservación de la misma si lo desea.
 
 ### Mis Datos
 
@@ -76,11 +76,12 @@ En esta vista podremos ver nuestros datos de la cuenta y podremos cambiar tanto 
 
 ## 👑 Vista Admin 👑
 
-En el caso de la vista del administrador tenemos las mismas opciones en la parte superior izquierda de la web. (Cambio de lenguaje, Nombre de usuario y Log out)
+* En el caso de la vista del administrador tenemos las mismas opciones en la parte superior derecha de la web. (Cambio de lenguaje, Nombre de usuario y Cerrar sesión).
+* En la parte central superior de la aplicación se puede ver la barra de navegación con la que podremos navegar entre distintas pantallas de la web:
 
 ### Alojamientos
 
-En la Vista Alojamientos ahora se muestra una tabla que nos mostrará todos los alojamientos disponibles y ademas podremos hacer 3 acciones.
+En la Vista Alojamientos ahora se muestra una tabla que nos mostrará todos los alojamientos disponibles y además podremos hacer 3 acciones.
 
 * **Agregar un Alojamiento**
 * **Modificar un Alojamiento**
@@ -93,45 +94,45 @@ En la parte central de la web se encuentran unos campos para completar con la in
 * Código
 * Ciudad
 * Barrio
-* Cantidad de personas
 * Estrellas
+* Cantidad de personas
 * ¿Tiene tv?
+* Tipo
 * Precio por persona
-
 * Precio por día
 * Habitaciones
 * Baños
 
-Una vez completado dicho formulario se debe presionar el botón Crear para incluirlo en el listado de alojamientos a reservar
+Una vez completado dicho formulario se debe presionar el botón Crear para incluirlo en el listado de alojamientos a reservar o podemos presionar Volver para ir a la vista de Alojamientos.
 
 #### Vista Modificar Alojamiento
 
-Para modificar un alojamiento ya registrado se debe seleccionar cual es el que se quiere modificar y en la parte derecha de la tabla se encuentra un botón con el nombre **Editar**, una vez presionado nos enviará a la vista Edit de Alojamiento con los datos precargados de ese alojamiento donde se hará dicha modificación si es necesaria, una vez terminado el cambio, se deberá pulsar el botón **Guardar** para cargar los nuevos datos al alojamiento que se quiso modificar.
+Para modificar un alojamiento ya registrado se debe seleccionar cual es el que se quiere modificar y en la parte derecha de la tabla se encuentra un botón con el nombre **Editar**, una vez presionado nos enviará a la vista Edit de Alojamiento con los datos precargados de ese alojamiento donde se hará dicha modificación si es necesaria, una vez terminado el cambio, se deberá pulsar el botón **Guardar** para cargar los nuevos datos al alojamiento que se quiso modificar o podemos presionar Volver para ir a la vista de Alojamientos.
 
 #### Vista Eliminar Alojamiento
 
-Muy parecido al botón Modificar, el botón borrar se encuentra en la tabla de los alojamientos con un color rojo, este nos servirá para eliminar el alojamiento seleccionado del registro de alojamientos.
+Muy parecido al botón Modificar, el botón borrar se encuentra en la tabla de los alojamientos con un color rojo, este nos servirá para eliminar el alojamiento seleccionado del registro de alojamientos o podemos presionar Volver para ir a la vista de Alojamientos.
 
 #### Vista Reservas
 
-Se muestran todas las reservas hechas por los usuarios registrados en la aplicación. En este mismo vamos a tener la posibilidad de **Modificar** o **Borrar** dichas reservas de la misma manera que se hace con los alojamientos. En el apartado modificar el único dato que se puede cambiar es la **fecha de reserva**.
+Se muestran todas las reservas hechas por los usuarios registrados en la aplicación. En este mismo vamos a tener la posibilidad de **Modificar** o **Borrar** dichas reservas de la misma manera que se hace con los alojamientos. En el apartado modificar el único dato que se puede cambiar es la **fecha de reserva** (fecha desde y fecha hasta).
 
 #### Vista Usuarios
 
 Aparecen todos los usuarios registrados en la aplicación y tendremos las mismas opciones antes mencionadas, **Modificar** y **Borrar**.
 
-En la opción **Modificar**, en este caso, podremos cambiar todos los datos y a su vez se podrá realizar el cambio de tipo de usuario de Usuario común a Usuario administrador, además, desde esta opción es donde se podrá realizar el desbloqueo de los usuarios que hayan sido bloqueados por haberse logeado de manera incorrecta más de 3 veces seguidas.
+En la opción **Modificar**, en este caso, podremos cambiar todos los datos (excepto la contraseña) y a su vez se podrá realizar el cambio de tipo de usuario de Usuario común a Usuario administrador, además, desde esta opción es donde se podrá realizar el desbloqueo de los usuarios que hayan sido bloqueados por haberse logeado de manera incorrecta más de 3 veces seguidas o eliminar los intentos de ingreso a la cuenta de ser necesario.
 
 ---
 
 ## Extras Realizados
 
-* Agregamos fotos a los alojamientos para vizualizar los resultados de la busqueda para Cabañas o Hoteles.
+* Agregamos fotos a los alojamientos para visualizar los resultados de la búsqueda para Cabañas u Hoteles.
 * Manejo de Multilenguaje.
-* Login con manejo de cookes de sesión y encriptado de contraseñas a nivel base de datos
+* Login con manejo de cookies de sesión y encriptado de contraseñas a nivel base de datos
 * Mejoras a nivel visual (Uso de Bootstrap + FontAwesome)
-* Agregamos Sonidos de confirmacion y error.
-* Validacion de Tiempo de sesión con las propiedades de Autenticación
+* Agregamos Sonidos de confirmación y error.
+* Validación de Tiempo de sesión con las propiedades de Autenticación.
 
 ---
 ## Screenshots
