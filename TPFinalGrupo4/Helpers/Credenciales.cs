@@ -7,7 +7,7 @@ namespace TPFinalGrupo4.Helpers
     class Credenciales
     {
         private const String SERVER = "localhost";
-        private const String DATABASE = "grupo4-TP-Final";
+        private const String DATABASE = "inicio-proyecto";
         private const String USER = "root";
         private const String PASSWORD = "";
         private const int PORT = 3306;
