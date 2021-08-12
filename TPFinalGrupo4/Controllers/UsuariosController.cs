@@ -180,11 +180,16 @@ namespace TPFinalGrupo4.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var usuario = await _context.Usuario.FindAsync(id);
-            _context.Usuario.Remove(usuario);
+            var usuario = await this._context.Usuario.FindAsync(id);
+
+            // Elimino las reservas relacionadas con el usuario
+            var reservasDelUsuario = await this._context.Reserva.Where(r => r.Usuario.Id == id).ToListAsync();
+            reservasDelUsuario.ForEach(reserva => this._context.Reserva.Remove(reserva));
+
+            this._context.Usuario.Remove(usuario);
             await _context.SaveChangesAsync();
-            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
-            _soundPlayer.Play();
+            this._soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            this._soundPlayer.Play();
             return RedirectToAction(nameof(Index));
         }
 

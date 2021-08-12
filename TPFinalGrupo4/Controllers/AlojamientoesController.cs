@@ -232,11 +232,16 @@ namespace TPFinalGrupo4.Models
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var alojamiento = await _context.Alojamiento.FindAsync(id);
-            _context.Alojamiento.Remove(alojamiento);
-            await _context.SaveChangesAsync();
-            _soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
-            _soundPlayer.Play();
+            var alojamiento = await this._context.Alojamiento.FindAsync(id);
+
+            // Elimino las reservas relacionadas con el alojamiento
+            var reservasDelAlojamiento = await this._context.Reserva.Where(r => r.Alojamiento.Id == id).ToListAsync();
+            reservasDelAlojamiento.ForEach( reserva => this._context.Reserva.Remove(reserva));
+
+            this._context.Alojamiento.Remove(alojamiento);
+            await this._context.SaveChangesAsync();
+            this._soundPlayer = new SoundPlayer("Resources/DeleteSound.wav");
+            this._soundPlayer.Play();
             return RedirectToAction(nameof(Index));
         }
 
